@@ -46,10 +46,10 @@
 
 
   {#if title === undefined}
-      <Alert color="info" class="mt-lg-4">
-        <h4 class="alert-heading text-capitalize">Info</h4>
-        Pilih menu di atas untuk menampilkan data.
-      </Alert>
+    <Alert color="info" class="mt-lg-4">
+      <h4 class="alert-heading text-capitalize">Info</h4>
+      Pilih menu di atas untuk menampilkan data.
+    </Alert>
   {/if}
 
   {#if title === 'Danau'}
