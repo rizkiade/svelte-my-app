@@ -1,32 +1,21 @@
 <script>
-    import { Card, FormGroup, Input, Label, Offcanvas, Row } from "sveltestrap";
-    import Select from "svelte-select";
-    import { toasts } from "svelte-toasts";
+	import { Card, FormGroup, Input, Label, Offcanvas, Row } from "sveltestrap";
+	import Select from "svelte-select";
+	import { toasts } from "svelte-toasts";
+	import Pengelola from "../features/pengelola/Pengelola.svelte";
 
-    let isOpen = false;
+	let isOpen = false;
 
-    let togglePengelola = (e) => {
 
-        toasts.error("Pilih Pengelola terlebih dahulu.");
-    };
-
-    export { isOpen };
+	export { isOpen };
 </script>
 
 <Offcanvas isOpen={isOpen === 'layer'} header="Asset Filter" placement="start" backdrop={false} style="width: 300px; background: rgba(255, 255, 255, 0.5);">
   <Card body style="background: rgba(104, 129, 169, 0.35); padding-bottom: 0;">
     <Label class="text-center">Wilayah Kerja</Label>
 
-    <Row>
-      <!--{#await getPengelola()}-->
-      <!--                <SelectLoading/>-->
-      <!--            {:then pengelolaItems}-->
-      <Select placeholder="Select Balai Pengelola..." } />
-      <!--{/await}-->
-      <FormGroup>
-        <Input id="pengelola" type="switch" label="Show Area" on:change={togglePengelola} />
-      </FormGroup>
-    </Row>
+    <Pengelola />
+    
   </Card>
 </Offcanvas>
 

@@ -1,6 +1,6 @@
 <script>
     import { Offcanvas } from "sveltestrap";
-    import NavButton from "../../component/NavButton.svelte";
+    import NavButton from "../component/NavButton.svelte";
     import { panel } from "../control/NavigationStore.js";
 
     let openNav = true;

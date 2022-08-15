@@ -1,34 +1,37 @@
 <script lang="ts">
-  import { browser } from "$app/env";
+	import { browser } from "$app/env";
 
-  import { Map, View } from "ol";
-  import { onMount, setContext } from "svelte";
-  import { Tile } from "ol/layer.js";
-  import { OSM } from "ol/source.js";
+	import { Map, View } from "ol";
+	import { onMount, setContext } from "svelte";
+	import { Tile } from "ol/layer.js";
+	import { OSM } from "ol/source.js";
 
-  import "ol/ol.css";
+	import "ol/ol.css";
+	import { toasts } from "svelte-toasts";
 
-  let target: HTMLDivElement;
-  let map: Map;
+	let target: HTMLDivElement;
+	let map: Map;
 
-  const mapLng = 118.0148634;
-  const mapLat = -2.548926;
+	const mapLng = 118.0148634;
+	const mapLat = -2.548926;
 
-  const attributions =
-    "<a href=\"https://openlayers.org/\" target=\"_blank\">&copy; OpenLayers</a> " +
-    "<a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>";
+	const attributions =
+		"<a href=\"https://openlayers.org/\" target=\"_blank\">&copy; OpenLayers</a> " +
+		"<a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>";
 
-  onMount(() => {
-    if (browser) {
+	onMount(() => {
+		// console.log("loaded");
+		toasts.info("Package build complete.");
+		if (browser) {
 
-      const view = new View({ projection: "EPSG:4326", center: [mapLng, mapLat], zoom: 5.35 });
-      const layers = [new Tile({ source: new OSM({ attributions: attributions }) })];
-      map = new Map({ target, view, layers });
-    }
+			const view = new View({ projection: "EPSG:4326", center: [mapLng, mapLat], zoom: 5.35 });
+			const layers = [new Tile({ source: new OSM({ attributions: attributions }) })];
+			map = new Map({ target, view, layers });
+		}
 
-    let el = document.querySelector(".ol-zoom");
-    el["style"].top = "5em";
-  });
+		let el = document.querySelector(".ol-zoom");
+		el["style"].top = "5em";
+	});
 
 </script>
 
