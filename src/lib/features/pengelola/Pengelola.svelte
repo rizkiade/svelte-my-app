@@ -5,8 +5,8 @@
 	import { PengelolaApi } from "./pengelola.ts";
 	import SelectLoading from "$lib/component/loader/SelectLoading.svelte";
 
-	const optionIdentifier = "id";
-	const labelIdentifier = "name";
+	const itemId = "id";
+	const label = "name";
 
 	const _api = new PengelolaApi();
 
@@ -20,7 +20,7 @@
   {#await _api.getAll()}
     <SelectLoading />
   {:then pengelolaItems}
-    <Select placeholder="Pilih Pengelola" } items="{pengelolaItems}" {optionIdentifier} {labelIdentifier}>
+    <Select placeholder="Pilih Pengelola" } items="{pengelolaItems}" {itemId} {label}>
       <div slot="clear-icon">❌</div>
     </Select>
   {/await}
