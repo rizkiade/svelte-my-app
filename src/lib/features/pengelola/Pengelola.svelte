@@ -1,17 +1,24 @@
 <script lang="ts">
+	import { getContext } from "svelte";
 	import { FormGroup, Input, Row } from "sveltestrap";
 	import Select from "svelte-select";
 	import { toasts } from "svelte-toasts";
 	import { PengelolaApi } from "./pengelola.ts";
 	import SelectLoading from "$lib/component/loader/SelectLoading.svelte";
 
+	import { mapKey } from "../../../store/map.js";
+
 	const itemId = "id";
 	const label = "name";
+
+	const mapContext = getContext(mapKey);
+	const map = mapContext;
 
 	const _api = new PengelolaApi();
 
 	let togglePengelola = (e) => {
 		toasts.error("Pilih Pengelola terlebih dahulu.");
+		console.log(map.getMap().updateSize());
 	};
 
 </script>

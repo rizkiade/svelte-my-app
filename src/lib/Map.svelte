@@ -8,6 +8,11 @@
 
 	import "ol/ol.css";
 	import { toasts } from "svelte-toasts";
+	import { mapKey } from "../store/map.js";
+
+	setContext(mapKey, {
+		getMap: () => map
+	});
 
 	let target: HTMLDivElement;
 	let map: Map;
@@ -20,7 +25,6 @@
 		"<a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>";
 
 	onMount(() => {
-		// console.log("loaded");
 		toasts.info("Package build complete.");
 		if (browser) {
 
@@ -31,6 +35,11 @@
 
 		let el = document.querySelector(".ol-zoom");
 		el["style"].top = "5em";
+
+		setTimeout(function() {
+			// Update container size if change container not full width
+			map.updateSize();
+		}, 1000);
 	});
 
 </script>

@@ -1,40 +1,42 @@
 <script lang="ts">
-    import {page} from '$app/stores';
-    import logo from './svelte-logo.svg';
+	import { page } from "$app/stores";
+	import logo from "./svelte-logo.svg";
+	import logo_pu from "./pu_logo.png";
 </script>
 
 <header>
-    <div class="corner">
-        <a href="https://kit.svelte.dev">
-            <img src={logo} alt="SvelteKit"/>
-        </a>
-    </div>
+  <div class="corner">
+    <a href="https://sda.pu.go.id/" style="margin-top: 0.5rem; margin-left: 0.5rem; text-decoration: none; color: #1a1919">
+      <img src={logo_pu} alt="SvelteKit" />
+      <!--      <span style="font-size: 14px">Direktorat Jenderal Sumber Daya Air</span>-->
+    </a>
+  </div>
 
-    <nav>
-        <svg viewBox="0 0 2 3" aria-hidden="true">
-            <path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z"/>
-        </svg>
-        <ul>
-            <li class:active={$page.url.pathname === '/'}>
-                <a sveltekit:prefetch href="/">Map</a>
-            </li>
-            <li class:active={$page.url.pathname === '/statistic'}>
-                <a sveltekit:prefetch href="/statistic">Statistic</a>
-            </li>
-            <li class:active={$page.url.pathname === '/danaupriority'}>
-                <a sveltekit:prefetch href="/danaupriority">Danau Prioritas</a>
-            </li>
-        </ul>
-        <svg viewBox="0 0 2 3" aria-hidden="true">
-            <path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z"/>
-        </svg>
-    </nav>
+  <nav>
+    <svg viewBox="0 0 2 3" aria-hidden="true">
+      <path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
+    </svg>
+    <ul>
+      <li class:active={$page.url.pathname === '/'}>
+        <a sveltekit:prefetch href="/">Map</a>
+      </li>
+      <li class:active={$page.url.pathname === '/statistic'}>
+        <a sveltekit:prefetch href="/statistic">Statistic</a>
+      </li>
+      <li class:active={$page.url.pathname === '/danaupriority'}>
+        <a sveltekit:prefetch href="/danaupriority">Danau Prioritas</a>
+      </li>
+    </ul>
+    <svg viewBox="0 0 2 3" aria-hidden="true">
+      <path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
+    </svg>
+  </nav>
 
-    <div class="corner">
-        <a href="https://kit.svelte.dev">
-            <img src={logo} alt="SvelteKit"/>
-        </a>
-    </div>
+  <div class="corner">
+    <a href="https://sda.pu.go.id/" style="margin-top: 0.5rem; margin-right: 0.5rem; text-decoration: none; color: #1a1919">
+      <img src={logo_pu} alt="SvelteKit" />
+    </a>
+  </div>
 </header>
 
 <style>
@@ -48,12 +50,12 @@
     }
 
     .corner {
-        width: 3em;
+        width: auto;
         height: 3em;
+        display: flex;
     }
 
     .corner a {
-        display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
