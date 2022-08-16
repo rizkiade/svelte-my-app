@@ -3,6 +3,7 @@
 	import Select from "svelte-select";
 	import { toasts } from "svelte-toasts";
 	import Pengelola from "../features/pengelola/Pengelola.svelte";
+	import WilayahSungai from "../features/wilayahsungai/WilayahSungai.svelte";
 
 	let isOpen = false;
 
@@ -15,7 +16,8 @@
     <Label class="text-center">Wilayah Kerja</Label>
 
     <Pengelola />
-    
+    <WilayahSungai />
+
   </Card>
 </Offcanvas>
 
