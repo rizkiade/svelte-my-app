@@ -1,17 +1,20 @@
 <script>
-    import { Offcanvas } from "sveltestrap";
-    import NavButton from "../component/NavButton.svelte";
-    import { panel } from "../control/NavigationStore.js";
+	import { Offcanvas } from "sveltestrap";
+	import NavButton from "../component/NavButton.svelte";
+	import { panel } from "../control/NavigationStore.js";
+	import { ws } from "../../store/map.js";
 
-    let openNav = true;
-    let current = undefined;
+	let openNav = true;
+	let current = undefined;
 
-    function handleAction(event) {
+	function handleAction(event) {
 
-        // isOpen = event.detail.text;
-        current = event.detail.text;
-        console.log(current);
-    }
+		// isOpen = event.detail.text;
+		current = event.detail.text;
+		console.log(current);
+		// console.log($ws);
+
+	}
 
 </script>
 

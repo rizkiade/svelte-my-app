@@ -1,37 +1,37 @@
 <script context="module">
-    import {browser, dev} from '$app/env';
+	import { browser, dev } from "$app/env";
 
-    // we don't need any JS on this page, though we'll load
-    // it in dev so that we get hot module replacement...
-    export const hydrate = dev;
+	// we don't need any JS on this page, though we'll load
+	// it in dev so that we get hot module replacement...
+	export const hydrate = dev;
 
-    // ...but if the client-side router is already loaded
-    // (i.e. we came here from elsewhere in the app), use it
-    export const router = browser;
+	// ...but if the client-side router is already loaded
+	// (i.e. we came here from elsewhere in the app), use it
+	export const router = browser;
 
-    // since there's no dynamic data here, we can prerender
-    // it so that it gets served as a static asset in prod
-    export const prerender = true;
+	// since there's no dynamic data here, we can prerender
+	// it so that it gets served as a static asset in prod
+	export const prerender = true;
 </script>
 
 <svelte:head>
-    <title>Danau Priority</title>
-    <meta name="description" content="Danau Priority"/>
+  <title>Danau Priority</title>
+  <meta name="description" content="Danau Priority" />
 </svelte:head>
 
 <div class="content">
-    <h1>Custom Page for Danau Priority</h1>
+  <h1>Custom Page for Danau Priority</h1>
 
-    <p>
-        You can make your own by typing the
-        following into your command line and following the prompts:
-    </p>
+  <p>
+    You can make your own by typing the
+    following into your command line and following the prompts:
+  </p>
 
-    <p>
-        The page you're looking at is purely static HTML, with no client-side interactivity needed.
-        Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
-        the devtools network panel and reloading.
-    </p>
+  <p>
+    The page you're looking at is purely static HTML, with no client-side interactivity needed.
+    Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
+    the devtools network panel and reloading.
+  </p>
 
 </div>
 

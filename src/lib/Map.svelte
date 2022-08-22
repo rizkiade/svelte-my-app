@@ -7,8 +7,8 @@
 	import { OSM } from "ol/source.js";
 
 	import "ol/ol.css";
-	import { toasts } from "svelte-toasts";
-	import { mapKey } from "../store/map.js";
+	import { mapKey, preloader } from "../store/map.js";
+	import Preloader from "./component/loader/Preloader.svelte";
 
 	setContext(mapKey, {
 		getMap: () => map
@@ -25,7 +25,6 @@
 		"<a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>";
 
 	onMount(() => {
-		toasts.info("Package build complete.");
 		if (browser) {
 
 			const view = new View({ projection: "EPSG:4326", center: [mapLng, mapLat], zoom: 5.35 });
@@ -55,9 +54,14 @@
 </style>
 
 <div class="ol-container" bind:this={target}>
-  <!--    problem jika pakai slot element-->
-  <slot />
+  {#if map}
+    <slot />
+  {/if}
 </div>
+
+{#if $preloader}
+  <Preloader />
+{/if}
 
 
 
