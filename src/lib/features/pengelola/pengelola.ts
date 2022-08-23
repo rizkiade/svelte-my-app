@@ -1,3 +1,5 @@
+import { pengelola } from "../../../store/map.js";
+
 export type Pengelola = {
 	id: number,
 	name: string,
@@ -14,6 +16,7 @@ export class PengelolaApi {
 		const result = await response.json();
 
 		if (response.ok) {
+			pengelola.set(result);
 			return result;
 		} else {
 			throw new Error(result);

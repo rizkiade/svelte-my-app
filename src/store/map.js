@@ -9,6 +9,7 @@ const ws_visible = writable(false);
 const wsp_visible = writable(false);
 let paramsKewenangan = writable(undefined);
 
+const pengelola = writable([]);
 const ws = writable([]);
 const wsFilter = writable([]);
 const dasFilter = writable([]);
@@ -24,4 +25,4 @@ let filter_asset = writable({
 	kelurahan: undefined
 });
 
-export { mapKey, preloader, ws_visible, wsp_visible, paramsKewenangan, ws, wsFilter, dasFilter, filter_asset };
+export { mapKey, preloader, ws_visible, wsp_visible, paramsKewenangan, pengelola, ws, wsFilter, dasFilter, filter_asset };

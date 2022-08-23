@@ -6,7 +6,7 @@
 	import { PengelolaApi } from "./pengelola.ts";
 	import SelectLoading from "$lib/component/loader/SelectLoading.svelte";
 
-	import { mapKey, preloader, ws, ws_visible, wsp_visible, wsFilter, filter_asset } from "../../../store/map.js";
+	import { mapKey, preloader, ws, ws_visible, wsp_visible, wsFilter, pengelola, filter_asset } from "../../../store/map.js";
 	import { wsp_features, featureExistWSP } from "../../../store/features.js";
 
 	const itemId = "id";
@@ -92,13 +92,20 @@
 </script>
 
 <Row>
-  {#await _api.getList()}
-    <SelectLoading />
-  {:then pengelolaItems}
-    <Select placeholder="Pilih Pengelola" } items="{pengelolaItems}" {itemId} {label} on:select={pengelolaSelect} on:clear={fieldClear}>
+  {#if ($pengelola.length !== 0)}
+    <Select placeholder="Pilih Pengelola" } items="{$pengelola}" {itemId} {label} on:select={pengelolaSelect} on:clear={fieldClear}>
       <div slot="clear-icon">❌</div>
     </Select>
-  {/await}
+  {:else}
+    {#await _api.getList()}
+      <SelectLoading />
+    {:then pengelolaItems}
+      <Select placeholder="Pilih Pengelola" } items="{pengelolaItems}" {itemId} {label} on:select={pengelolaSelect} on:clear={fieldClear}>
+        <div slot="clear-icon">❌</div>
+      </Select>
+    {/await}
+  {/if}
+
   <FormGroup>
     <Input id="pengelola" type="switch" label="Show Area" on:change={togglePengelola} checked={$wsp_visible} />
   </FormGroup>

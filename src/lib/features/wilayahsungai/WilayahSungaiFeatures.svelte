@@ -1,6 +1,6 @@
 <script>
-	import { mapKey, ws_visible, paramsKewenangan, wsFilter, filter_asset } from "../../../store/map.js";
-	import { getContext, onMount } from "svelte";
+	import { mapKey, ws_visible, paramsKewenangan, wsFilter, filter_asset, pengelola, wsp_visible } from "../../../store/map.js";
+	import { getContext, onMount, onDestroy } from "svelte";
 	import VectorSource from "ol/source/Vector.js";
 	import { GeoJSON } from "ol/format.js";
 	import VectorLayer from "ol/layer/Vector.js";
@@ -28,20 +28,48 @@
 
 	onMount(async () => {
 
-		let result = await _api.getArea();
-		feature = { ...result };
+		if ($ws_features.features.length === 0) {
+			let result = await _api.getArea();
+			feature = { ...result };
+			ws_features.set(result);
+		} else {
+			// copy from existing source
+			feature.features = [...$ws_features.features];
+		}
 
-		ws_features.set(result);
 		toasts.info("Package build complete.");
+	});
+
+	onDestroy(() => {
+		// Clear params data store
+		filter_asset.set({
+			pengelolaId: undefined,
+			wsId: undefined,
+			dasId: undefined,
+			provinsi: undefined,
+			kabupaten: undefined,
+			kecamatan: undefined,
+			kelurahan: undefined
+		});
+		ws_visible.set(false);
+		wsp_visible.set(false);
+		paramsKewenangan.set(undefined);
 	});
 
 	let styleArea = (feature) => {
 
 		let id = feature.get("id");
 		let color = feature.get("color");
+		let kw = feature.get("kewenangan");
 
 		if ($filter_asset.wsId) {
 			if ($filter_asset.wsId === id) {
+
+				// jika kewenangan terpilih dan tidak sesuai kewenangan area maka setStyle menjadi FALSE;
+				if ($paramsKewenangan && $paramsKewenangan.toUpperCase() !== kw) {
+					return false;
+				}
+
 				return new Style({
 					stroke: new Stroke({
 						color: "#502909",
@@ -91,23 +119,37 @@
 		let paramsKw = $paramsKewenangan ? $paramsKewenangan.toUpperCase() : undefined;
 
 		$wsFilter = []; // Clear filter
-		feature.features = $ws_features.features.filter(val => {
-			let prop = val.properties;
+		if ($filter_asset.pengelolaId) {
 
-			if ($paramsKewenangan) {
-				return prop.kewenangan === paramsKw;
-			} else {
+			let obj_value = $pengelola.find(o => o.id === $filter_asset.pengelolaId.toString());
+			$wsFilter = JSON.parse(obj_value.ws_area).filter(item => {
+				if ($paramsKewenangan) {
+					if (item.kewenangan === paramsKw) {
+						return { id: item.id, name: item.name };
+					}
+				} else {
+					return { id: item.id, name: item.name };
+				}
+			});
+
+		} else {
+
+			let temp = [];
+			feature.features = $ws_features.features.filter(val => {
+				let prop = val.properties;
+				if ($paramsKewenangan) {
+					if (prop.kewenangan === paramsKw) {
+						temp.push({ id: prop.id, name: prop.name });
+						return true;
+					}
+				}
 				return true;
-			}
-		});
-
-		// Append list WS to select field;
-		$wsFilter = feature.features.map(item => {
-			return { id: item.properties.id, name: item.properties.name };
-		});
+			});
+			$wsFilter = [...temp];
+		}
 
 		reloadMap();
 	};
-	$: filterWS($paramsKewenangan);
+	$: filterWS($paramsKewenangan, $filter_asset.pengelolaId);
 
 </script>

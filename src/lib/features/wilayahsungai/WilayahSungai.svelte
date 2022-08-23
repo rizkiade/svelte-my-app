@@ -40,13 +40,20 @@
 </script>
 
 <Row>
-  {#await _api.getList()}
-    <SelectLoading />
-  {:then wsItems}
+  {#if ($ws.length !== 0)}
     <Select placeholder="Pilih Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws }" {itemId} {label} on:select={wsSelect} on:clear={fieldClear} clearable="true">
       <div slot="clear-icon">❌</div>
     </Select>
-  {/await}
+  {:else}
+    {#await _api.getList()}
+      <SelectLoading />
+    {:then wsItems}
+      <Select placeholder="Pilih Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws }" {itemId} {label} on:select={wsSelect} on:clear={fieldClear} clearable="true">
+        <div slot="clear-icon">❌</div>
+      </Select>
+    {/await}
+  {/if}
+
   <FormGroup>
     <Input id="wilayah_sungai" type="switch" label="Show Area" on:change={toggleWilayahSungai} checked={$ws_visible} />
   </FormGroup>
