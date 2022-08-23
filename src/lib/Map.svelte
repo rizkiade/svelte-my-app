@@ -5,7 +5,6 @@
 	import { onMount, setContext } from "svelte";
 	import { Tile } from "ol/layer.js";
 	import { OSM } from "ol/source.js";
-	import XYZ from "ol/source/XYZ";
 
 	import "ol/ol.css";
 	import { mapKey, preloader } from "../store/map.js";
@@ -21,23 +20,15 @@
 	const mapLng = 118.0148634;
 	const mapLat = -2.548926;
 
-	const key = "v2CeM9FHouLe6oYsPVoa";
-	const url = "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=" + key;
-
 	const attributions =
 		"<a href=\"https://openlayers.org/\" target=\"_blank\">&copy; OpenLayers</a> " +
 		"<a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>";
-
-	const withTransition = new Tile({
-		source: new XYZ({ url: url, tileSize: 512, attributions: attributions, crossOrigin: "anonymous" })
-	});
 
 	onMount(() => {
 		if (browser) {
 
 			const view = new View({ projection: "EPSG:4326", center: [mapLng, mapLat], zoom: 5.35 });
 			const layers = [new Tile({ source: new OSM({ attributions: attributions }) })];
-			// const layers = [withTransition];
 
 			map = new Map({ target, view, layers });
 		}
