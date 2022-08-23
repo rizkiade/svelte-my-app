@@ -10,8 +10,10 @@
 	import Sidebar from "../lib/sidebar/Sidebar.svelte";
 	import PengelolaFeatures from "../lib/features/pengelola/PengelolaFeatures.svelte";
 	import WilayahSungaiFeatures from "../lib/features/wilayahsungai/WilayahSungaiFeatures.svelte";
+	import SearchPanel from "../lib/control/SearchPanel.svelte";
+	import InfrastructurePanel from "../lib/control/InfrastructurePanel.svelte";
 
-	let isOpen = "layer";
+	let isOpen = undefined;
 
 	function handleAction(event) {
 		isOpen = event.detail.text;
@@ -23,6 +25,7 @@
 <svelte:head>
   <title>Map</title>
   <meta name="description" content="Web GIS SDA" />
+  <script src="https://kit.fontawesome.com/f21c89a90b.js" crossorigin="anonymous"></script>
 </svelte:head>
 
 <Map>
@@ -32,7 +35,15 @@
   <WilayahSungaiFeatures />
 
   <FilterLayer isOpen={isOpen} />
-  <Sidebar on:action={handleAction} />
+  <Sidebar on:action={handleAction}>
+    {#if $panel.right === 'search'}
+      <SearchPanel />
+    {/if}
+
+    {#if $panel.right === 'infrastructure'}
+      <InfrastructurePanel />
+    {/if}
+  </Sidebar>
 </Map>
 
 

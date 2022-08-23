@@ -1,33 +1,34 @@
 <script>
-    // import { activeNav } from "../store/control.js";
-    import {Tooltip} from "sveltestrap";
-    import {createEventDispatcher} from "svelte";
+	// import { activeNav } from "../store/control.js";
+	import { Tooltip } from "sveltestrap";
+	import { createEventDispatcher } from "svelte";
 
-    const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher();
 
-    function sayHello(param) {
-        dispatch('action', {
-            text: param
-        });
-    }
+	function sayHello(param) {
+		// console.log(param);
+		dispatch("action", {
+			text: param
+		});
+	}
 
-    let src;
-    let alt;
-    let title;
-    let name;
-    let active;
+	let src;
+	let alt;
+	let title;
+	let name;
+	let active;
 
-    export {src, alt, title, name, active}
+	export { src, alt, title, name, active };
 
 </script>
 
 
 <div>
-    <button class="btn-landing" id={`btn-${name}`} class:active="{active}" on:click="{sayHello(name)}">
-        <img class="img-icon" src="{src}" alt="{alt}">
-        <!--{$activeNav.left} {$activeNav.right}-->
-    </button>
-    <Tooltip target={`btn-${name}`} placement="left">{title}</Tooltip>
+  <button class="btn-landing" id={`btn-${name}`} class:active="{active}" on:click="{()=>sayHello(name)}">
+    <img class="img-icon" src="{src}" alt="{alt}">
+    <!--{$activeNav.left} {$activeNav.right}-->
+  </button>
+  <Tooltip target={`btn-${name}`} placement="left">{title}</Tooltip>
 </div>
 
 <style>
