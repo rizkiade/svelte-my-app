@@ -10,8 +10,6 @@
 	import Sidebar from "../lib/sidebar/Sidebar.svelte";
 	import PengelolaFeatures from "../lib/features/pengelola/PengelolaFeatures.svelte";
 	import WilayahSungaiFeatures from "../lib/features/wilayahsungai/WilayahSungaiFeatures.svelte";
-	import SearchPanel from "../lib/control/SearchPanel.svelte";
-	import InfrastructurePanel from "../lib/control/InfrastructurePanel.svelte";
 
 	let isOpen = undefined;
 
@@ -35,15 +33,8 @@
   <WilayahSungaiFeatures />
 
   <FilterLayer isOpen={isOpen} />
-  <Sidebar on:action={handleAction}>
-    {#if $panel.right === 'search'}
-      <SearchPanel />
-    {/if}
+  <Sidebar on:action={handleAction} />
 
-    {#if $panel.right === 'infrastructure'}
-      <InfrastructurePanel />
-    {/if}
-  </Sidebar>
 </Map>
 
 

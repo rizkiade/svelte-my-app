@@ -5,7 +5,7 @@
 	import { filter_asset, paramsKewenangan } from "../../store/map.js";
 	import { toasts } from "svelte-toasts";
 
-	let isOpen;
+	let isOpen = false;
 
 	let handleSwitch = (e) => {
 		if (e.target.checked) {
@@ -53,19 +53,19 @@
     <WilayahSungai />
 
     <Card body style="background: rgba(104, 129, 169, 0.35); padding-bottom: 10px;">
-      <Label class="text-center">Sungai Ordo</Label>
+      <Label class="text-center">Sungai</Label>
       <Row style="background-color:rgba(104,129,169,0.54); border-radius: 10px">
         <Col xs="6">
-          <Input type="switch" label="Utama" value="utama" on:change={handleOrdoSungai} />
+          <Input type="switch" label="Ordo 1" value="1" on:change={handleOrdoSungai} />
         </Col>
         <Col xs="6">
-          <Input type="switch" label="Satu(1)" value="1" on:change={handleOrdoSungai} />
+          <Input type="switch" label="Ordo 2" value="2" on:change={handleOrdoSungai} />
         </Col>
         <Col xs="6">
-          <Input type="switch" label="Dua(2)" value="2" on:change={handleOrdoSungai} />
+          <Input type="switch" label="Ordo 3" value="3" on:change={handleOrdoSungai} />
         </Col>
         <Col xs="6">
-          <Input type="switch" label="Tiga(3)" value="3" on:change={handleOrdoSungai} />
+          <Input type="switch" label="Ordo 4" value="4" on:change={handleOrdoSungai} />
         </Col>
       </Row>
 

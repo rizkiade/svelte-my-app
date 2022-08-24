@@ -4,7 +4,7 @@ const panel = writable({
 	left: undefined, // name component
 	right: undefined // name panel
 });
-const rightWidth = writable(55);
+const rightWidth = writable(0);
 
 
 export { panel, rightWidth };

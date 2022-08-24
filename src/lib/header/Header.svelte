@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import logo from "./svelte-logo.svg";
 	import logo_pu from "./pu_logo.png";
 </script>
 
@@ -8,7 +7,6 @@
   <div class="corner">
     <a href="https://sda.pu.go.id/" style="margin-top: 0.5rem; margin-left: 0.5rem; text-decoration: none; color: #1a1919">
       <img src={logo_pu} alt="SvelteKit" />
-      <!--      <span style="font-size: 14px">Direktorat Jenderal Sumber Daya Air</span>-->
     </a>
   </div>
 
@@ -33,9 +31,7 @@
   </nav>
 
   <div class="corner">
-    <a href="https://sda.pu.go.id/" style="margin-top: 0.5rem; margin-right: 0.5rem; text-decoration: none; color: #1a1919">
-      <img src={logo_pu} alt="SvelteKit" />
-    </a>
+    <a href="https://sda.pu.go.id/" style="margin-top: 0.5rem; margin-right: 0.5rem; text-decoration: none; color: #1a1919"></a>
   </div>
 </header>
 

@@ -1,14 +1,11 @@
 <script>
-	import { Alert, Card, Col, Container, Input, Offcanvas, Row } from "sveltestrap";
+	import { Col, Container, Offcanvas, Row } from "sveltestrap";
 	import NavButton from "../component/NavButton.svelte";
 	import { panel, rightWidth } from "../control/NavigationStore.js";
-	import Select from "svelte-select";
+	import SearchPanel from "../control/SearchPanel.svelte";
+	import InfrastructurePanel from "../control/InfrastructurePanel.svelte";
 
 	let current = undefined;
-
-	const optionIdentifier = "id";
-	const getOptionLabel = (option) => option.name;
-	const getSelectionLabel = (option) => option.name;
 
 	function handleAction(event) {
 		current = event.detail.text;
@@ -21,7 +18,7 @@
 				rightWidth.set(400);
 				break;
 			default:
-				rightWidth.set(55);
+				rightWidth.set(0);
 				$panel.right = undefined;
 				break;
 		}
@@ -32,12 +29,39 @@
 
 
 <Offcanvas isOpen="{true}" backdrop={false} placement="end"
-           style="width: {$rightWidth}px; height: 80%; display: flex; align-items: center; background: rgba(255,255,255,0.42); transition: width 0.25s; border-radius: 15px 0px 0px 15px; " body={false}>
+           style="width: {$rightWidth}px; height: 80%; background: rgba(255,255,255,0.42); transition: width 0.25s; border-radius: 15px 0px 0px 15px; overflow:hidden">
 
   <Container>
-    <Row class="justify-content-evenly">
 
-      <Col xs="auto" class="text-center">
+    <Row class="justify-content-center">
+
+      {#if $panel.right}
+        <Col class="mt-2 me-lg-5 p-0">
+
+          {#if $panel.right === 'search'}
+            <SearchPanel />
+          {/if}
+
+          {#if $panel.right === 'infrastructure'}
+            <InfrastructurePanel />
+          {/if}
+        </Col>
+
+      {/if}
+
+    </Row>
+
+  </Container>
+
+</Offcanvas>
+
+
+<Offcanvas isOpen="{true}" backdrop={false} placement="end"
+           style="width: 55px; height: 80%; align-items: center; background: {$panel.right ? 'transparent': 'rgba(255,255,255,0.42)'} ; transition: width 0.25s; border-radius: 15px 0px 0px 15px; {$panel.right ? 'border: none': ''}">
+  <Container>
+
+    <Row class="justify-content-evenly">
+      <Col>
         <NavButton src="/nav-icon/search.svg" alt="search" name="{current === 'search' ? 'searches': 'search'}" title="Search" on:action={handleAction}
                    active="{current === 'search'}" />
         <NavButton src="/nav-icon/layer-shadow.svg" alt="layer" name="{$panel.left === 'layer' ? 'layers':'layer'}"
@@ -46,17 +70,7 @@
                    on:action={handleAction}
                    active="{current === 'infrastructure' }" />
       </Col>
-
-      {#if $panel.right}
-        <Col xs="10" class="mt-2 p-0">
-
-          <slot />
-
-        </Col>
-
-      {/if}
-
     </Row>
-  </Container>
 
+  </Container>
 </Offcanvas>

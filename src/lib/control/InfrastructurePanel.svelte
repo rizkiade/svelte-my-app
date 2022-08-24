@@ -1,5 +1,5 @@
 <script>
-	import { Col, Row } from "sveltestrap";
+	import { Row } from "sveltestrap";
 	import { slide } from "svelte/transition";
 
 
@@ -30,21 +30,24 @@
     <div class="card-header text-center" style="background-color: rgba(87,107,131,0.5)">Geo Information</div>
   </div>
 
+  <div class="d-flex flex-column bd-highlight">
+    {#each infrastructure as { id, name, checked }}
+      <Row>
+        <div class="btn-group mt-2" role="group" aria-label="Basic example">
+          <button class="btn bg-warning" style="border-radius: 35px 0 0 5px; width: 25%" disabled><b>0</b></button>
+          <div class="d-inline-block" style="width: 75%">
+            <input type="checkbox" class="btn-check" id="{id}" bind:checked="{checked}" autocomplete="off" on:change={handleClick}>
+            <label class="btn btn-primary text-start d-block" for="{id}" style="border-radius: 0 5px 35px 0">{name}
+              <i class="fa-regular fa-circle-check float-end text-warning"></i>
+            </label>
+          </div>
 
-  {#each infrastructure as { id, name, checked }}
-    <Row>
-      <Col xs="12" class="mt-2">
-        <div class="btn-group d-inline-block" role="group" aria-label="Basic example">
-          <button class="btn btn-warning" style="border-radius: 10px 0 0 10px" disabled><b>0</b></button>
-          <button type="button" class="btn btn-primary"> {name}</button>
-          <button type="button" class="btn btn-outline-dark" style="border: transparent"><i class="fa-solid fa-gear"></i></button>
+          <button type="button" class="btn" style="border: transparent; background: transparent; width: 10%">
+            <i class="fa-solid fa-filter text-danger"></i>
+          </button>
         </div>
-      </Col>
-    </Row>
+      </Row>
 
-    <!--  <input type="checkbox" class="btn-check" id="{id}" bind:checked="{checked}" autocomplete="off" on:change={handleClick}>-->
-    <!--  <label class="btn btn-outline-dark mt-2 text-start" for="{id}" style="border-radius: 13px">-->
-    <!--    <Badge color="danger">0</Badge> {name}-->
-    <!--  </label>-->
-  {/each}
+    {/each}
+  </div>
 </div>

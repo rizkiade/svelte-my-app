@@ -2,6 +2,11 @@
 	import { Alert, Card, Row } from "sveltestrap";
 	import Select from "svelte-select";
 	import { slide } from "svelte/transition";
+
+  const optionIdentifier = "id";
+  const getOptionLabel = (option) => option.name;
+  const getSelectionLabel = (option) => option.name;
+
 </script>
 
 <div transition:slide>
@@ -62,4 +67,5 @@
       </table>
     </div>
   </div>
+
 </div>
