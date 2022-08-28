@@ -4,18 +4,22 @@
 	import { panel, rightWidth } from "../control/NavigationStore.js";
 	import SearchPanel from "../control/SearchPanel.svelte";
 	import InfrastructurePanel from "../control/InfrastructurePanel.svelte";
+	import ProjectPanel from "../control/ProjectPanel.svelte";
 
 	let current = undefined;
 
 	function handleAction(event) {
 		current = event.detail.text;
-		// console.log(current);
+		$panel.right = current;
+		console.log(current);
 
 		switch (current) {
 			case "search":
 			case "infrastructure":
-				$panel.right = current;
 				rightWidth.set(400);
+				break;
+			case "project":
+				rightWidth.set(300);
 				break;
 			default:
 				rightWidth.set(0);
@@ -29,7 +33,7 @@
 
 
 <Offcanvas isOpen="{true}" backdrop={false} placement="end"
-           style="width: {$rightWidth}px; height: 80%; background: rgba(255,255,255,0.42); transition: width 0.25s; border-radius: 15px 0px 0px 15px; overflow:hidden">
+           style="width: {$rightWidth}px; height: 100%; background: rgba(255,255,255,0.42); transition: width 0.25s; border-radius: 15px 0px 0px 15px; overflow:hidden">
 
   <Container>
 
@@ -45,6 +49,10 @@
           {#if $panel.right === 'infrastructure'}
             <InfrastructurePanel />
           {/if}
+
+          {#if $panel.right === 'project'}
+            <ProjectPanel />
+          {/if}
         </Col>
 
       {/if}
@@ -57,7 +65,7 @@
 
 
 <Offcanvas isOpen="{true}" backdrop={false} placement="end"
-           style="width: 55px; height: 80%; align-items: center; background: {$panel.right ? 'transparent': 'rgba(255,255,255,0.42)'} ; transition: width 0.25s; border-radius: 15px 0px 0px 15px; {$panel.right ? 'border: none': ''}">
+           style="width: 55px; height: 40%; align-items: center; background: {$panel.right ? 'transparent': 'rgba(255,255,255,0.42)'} ; transition: width 0.25s; border-radius: 15px 0px 0px 15px; {$panel.right ? 'border: none': ''}">
   <Container>
 
     <Row class="justify-content-evenly">
@@ -69,6 +77,9 @@
         <NavButton src="/nav-icon/maps-shadow.svg" alt="infrastructure" name="{current === 'infrastructure' ? 'infrastructures': 'infrastructure'}" title="Infrastructure"
                    on:action={handleAction}
                    active="{current === 'infrastructure' }" />
+        <NavButton src="/nav-icon/list-shadow.svg" alt="project" name="{current === 'project' ? 'projects': 'project'}" title="Project"
+                   on:action={handleAction}
+                   active="{current === 'project' }" />
       </Col>
     </Row>
 

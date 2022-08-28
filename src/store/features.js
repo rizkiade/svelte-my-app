@@ -14,5 +14,8 @@ let wsp_features = writable({
 // Master WSP Store after request complete.
 let featureExistWSP = writable({});
 
+// Project Source
+let projectLayerSource = writable([]);
 
-export { ws_features, wsp_features, featureExistWSP };
+
+export { ws_features, wsp_features, featureExistWSP, projectLayerSource };

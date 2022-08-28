@@ -2,7 +2,6 @@
 	import { Row } from "sveltestrap";
 	import { slide } from "svelte/transition";
 
-
 	const infrastructure = [
 		{ id: 2, name: "Danau", checked: false },
 		{ id: 3, name: "Bendungan", checked: false },
@@ -27,17 +26,17 @@
 
 <div transition:slide>
   <div class="card" style="background-color: rgba(104,129,169,0.35)">
-    <div class="card-header text-center" style="background-color: rgba(87,107,131,0.5)">Geo Information</div>
+    <div class="card-header text-center" style="background-color: rgba(87,107,131,0.5)">List Infrastructure</div>
   </div>
 
   <div class="d-flex flex-column bd-highlight">
     {#each infrastructure as { id, name, checked }}
       <Row>
         <div class="btn-group mt-2" role="group" aria-label="Basic example">
-          <button class="btn bg-warning" style="border-radius: 35px 0 0 5px; width: 25%" disabled><b>0</b></button>
+          <button class="btn bg-warning" style="border-radius: 15px 0 0 0; border: none; width: 25%" disabled><b>0</b></button>
           <div class="d-inline-block" style="width: 75%">
             <input type="checkbox" class="btn-check" id="{id}" bind:checked="{checked}" autocomplete="off" on:change={handleClick}>
-            <label class="btn btn-primary text-start d-block" for="{id}" style="border-radius: 0 5px 35px 0">{name}
+            <label class="btn btn-primary text-start d-block" for="{id}" style="border-radius: 0 0 15px 0">{name}
               <i class="fa-regular fa-circle-check float-end text-warning"></i>
             </label>
           </div>
