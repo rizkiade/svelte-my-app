@@ -5,10 +5,14 @@
 	import { onMount, setContext } from "svelte";
 	import { Tile } from "ol/layer.js";
 	import { OSM } from "ol/source.js";
+	import { ScaleLine } from "ol/control.js";
+	import Overlay from "ol/Overlay.js";
+
 
 	import "ol/ol.css";
 	import { mapKey, preloader } from "../store/map.js";
 	import Preloader from "./component/loader/Preloader.svelte";
+	import Popup from "./component/Popup.svelte";
 
 	setContext(mapKey, {
 		getMap: () => map
@@ -27,10 +31,54 @@
 	onMount(() => {
 		if (browser) {
 
+			props.display = "inline-block";
+			const container = document.getElementById("card-popup");
+			const overlay = new Overlay({
+				element: container,
+				autoPan: {
+					animation: {
+						duration: 250
+					}
+				}
+			});
+			// overlay.setPosition([111.25585774134638, -7.715808856799736]);
+
 			const view = new View({ projection: "EPSG:4326", center: [mapLng, mapLat], zoom: 5.35 });
 			const layers = [new Tile({ source: new OSM({ attributions: attributions }) })];
 
 			map = new Map({ target, view, layers });
+			map.addControl(new ScaleLine({ units: "us" }));
+			map.addOverlay(overlay);
+
+			map.on("pointermove", function(e) {
+				let feature = map.forEachFeatureAtPixel(e.pixel, function(feature) {
+					return feature;
+				});
+
+				if (feature) {
+					props.type = feature.get("type_name") ?? "";
+					props.name = feature.get("name");
+					props.kewenangan = feature.get("kewenangan") ?? "";
+					props.status_lintas = feature.get("status_lintas") ?? "";
+					props.kode_ws = feature.get("kode_ws") ?? "";
+					props.kode_das = feature.get("kode_das") ?? "";
+					props.luas = feature.get("luas") ?? "";
+					overlay.setPosition(e.coordinate);
+				} else {
+					overlay.setPosition(undefined);
+				}
+			});
+
+			map.on("click", function(e) {
+
+				// let feature = map.forEachFeatureAtPixel(e.pixel, function(feature) {
+				// 	return feature;
+				// });
+
+				// console.log(feature.get("name"));
+				// console.log(feature);
+			});
+
 		}
 
 		let el = document.querySelector(".ol-zoom");
@@ -41,6 +89,17 @@
 			map.updateSize();
 		}, 1000);
 	});
+
+	const props = {
+		display: "none",
+		name: undefined,
+		type: undefined,
+		kewenangan: undefined,
+		status_lintas: undefined,
+		kode_ws: undefined,
+		kode_das: undefined,
+		luas: undefined
+	};
 
 </script>
 
@@ -58,6 +117,7 @@
   {#if map}
     <slot />
   {/if}
+  <Popup {...props} />
 </div>
 
 {#if $preloader}

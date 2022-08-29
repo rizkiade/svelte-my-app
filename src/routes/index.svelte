@@ -10,6 +10,7 @@
 	import Sidebar from "../lib/sidebar/Sidebar.svelte";
 	import PengelolaFeatures from "../lib/features/pengelola/PengelolaFeatures.svelte";
 	import WilayahSungaiFeatures from "../lib/features/wilayahsungai/WilayahSungaiFeatures.svelte";
+	import ProjectFeatures from "../lib/features/project/ProjectFeatures.svelte";
 
 	let isOpen = undefined;
 
@@ -31,6 +32,7 @@
 
   <PengelolaFeatures />
   <WilayahSungaiFeatures />
+  <ProjectFeatures />
 
   <FilterLayer isOpen={isOpen} />
   <Sidebar on:action={handleAction} />

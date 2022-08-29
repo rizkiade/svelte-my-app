@@ -1,5 +1,5 @@
 <script>
-	import { Badge, Button, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Progress, Row, Table } from "sveltestrap";
+	import { Badge, Button, Input, Modal, ModalBody, ModalFooter, ModalHeader, Progress, Row, Table } from "sveltestrap";
 	import { slide } from "svelte/transition";
 	import { ProjectApi } from "../features/project/project.d.ts";
 	import { onMount } from "svelte";
@@ -58,7 +58,7 @@
 		let qs = "format=json";
 		if (e.target.checked) {
 			projectLayer.set(val);
-			toasts.info("requested");
+			toasts.info("Requested");
 
 			if (val !== "0") {
 				qs = `ctgPId=${val}&${qs}`;
@@ -95,8 +95,6 @@
 			}
 		});
 
-
-		return 1;
 	};
 
 	$:countProjectSub($projectLayerSource);
