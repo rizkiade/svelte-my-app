@@ -11,6 +11,7 @@
 	import PengelolaFeatures from "../lib/features/pengelola/PengelolaFeatures.svelte";
 	import WilayahSungaiFeatures from "../lib/features/wilayahsungai/WilayahSungaiFeatures.svelte";
 	import ProjectFeatures from "../lib/features/project/ProjectFeatures.svelte";
+	import InfrastructureFeatures from "../lib/features/infrastructure/InfrastructureFeatures.svelte";
 
 	let isOpen = undefined;
 
@@ -32,6 +33,7 @@
 
   <PengelolaFeatures />
   <WilayahSungaiFeatures />
+  <InfrastructureFeatures />
   <ProjectFeatures />
 
   <FilterLayer isOpen={isOpen} />

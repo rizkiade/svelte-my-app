@@ -3,8 +3,8 @@
 	import NavButton from "../component/NavButton.svelte";
 	import { panel, rightWidth } from "../control/NavigationStore.js";
 	import SearchPanel from "../control/SearchPanel.svelte";
-	import InfrastructurePanel from "../control/InfrastructurePanel.svelte";
-	import ProjectPanel from "../control/ProjectPanel.svelte";
+	import Infrastructure from "../features/infrastructure/Infrastructure.svelte";
+	import Project from "../features/project/Project.svelte";
 
 	let current = undefined;
 
@@ -47,11 +47,11 @@
           {/if}
 
           {#if $panel.right === 'infrastructure'}
-            <InfrastructurePanel />
+            <Infrastructure />
           {/if}
 
           {#if $panel.right === 'project'}
-            <ProjectPanel />
+            <Project />
           {/if}
         </Col>
 

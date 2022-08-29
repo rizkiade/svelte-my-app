@@ -8,6 +8,7 @@
 	import { mapKey } from "../../../store/map.js";
 	import { projectLayerSource } from "../../../store/features.js";
 	import { Point } from "ol/geom.js";
+	import { panel } from "../../control/NavigationStore.js";
 
 
 	let styleIcon = (feature) => {
@@ -29,9 +30,9 @@
 	};
 
 	let features = [];
-	const VSourceSearch = new VectorSource();
-	const VLayerSearch = new VectorLayer({
-		source: VSourceSearch,
+	const VSourceProject = new VectorSource();
+	const VLayerProject = new VectorLayer({
+		source: VSourceProject,
 		zIndex: 10,
 		style: styleIcon
 	});
@@ -43,7 +44,7 @@
 	let reloadMap = () => {
 
 		if (map) {
-			map.removeLayer(VLayerSearch);
+			map.removeLayer(VLayerProject);
 			features = [];
 		}
 
@@ -60,15 +61,21 @@
 			}
 		});
 
-		VLayerSearch.setSource(new VectorSource({
+		VLayerProject.setSource(new VectorSource({
 			features: features
 		}));
 
 		if (map) {
-			map.addLayer(VLayerSearch);
+
+			if ($panel.right === "project") {
+				VLayerProject.setVisible(true);
+			} else {
+				VLayerProject.setVisible(false);
+			}
+			map.addLayer(VLayerProject);
 		}
 
 	};
 
-	$:reloadMap($projectLayerSource);
+	$:reloadMap($projectLayerSource, $panel.right);
 </script>

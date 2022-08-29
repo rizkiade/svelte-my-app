@@ -1,11 +1,11 @@
 <script>
 	import { Badge, Button, Input, Modal, ModalBody, ModalFooter, ModalHeader, Progress, Row, Table } from "sveltestrap";
 	import { slide } from "svelte/transition";
-	import { ProjectApi } from "../features/project/project.d.ts";
+	import { ProjectApi } from "./project.d.ts";
 	import { onMount } from "svelte";
-	import { categoryProject, projectLayer } from "../../store/map.js";
-	import { projectLayerSource } from "../../store/features.js";
-	import ListLoading from "../component/loader/ListLoading.svelte";
+	import { categoryProject, projectLayer } from "../../../store/map.js";
+	import { projectLayerSource } from "../../../store/features.js";
+	import ListLoading from "../../component/loader/ListLoading.svelte";
 	import { toasts } from "svelte-toasts";
 
 	const category = [];

@@ -1,6 +1,9 @@
 <script>
 	import { Row } from "sveltestrap";
 	import { slide } from "svelte/transition";
+	import { InfrastructureApi } from "./infrastructure.d.ts";
+	import { toasts } from "svelte-toasts";
+	import { assets_features } from "../../../store/map.js";
 
 	const infrastructure = [
 		{ id: 2, name: "Danau", checked: false },
@@ -17,11 +20,28 @@
 		{ id: 16, name: "Pos Klimatologi", checked: false }
 	];
 
+	const _api = new InfrastructureApi();
 
 	let handleClick = async (e) => {
 		let _id = parseInt(e.target.id);
-		let checked = e.target.checked;
+		// let checked = e.target.checked;
+
+		if (e.target.checked) {
+			let result = await _api.getAsset(_id);
+			console.log(result.features);
+
+			toasts.info(`${result.features.length} features add.`);
+			$assets_features.features = { ...assets_features.features, ...result.features };
+
+			// console.log($assets_features);
+		} else {
+				console.log("unchecked");
+		}
+
+		// let infra = infrastructure.find(i => i.id === parseInt(_id));
+		// console.log(infra);
 	};
+
 </script>
 
 <div transition:slide>

@@ -15,6 +15,11 @@ const wsFilter = writable([]);
 const dasFilter = writable([]);
 
 
+let assets_features = writable({
+	"type": "FeatureCollection",
+	"features": []
+});
+
 // Store filter assets
 let filter_asset = writable({
 	pengelolaId: undefined,
@@ -28,6 +33,7 @@ let filter_asset = writable({
 
 const categoryProject = writable([]);
 let projectLayer = writable(undefined);
+const project_visible = writable(false);
 
 
-export { mapKey, preloader, ws_visible, wsp_visible, paramsKewenangan, pengelola, ws, wsFilter, dasFilter, filter_asset, categoryProject, projectLayer };
+export { mapKey, preloader, ws_visible, wsp_visible, paramsKewenangan, pengelola, ws, wsFilter, dasFilter, assets_features, filter_asset, categoryProject, projectLayer, project_visible };
