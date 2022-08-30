@@ -59,7 +59,7 @@
   </div>
 
   <div class="d-flex flex-column bd-highlight">
-    {#each infrastructure as { id, name, checked, disabled }}
+    {#each infrastructure as { id, name, checked }}
       <Row>
         <div class="btn-group mt-2" role="group" aria-label="Basic example">
           <button class="btn bg-warning" style="border-radius: 15px 0 0 0; border: none; width: 25%" disabled>

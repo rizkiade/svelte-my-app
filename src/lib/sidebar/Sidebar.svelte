@@ -5,6 +5,8 @@
 	import SearchPanel from "../control/SearchPanel.svelte";
 	import Infrastructure from "../features/infrastructure/Infrastructure.svelte";
 	import Project from "../features/project/Project.svelte";
+	import { selected_asset } from "../../store/map.js";
+	import DetailAsset from "../features/detail/DetailAsset.svelte";
 
 	let current = undefined;
 
@@ -26,7 +28,16 @@
 				$panel.right = undefined;
 				break;
 		}
+	}
 
+	$: if ($selected_asset.id !== undefined) {
+		rightWidth.set(450);
+	} else {
+		if ($panel.right === undefined) {
+			rightWidth.set(0);
+		} else {
+			rightWidth.set(400);
+		}
 	}
 
 </script>
@@ -47,7 +58,11 @@
           {/if}
 
           {#if $panel.right === 'infrastructure'}
-            <Infrastructure />
+            {#if $selected_asset.id !== undefined}
+              <DetailAsset />
+            {:else }
+              <Infrastructure />
+            {/if}
           {/if}
 
           {#if $panel.right === 'project'}

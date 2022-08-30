@@ -3,7 +3,7 @@
 	import { FormGroup, Input, Row } from "sveltestrap";
 	import Select from "svelte-select";
 	import { toasts } from "svelte-toasts";
-	import { PengelolaApi } from "./pengelola.ts";
+	import { PengelolaApi } from "./pengelola.d.ts";
 	import SelectLoading from "$lib/component/loader/SelectLoading.svelte";
 
 	import { mapKey, preloader, ws, ws_visible, wsp_visible, wsFilter, pengelola, filter_asset } from "../../../store/map.js";

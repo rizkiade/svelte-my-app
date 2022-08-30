@@ -10,7 +10,7 @@
 
 
 	import "ol/ol.css";
-	import { mapKey, preloader } from "../store/map.js";
+	import { mapKey, preloader, selected_asset } from "../store/map.js";
 	import Preloader from "./component/loader/Preloader.svelte";
 	import Popup from "./component/Popup.svelte";
 
@@ -71,12 +71,33 @@
 
 			map.on("click", function(e) {
 
-				// let feature = map.forEachFeatureAtPixel(e.pixel, function(feature) {
-				// 	return feature;
-				// });
+				let feature = map.forEachFeatureAtPixel(e.pixel, function(feature) {
+					return feature;
+				});
 
-				// console.log(feature.get("name"));
-				// console.log(feature);
+				if (feature && feature.get("type_name")) {
+
+					// console.log(feature.get("name"));
+					// console.log(feature);
+
+					let _id = feature.get("id");
+					if ($selected_asset.id !== _id) {
+
+						selected_asset.set({
+							id: _id,
+							name: feature.get("name"),
+							type: feature.get("type_name"),
+							pengelola: feature.get("pengelola_name"),
+							coordinate: feature.getGeometry().getCoordinates(),
+							ws: feature.get("ws_name"),
+							das: feature.get("das_name"),
+							provinsi: feature.get("provinsi"),
+							kabupaten: feature.get("kabupaten"),
+							kecamatan: feature.get("kecamatan"),
+							desa: feature.get("kelurahan")
+						});
+					}
+				}
 			});
 
 		}

@@ -32,9 +32,28 @@ let filter_asset = writable({
 	kelurahan: undefined
 });
 
+let selected_asset = writable({
+	id: undefined,
+	name: undefined,
+	type: undefined,
+	pengelola: undefined,
+	coordinate: undefined,
+	ws: undefined,
+	das: undefined,
+	provinsi: undefined,
+	kabupaten: undefined,
+	kecamatan: undefined,
+	desa: undefined
+});
+
 const categoryProject = writable([]);
 let projectLayer = writable(undefined);
-const project_visible = writable(false);
+
+let assetDetail = writable({
+	technic: undefined,
+	activity: []
+});
+let onAssetDetailReq = writable(false);
 
 
-export { mapKey, preloader, ws_visible, wsp_visible, paramsKewenangan, pengelola, ws, wsFilter, dasFilter, assets_features, count_asset, filter_asset, categoryProject, projectLayer, project_visible };
+export { mapKey, preloader, ws_visible, wsp_visible, paramsKewenangan, pengelola, ws, wsFilter, dasFilter, assets_features, count_asset, filter_asset, selected_asset, categoryProject, projectLayer, assetDetail, onAssetDetailReq };

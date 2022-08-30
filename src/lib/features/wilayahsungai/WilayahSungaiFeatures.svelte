@@ -5,7 +5,7 @@
 	import { GeoJSON } from "ol/format.js";
 	import VectorLayer from "ol/layer/Vector.js";
 	import { toasts } from "svelte-toasts";
-	import { WilayahSungaiApi } from "./wilayahsungai.ts";
+	import { WilayahSungaiApi } from "./wilayahsungai.d.ts";
 	import { Fill, Stroke, Style } from "ol/style.js";
 	import { ws_features } from "../../../store/features.js";
 

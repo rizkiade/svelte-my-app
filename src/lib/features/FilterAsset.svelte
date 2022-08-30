@@ -21,6 +21,7 @@
 		let kw = feature.get("kewenangan");
 		let pengId = feature.get("pengelola_id");
 		let wsId = feature.get("ws_id");
+
 		// console.log(kw);
 		// console.log(typeof pengId);
 		// console.log(typeof pengelola);

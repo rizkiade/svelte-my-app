@@ -1,12 +1,12 @@
 import { ws } from "../../../store/map.js";
 
-export type WilayahSungai = {
+export type Wilayahsungai = {
 	id: number,
 	name: string,
 }
 
 export class WilayahSungaiApi {
-	getList = async (): Promise<WilayahSungai[]> => {
+	getList = async (): Promise<Wilayahsungai[]> => {
 		const response = await fetch(`${import.meta.env.VITE_GIS_API}/master/ws`);
 		const result = await response.json();
 

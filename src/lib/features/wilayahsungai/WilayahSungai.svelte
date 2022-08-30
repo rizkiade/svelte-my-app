@@ -1,31 +1,25 @@
 <script lang="ts">
-	import { getContext } from "svelte";
 	import { FormGroup, Input, Row } from "sveltestrap";
 	import Select from "svelte-select";
-	import { toasts } from "svelte-toasts";
-	import { WilayahSungaiApi } from "./wilayahsungai.ts";
+	import { WilayahSungaiApi } from "./wilayahsungai.d.ts";
 	import SelectLoading from "$lib/component/loader/SelectLoading.svelte";
 
-	import { mapKey, ws_visible, ws, wsFilter, filter_asset } from "../../../store/map.js";
+	import { filter_asset, ws, ws_visible, wsFilter } from "../../../store/map.js";
 
 	const itemId = "id";
 	const label = "name";
 
-	// const { getMap } = getContext(mapKey);
-	// const map = getMap();
-
 	const _api = new WilayahSungaiApi();
 
 	let wsSelect = async (e) => {
-		let wsId = e.detail.id;
-		$filter_asset.wsId = wsId;
+	  $filter_asset.wsId = e.detail.id;
 		$filter_asset.dasId = undefined;
 
 		// console.log(wsId);
 		// console.log($ws_visible);
 	};
 
-	let toggleWilayahSungai = (e) => {
+	let toggleWilayahSungai = () => {
 		$ws_visible = !$ws_visible;
 		// toasts.error("Pilih Wilayah Sungai terlebih dahulu.");
 		// console.log($filter_asset);
