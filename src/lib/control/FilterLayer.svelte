@@ -7,7 +7,7 @@
 
 	let isOpen = false;
 
-	let handleSwitch = (e) => {
+	let handleKwSwitch = (e) => {
 		if (e.target.checked) {
 			paramsKewenangan.set(e.target.value);
 		} else {
@@ -34,13 +34,13 @@
 
     <Row style="background-color:rgba(104,129,169,0.54); border-radius: 10px">
       <Col>
-        <Input type="switch" label="Pusat" value="pusat" on:change={handleSwitch} checked={$paramsKewenangan === 'pusat'} />
+        <Input type="switch" label="Pusat" value="pusat" on:change={handleKwSwitch} checked={$paramsKewenangan === 'pusat'} />
       </Col>
       <Col>
-        <Input type="switch" label="Prov" value="provinsi" on:change={handleSwitch} checked={$paramsKewenangan === 'provinsi'} />
+        <Input type="switch" label="Prov" value="provinsi" on:change={handleKwSwitch} checked={$paramsKewenangan === 'provinsi'} />
       </Col>
       <Col>
-        <Input type="switch" label="Kab" value="kabupaten" on:change={handleSwitch} checked={$paramsKewenangan === 'kabupaten'} />
+        <Input type="switch" label="Kab" value="kabupaten" on:change={handleKwSwitch} checked={$paramsKewenangan === 'kabupaten'} />
       </Col>
     </Row>
 

@@ -23,7 +23,7 @@ export class PengelolaApi {
 		}
 	};
 
-	getArea = async (params: number): Promise<Features[]> => {
+	getArea = async (params: number): Promise<Features> => {
 		const response = await fetch(`${import.meta.env.VITE_GIS_API}/area/pengelola?id=${params}`);
 		const result = await response.json();
 

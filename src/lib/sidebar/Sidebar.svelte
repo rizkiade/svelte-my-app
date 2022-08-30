@@ -11,7 +11,7 @@
 	function handleAction(event) {
 		current = event.detail.text;
 		$panel.right = current;
-		console.log(current);
+		// console.log(current);
 
 		switch (current) {
 			case "search":

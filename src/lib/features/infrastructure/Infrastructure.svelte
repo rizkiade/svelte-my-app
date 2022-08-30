@@ -1,9 +1,9 @@
 <script>
-	import { Row } from "sveltestrap";
+	import { Row, Spinner } from "sveltestrap";
 	import { slide } from "svelte/transition";
 	import { InfrastructureApi } from "./infrastructure.d.ts";
 	import { toasts } from "svelte-toasts";
-	import { assets_features } from "../../../store/map.js";
+	import { assets_features, count_asset } from "../../../store/map.js";
 
 	const infrastructure = [
 		{ id: 2, name: "Danau", checked: false },
@@ -22,24 +22,33 @@
 
 	const _api = new InfrastructureApi();
 
+	let result;
 	let handleClick = async (e) => {
 		let _id = parseInt(e.target.id);
-		// let checked = e.target.checked;
+
 
 		if (e.target.checked) {
-			let result = await _api.getAsset(_id);
-			console.log(result.features);
+			e.target.disabled = true;
 
+			let spinnerEl = document.querySelector(`#spinner_${_id}`);
+			let labelEl = document.querySelector(`#label_${_id}`);
+
+			spinnerEl["style"].display = "inline-block";
+			labelEl["style"].display = "none";
+
+			result = await _api.getAsset(_id);
+
+			$assets_features.features = [...$assets_features.features, ...result.features];
 			toasts.info(`${result.features.length} features add.`);
-			$assets_features.features = { ...assets_features.features, ...result.features };
+			e.target.disabled = false;
 
-			// console.log($assets_features);
+			spinnerEl["style"].display = "none";
+			labelEl["style"].display = "inline";
+
 		} else {
-				console.log("unchecked");
+			$assets_features.features = $assets_features.features.filter(i => i.properties.type_id !== _id);
 		}
 
-		// let infra = infrastructure.find(i => i.id === parseInt(_id));
-		// console.log(infra);
 	};
 
 </script>
@@ -50,10 +59,15 @@
   </div>
 
   <div class="d-flex flex-column bd-highlight">
-    {#each infrastructure as { id, name, checked }}
+    {#each infrastructure as { id, name, checked, disabled }}
       <Row>
         <div class="btn-group mt-2" role="group" aria-label="Basic example">
-          <button class="btn bg-warning" style="border-radius: 15px 0 0 0; border: none; width: 25%" disabled><b>0</b></button>
+          <button class="btn bg-warning" style="border-radius: 15px 0 0 0; border: none; width: 25%" disabled>
+            <Spinner size="sm" style="display: none" id="spinner_{id}" />
+            <b id="label_{id}">
+              {$count_asset[id] ?? 0}
+            </b>
+          </button>
           <div class="d-inline-block" style="width: 75%">
             <input type="checkbox" class="btn-check" id="{id}" bind:checked="{checked}" autocomplete="off" on:change={handleClick}>
             <label class="btn btn-primary text-start d-block" for="{id}" style="border-radius: 0 0 15px 0">{name}

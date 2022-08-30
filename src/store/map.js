@@ -19,6 +19,7 @@ let assets_features = writable({
 	"type": "FeatureCollection",
 	"features": []
 });
+let count_asset = writable({});
 
 // Store filter assets
 let filter_asset = writable({
@@ -36,4 +37,4 @@ let projectLayer = writable(undefined);
 const project_visible = writable(false);
 
 
-export { mapKey, preloader, ws_visible, wsp_visible, paramsKewenangan, pengelola, ws, wsFilter, dasFilter, assets_features, filter_asset, categoryProject, projectLayer, project_visible };
+export { mapKey, preloader, ws_visible, wsp_visible, paramsKewenangan, pengelola, ws, wsFilter, dasFilter, assets_features, count_asset, filter_asset, categoryProject, projectLayer, project_visible };

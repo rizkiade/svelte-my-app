@@ -58,6 +58,8 @@
 
 	let styleArea = (feature) => {
 
+		console.log("aa");
+
 		let id = feature.get("id");
 		let color = feature.get("color");
 		let kw = feature.get("kewenangan");
@@ -65,7 +67,6 @@
 		if ($filter_asset.wsId) {
 			if ($filter_asset.wsId === id) {
 
-				// jika kewenangan terpilih dan tidak sesuai kewenangan area maka setStyle menjadi FALSE;
 				if ($paramsKewenangan && $paramsKewenangan.toUpperCase() !== kw) {
 					return false;
 				}
@@ -81,6 +82,11 @@
 				});
 			}
 		} else {
+
+			if ($paramsKewenangan && $paramsKewenangan.toUpperCase() !== kw) {
+				return false;
+			}
+
 			return new Style({
 				stroke: new Stroke({
 					color: "#502909",

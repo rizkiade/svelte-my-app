@@ -3,32 +3,11 @@
 	import VectorSource from "ol/source/Vector.js";
 	import { GeoJSON } from "ol/format.js";
 	import VectorLayer from "ol/layer/Vector.js";
-	// import { styleIcon } from "../../helper/style.js";
-	import { assets_features, mapKey } from "../../../store/map.js";
+	import { styleIcon } from "../../helper/style.js";
+	import { assets_features, count_asset, filter_asset, mapKey, paramsKewenangan } from "../../../store/map.js";
 	import { getContext } from "svelte";
-	import { Icon, Style } from "ol/style.js";
 	import { panel } from "../../control/NavigationStore.js";
-
-	let styleIcons = (feature) => {
-		// let typeId = feature.get("type_id");
-		console.log("aaa");
-
-		let image = "map-marker-red-128.png";
-		let type = feature.getGeometry().getType();
-
-		if (type === "Point") {
-			return new Style({
-				image: new Icon({
-					anchor: [0.5, 46],
-					anchorXUnits: "fraction",
-					anchorYUnits: "pixels",
-					scale: [0.20, 0.20],
-					src: `/marker/${image}`
-				})
-			});
-		}
-	};
-
+	import { filteredAsset } from "../FilterAsset.svelte";
 
 	const VSourceAsset = new VectorSource({
 		features: new GeoJSON().readFeatures($assets_features)
@@ -36,7 +15,7 @@
 
 	const VLayerAsset = new VectorLayer({
 		source: VSourceAsset,
-		style: styleIcons,
+		style: styleIcon,
 		zIndex: 10
 	});
 
@@ -51,21 +30,38 @@
 			map.removeLayer(VLayerAsset);
 		}
 
-		// VSourceAsset.clear();
-
-		// VLayerAsset.setVisible(true);
-		// VSourceAsset.addFeatures(new GeoJSON().readFeatures($assets_features));
+		VSourceAsset.clear();
+		VSourceAsset.addFeatures(new GeoJSON().readFeatures($assets_features));
 
 		if (map) {
+			if ($panel.right === "infrastructure") {
+				VLayerAsset.setVisible(true);
+			} else {
+				VLayerAsset.setVisible(false);
+			}
 			map.addLayer(VLayerAsset);
 		}
 
-
-		// console.log(VLayerAsset);
-
 	};
 
-	$:reloadMap($assets_features, $panel.right);
+	$:reloadMap($assets_features, $panel.right, $paramsKewenangan, $filter_asset);
 
+	let countAsset = () => {
+		// reset counter
+		$count_asset = {};
+		VSourceAsset.getFeatures().map(feature => {
+			if (filteredAsset(feature)) {
+				const id = feature.get("type_id");
+				let existID = id in $count_asset;
+				if (!existID) {
+					$count_asset[id] = 1;
+				} else {
+					$count_asset[id] = $count_asset[id] + 1;
+				}
+			}
+		});
+		// console.log($count_asset);
+	};
+	$:countAsset($assets_features, $paramsKewenangan, $filter_asset);
 
 </script>

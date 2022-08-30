@@ -1,5 +1,6 @@
 import { Fill, Icon, Stroke, Style } from "ol/style.js";
-// import CircleStyle from "ol/style/Circle.js";
+
+import { filteredAsset } from "../features/FilterAsset.svelte";
 
 const iconList = {
 	2: "_danau.png",
@@ -19,29 +20,42 @@ const iconList = {
 	17: "map-marker-red.png"
 };
 
-// const styleCache = {};
+// let paramKw;
+//
+// paramsKewenangan.subscribe(value => {
+// 	paramKw = value;
+// });
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 let styleIcon = (feature) => {
-	// console.log(feature.get("type_id"));
-
-	console.log('aaaa');
 
 	let typeId = feature.get("type_id");
 	let image = iconList[typeId] ?? "map-marker-red-128.png";
 	let type = feature.getGeometry().getType();
+	// let kw = feature.get("kewenangan");
 
-	if (type === "Point") {
-		return new Style({
-			image: new Icon({
-				// anchor: [0.5, 200],
-				anchor: [0.5, 46],
-				anchorXUnits: "fraction",
-				anchorYUnits: "pixels",
-				scale: [0.20, 0.20],
-				src: `/marker/${image}`
-			})
-		});
+	// console.log(filteredAsset(feature));
+
+	if (filteredAsset(feature)) {
+
+		if (type === "Point") {
+			return new Style({
+				image: new Icon({
+					// anchor: [0.5, 200],
+					anchor: [0.5, 46],
+					anchorXUnits: "fraction",
+					anchorYUnits: "pixels",
+					scale: [0.20, 0.20],
+					src: `/marker/${image}`
+				})
+			});
+		}
+
 	}
+
+	// if (paramKw && paramKw.toUpperCase() !== kw) {
+	// 	return false;
+	// }
 
 	// const size = feature.get('features').length;
 	// let style = styleCache[size];

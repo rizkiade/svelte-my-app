@@ -18,8 +18,7 @@
 	const mapContext = getContext(mapKey);
 	const map = mapContext.getMap();
 
-
-	let styleWSP = (feature) => {
+	let styleArea = (feature) => {
 		let bws_permen = feature.get("bws_permen");
 		let bws_kerja = feature.get("bws_kerja");
 		let color = feature.get("color");
@@ -64,12 +63,9 @@
 		}
 
 		VSourceWSP.clear();
-		VSourceWSP.addFeatures(new GeoJSON().readFeatures($wsp_features, {
-			dataProjection: "EPSG:4326",
-			featureProjection: "EPSG:4326"
-		}));
+		VSourceWSP.addFeatures(new GeoJSON().readFeatures($wsp_features));
 		VLayerWSP.setZIndex(1);
-		VLayerWSP.setStyle(styleWSP);
+		VLayerWSP.setStyle(styleArea);
 		VLayerWSP.setVisible($wsp_visible);
 		if (map) {
 			map.addLayer(VLayerWSP);
