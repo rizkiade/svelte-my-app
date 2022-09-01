@@ -6,7 +6,7 @@
 	import { PengelolaApi } from "./pengelola.d.ts";
 	import SelectLoading from "$lib/component/loader/SelectLoading.svelte";
 
-	import { mapKey, preloader, ws, ws_visible, wsp_visible, wsFilter, pengelola, filter_asset } from "../../../store/map.js";
+	import { mapKey, preloader, ws, ws_visible, wsp_visible, ordo_visible, wsFilter, pengelola, filter_asset } from "../../../store/map.js";
 	import { wsp_features, featureExistWSP } from "../../../store/features.js";
 
 	const itemId = "id";
@@ -27,6 +27,8 @@
 			kecamatan: undefined,
 			kelurahan: undefined
 		});
+
+		ordo_visible.set({ 1: false, 2: false, 3: false, 4: false });
 
 
 		$wsFilter = JSON.parse(e.detail.ws_area);

@@ -17,5 +17,8 @@ let featureExistWSP = writable({});
 // Project Source
 let projectLayerSource = writable([]);
 
+// Sungai & DAS stored in above variable
+let featureExist = writable({});
 
-export { ws_features, wsp_features, featureExistWSP, projectLayerSource };
+
+export { ws_features, wsp_features, featureExistWSP, projectLayerSource, featureExist };

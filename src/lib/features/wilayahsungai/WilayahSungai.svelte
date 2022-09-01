@@ -4,7 +4,8 @@
 	import { WilayahSungaiApi } from "./wilayahsungai.d.ts";
 	import SelectLoading from "$lib/component/loader/SelectLoading.svelte";
 
-	import { filter_asset, ws, ws_visible, wsFilter } from "../../../store/map.js";
+	import { filter_asset, ws, ws_visible, ordo_visible, wsFilter } from "../../../store/map.js";
+	import { featureExist } from "../../../store/features.js";
 
 	const itemId = "id";
 	const label = "name";
@@ -12,11 +13,14 @@
 	const _api = new WilayahSungaiApi();
 
 	let wsSelect = async (e) => {
-	  $filter_asset.wsId = e.detail.id;
+		$filter_asset.wsId = e.detail.id;
 		$filter_asset.dasId = undefined;
 
-		// console.log(wsId);
-		// console.log($ws_visible);
+		$ordo_visible[1] = $featureExist[$filter_asset.wsId] ? ($featureExist[$filter_asset.wsId][23] ? ($featureExist[$filter_asset.wsId][23]["ordo_1"] ? $featureExist[$filter_asset.wsId][23]["ordo_1"].checked : false) : false) : false;
+		$ordo_visible[2] = $featureExist[$filter_asset.wsId] ? ($featureExist[$filter_asset.wsId][23] ? ($featureExist[$filter_asset.wsId][23]["ordo_2"] ? $featureExist[$filter_asset.wsId][23]["ordo_2"].checked : false) : false) : false;
+		$ordo_visible[3] = $featureExist[$filter_asset.wsId] ? ($featureExist[$filter_asset.wsId][23] ? ($featureExist[$filter_asset.wsId][23]["ordo_3"] ? $featureExist[$filter_asset.wsId][23]["ordo_3"].checked : false) : false) : false;
+		$ordo_visible[4] = $featureExist[$filter_asset.wsId] ? ($featureExist[$filter_asset.wsId][23] ? ($featureExist[$filter_asset.wsId][23]["ordo_4"] ? $featureExist[$filter_asset.wsId][23]["ordo_4"].checked : false) : false) : false;
+
 	};
 
 	let toggleWilayahSungai = () => {

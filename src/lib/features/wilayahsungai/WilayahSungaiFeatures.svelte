@@ -58,8 +58,6 @@
 
 	let styleArea = (feature) => {
 
-		console.log("aa");
-
 		let id = feature.get("id");
 		let color = feature.get("color");
 		let kw = feature.get("kewenangan");
