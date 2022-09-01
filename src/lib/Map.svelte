@@ -77,9 +77,6 @@
 
 				if (feature && feature.get("type_name")) {
 
-					// console.log(feature.get("name"));
-					// console.log(feature);
-
 					let _id = feature.get("id");
 					if ($selected_asset.id !== _id) {
 
@@ -94,7 +91,8 @@
 							provinsi: feature.get("provinsi"),
 							kabupaten: feature.get("kabupaten"),
 							kecamatan: feature.get("kecamatan"),
-							desa: feature.get("kelurahan")
+							desa: feature.get("kelurahan"),
+							infrastructure_id: feature.get("type_id")
 						});
 					}
 				}
