@@ -4,28 +4,13 @@
 	import { InfrastructureApi } from "./infrastructure.d.ts";
 	import { toasts } from "svelte-toasts";
 	import { assets_features, count_asset } from "../../../store/map.js";
-
-	const infrastructure = [
-		{ id: 2, name: "Danau", checked: false },
-		{ id: 3, name: "Bendungan", checked: false },
-		{ id: 4, name: "Bendung", checked: false },
-		{ id: 5, name: "Embung", checked: false },
-		{ id: 6, name: "Air Tanah", checked: false },
-		{ id: 7, name: "Air Baku", checked: false },
-		{ id: 8, name: "Pengendali Sedimen", checked: false },
-		{ id: 12, name: "Pengaman Pantai", checked: false },
-		{ id: 13, name: "Posko Banjir", checked: false },
-		{ id: 14, name: "Pos Curah Hujan", checked: false },
-		{ id: 15, name: "Pos Duga Air", checked: false },
-		{ id: 16, name: "Pos Klimatologi", checked: false }
-	];
+	import { infrastructure } from "../../control/NavigationStore.js";
 
 	const _api = new InfrastructureApi();
 
 	let result;
 	let handleClick = async (e) => {
 		let _id = parseInt(e.target.id);
-
 
 		if (e.target.checked) {
 			e.target.disabled = true;
@@ -59,7 +44,7 @@
   </div>
 
   <div class="d-flex flex-column bd-highlight">
-    {#each infrastructure as { id, name, checked }}
+    {#each $infrastructure as { id, name, checked }}
       <Row>
         <div class="btn-group mt-2" role="group" aria-label="Basic example">
           <button class="btn bg-warning" style="border-radius: 15px 0 0 0; border: none; width: 25%" disabled>
