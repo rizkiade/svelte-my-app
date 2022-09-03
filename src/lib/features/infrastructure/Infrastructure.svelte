@@ -1,39 +1,19 @@
 <script>
-	import { Row, Spinner } from "sveltestrap";
+	import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "sveltestrap";
 	import { slide } from "svelte/transition";
-	import { InfrastructureApi } from "./infrastructure.d.ts";
-	import { toasts } from "svelte-toasts";
-	import { assets_features, count_asset } from "../../../store/map.js";
 	import { infrastructure } from "../../control/NavigationStore.js";
+	import InfrastructureButton from "./InfrastructureButton.svelte";
+	import PosDugaAir from "./filters/PosDugaAir.svelte";
+	import BoxContent from "./filters/BoxContent.svelte";
 
-	const _api = new InfrastructureApi();
+	let open = false;
+	let filterLayerId = undefined;
+	let filterLayerLabel = undefined;
 
-	let result;
-	let handleClick = async (e) => {
-		let _id = parseInt(e.target.id);
-
-		if (e.target.checked) {
-			e.target.disabled = true;
-
-			let spinnerEl = document.querySelector(`#spinner_${_id}`);
-			let labelEl = document.querySelector(`#label_${_id}`);
-
-			spinnerEl["style"].display = "inline-block";
-			labelEl["style"].display = "none";
-
-			result = await _api.getAsset(_id);
-
-			$assets_features.features = [...$assets_features.features, ...result.features];
-			toasts.info(`${result.features.length} features add.`);
-			e.target.disabled = false;
-
-			spinnerEl["style"].display = "none";
-			labelEl["style"].display = "inline";
-
-		} else {
-			$assets_features.features = $assets_features.features.filter(i => i.properties.type_id !== _id);
-		}
-
+	const toggle = (event) => {
+		open = event.detail.value;
+		filterLayerId = event.detail.layerId;
+		filterLayerLabel = event.detail.layerLabel;
 	};
 
 </script>
@@ -45,27 +25,34 @@
 
   <div class="d-flex flex-column bd-highlight">
     {#each $infrastructure as { id, name, checked }}
-      <Row>
-        <div class="btn-group mt-2" role="group" aria-label="Basic example">
-          <button class="btn bg-warning" style="border-radius: 15px 0 0 0; border: none; width: 25%" disabled>
-            <Spinner size="sm" style="display: none" id="spinner_{id}" />
-            <b id="label_{id}">
-              {$count_asset[id] ?? 0}
-            </b>
-          </button>
-          <div class="d-inline-block" style="width: 75%">
-            <input type="checkbox" class="btn-check" id="{id}" bind:checked="{checked}" autocomplete="off" on:change={handleClick}>
-            <label class="btn btn-primary text-start d-block" for="{id}" style="border-radius: 0 0 15px 0">{name}
-              <i class="fa-regular fa-circle-check float-end text-warning"></i>
-            </label>
-          </div>
-
-          <button type="button" class="btn" style="border: transparent; background: transparent; width: 10%">
-            <i class="fa-solid fa-filter text-danger"></i>
-          </button>
-        </div>
-      </Row>
-
+      <InfrastructureButton {id} {name} {checked} on:open={toggle} />
     {/each}
   </div>
 </div>
+
+<Modal isOpen={open} size="sm">
+  <ModalHeader>Params
+    <em>{filterLayerLabel}</em>
+  </ModalHeader>
+  <ModalBody>
+
+    {#if filterLayerId === 14}
+      <BoxContent />
+    {/if}
+
+    {#if filterLayerId === 15}
+      <BoxContent>
+        <PosDugaAir />
+      </BoxContent>
+    {/if}
+
+    {#if filterLayerId === 16}
+      <BoxContent />
+    {/if}
+
+
+  </ModalBody>
+  <ModalFooter>
+    <Button color="danger" on:click={toggle}>Close</Button>
+  </ModalFooter>
+</Modal>

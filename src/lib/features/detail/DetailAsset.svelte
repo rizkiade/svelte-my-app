@@ -35,7 +35,7 @@
   <div class="card" style="background-color: rgba(104,129,169,0.35)">
     <div class="card-header text-center" style="background-color: rgba(87,107,131,0.5)">Detail Information</div>
   </div>
-  <Button class="btn-sm btn-danger mt-2 float-end" on:click={closeDetail}>Hide</Button>
+  <Button class="btn-sm btn-danger mt-2" on:click={closeDetail}>Hide</Button>
 
   <Table borderless size="sm" class="mt-4">
     <tbody>
@@ -158,10 +158,10 @@
                   <h5 class="card-title">{row.name}</h5>
                   <div class="row">
                     <div class="col-6">
-                      TMA Sebelumnya : {parseInt(row.tma_before)} <i class="fa-solid fa-caret-left text-warning blinking"></i><i class="fa-solid fa-caret-left text-warning blinking"></i>
+                      TMA Sebelumnya : <i class="fa-solid fa-caret-right text-warning blinking"></i><i class="fa-solid fa-caret-right text-warning blinking"></i> {parseInt(row.tma_before)}
                     </div>
                     <div class="col-6">
-                      TMA Terakhir : {parseInt(row.tma_after)} <i class="fa-solid fa-caret-up text-success blinking"></i>
+                      TMA Terakhir : <i class="fa-solid fa-caret-up text-success blinking"></i> {parseInt(row.tma_after)}
                     </div>
                   </div>
                 </div>

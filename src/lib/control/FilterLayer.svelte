@@ -1,8 +1,8 @@
 <script>
-	import { Card, Col, Input, Label, Offcanvas, Row } from "sveltestrap";
+	import { Button, Card, Col, Input, Label, Offcanvas, Row } from "sveltestrap";
 	import Pengelola from "../features/pengelola/Pengelola.svelte";
 	import WilayahSungai from "../features/wilayahsungai/WilayahSungai.svelte";
-	import { paramsKewenangan } from "../../store/map.js";
+	import { filter_asset_sub, paramsKewenangan } from "../../store/map.js";
 	import Sungai from "../features/sungai/Sungai.svelte";
 
 	let isOpen = false;
@@ -15,10 +15,9 @@
 		}
 	};
 
-	// let print = () => {
-	// 	console.log($featureExist);
-	// 	console.log($ordo_visible);
-	// };
+	let print = () => {
+		console.log($filter_asset_sub);
+	};
 
 	// let addNew = () => {
 	// 	$featureExist[$filter_asset.wsId] = { 24: "DAS" };
@@ -54,7 +53,7 @@
 
   </Card>
 
-  <!--  <Button on:click={print}> CETAK</Button>-->
+  <Button on:click={print}> CETAK</Button>
   <!--  <Button on:click={addNew}> Add</Button>-->
 
 </Offcanvas>

@@ -5,8 +5,7 @@
 
 	const dispatch = createEventDispatcher();
 
-	function sayHello(param) {
-		// console.log(param);
+	function activeLayer(param) {
 		dispatch("action", {
 			text: param
 		});
@@ -24,7 +23,7 @@
 
 
 <div>
-  <button class="btn-landing" id={`btn-${name}`} class:active="{active}" on:click="{()=>sayHello(name)}">
+  <button class="btn-landing" id={`btn-${name}`} class:active="{active}" on:click="{()=>activeLayer(name)}">
     <img class="img-icon" src="{src}" alt="{alt}">
     <!--{$activeNav.left} {$activeNav.right}-->
   </button>

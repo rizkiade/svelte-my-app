@@ -53,10 +53,6 @@ let styleIcon = (feature) => {
 
 	}
 
-	// if (paramKw && paramKw.toUpperCase() !== kw) {
-	// 	return false;
-	// }
-
 	// const size = feature.get('features').length;
 	// let style = styleCache[size];
 

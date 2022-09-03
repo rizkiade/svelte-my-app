@@ -38,6 +38,17 @@ let filter_asset = writable({
 	kelurahan: undefined
 });
 
+let filter_asset_sub = writable({
+	15: {
+		type_pos: [
+			{ id: "pos_manual", name: "Pos Manual", checked: true },
+			{ id: "pos_otomatik", name: "Pos Automatic", checked: true },
+			{ id: "pos_telemetri", name: "Pos Telemetry", checked: true },
+			{ id: "pos_undefined", name: "Tanpa Ket", checked: true }
+		]
+	}
+});
+
 let selected_asset = writable({
 	id: undefined,
 	name: undefined,
@@ -64,4 +75,4 @@ let assetDetail = writable({
 let onAssetDetailReq = writable(false);
 
 
-export { mapKey, preloader, ws_visible, wsp_visible, ordo_visible, paramsKewenangan, pengelola, ws, wsFilter, dasFilter, assets_features, count_asset, filter_asset, selected_asset, categoryProject, projectLayer, assetDetail, onAssetDetailReq };
+export { mapKey, preloader, ws_visible, wsp_visible, ordo_visible, paramsKewenangan, pengelola, ws, wsFilter, dasFilter, assets_features, count_asset, filter_asset, filter_asset_sub, selected_asset, categoryProject, projectLayer, assetDetail, onAssetDetailReq };
