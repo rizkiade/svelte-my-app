@@ -2,8 +2,9 @@
 	import { Button, Card, Col, Input, Label, Offcanvas, Row } from "sveltestrap";
 	import Pengelola from "../features/pengelola/Pengelola.svelte";
 	import WilayahSungai from "../features/wilayahsungai/WilayahSungai.svelte";
-	import { filter_asset_sub, paramsKewenangan } from "../../store/map.js";
+	import { filter_asset, paramsKewenangan } from "../../store/map.js";
 	import Sungai from "../features/sungai/Sungai.svelte";
+	import DaerahAliranSungai from "../features/daerahaliransungai/DaerahAliranSungai.svelte";
 
 	let isOpen = false;
 
@@ -16,7 +17,9 @@
 	};
 
 	let print = () => {
-		console.log($filter_asset_sub);
+		// console.log($filter_asset_sub);
+		// console.log($featureExist);
+		console.log($filter_asset);
 	};
 
 	// let addNew = () => {
@@ -50,6 +53,7 @@
     <Pengelola />
     <WilayahSungai />
     <Sungai />
+    <DaerahAliranSungai />
 
   </Card>
 

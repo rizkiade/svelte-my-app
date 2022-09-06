@@ -13,6 +13,7 @@
 	import ProjectFeatures from "../lib/features/project/ProjectFeatures.svelte";
 	import InfrastructureFeatures from "../lib/features/infrastructure/InfrastructureFeatures.svelte";
 	import SungaiFeatures from "../lib/features/sungai/SungaiFeatures.svelte";
+	import DaerahAliranSungaiFeatures from "../lib/features/daerahaliransungai/DaerahAliranSungaiFeatures.svelte";
 
 	let isOpen = undefined;
 
@@ -35,7 +36,8 @@
   <PengelolaFeatures />
   <WilayahSungaiFeatures />
   <SungaiFeatures />
-  
+  <DaerahAliranSungaiFeatures />
+
   <InfrastructureFeatures />
   <ProjectFeatures />
 

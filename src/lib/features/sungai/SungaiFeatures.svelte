@@ -67,7 +67,7 @@
 
 		VSourceSungai.clear();
 		VSourceSungai.addFeatures(new GeoJSON().readFeatures(feature));
-		VLayerSungai.setZIndex(3);
+		VLayerSungai.setZIndex(4);
 		if (map) {
 			map.addLayer(VLayerSungai);
 		}

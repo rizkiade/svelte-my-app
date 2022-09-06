@@ -42,7 +42,7 @@
 
 	};
 
-	$:reloadMap($assets_features, $panel.right, $paramsKewenangan, $filter_asset, $filter_asset_sub[15].type_pos);
+	$:reloadMap($assets_features, $panel.right, $paramsKewenangan, $filter_asset, $filter_asset_sub);
 
 	let countAsset = () => {
 		// reset counter
@@ -60,6 +60,6 @@
 		});
 		// console.log($count_asset);
 	};
-	$:countAsset($assets_features, $paramsKewenangan, $filter_asset, $filter_asset_sub[15].type_pos);
+	$:countAsset($assets_features, $paramsKewenangan, $filter_asset, $filter_asset_sub);
 
 </script>

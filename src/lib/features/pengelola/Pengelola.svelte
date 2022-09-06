@@ -1,19 +1,15 @@
 <script lang="ts">
-	import { getContext } from "svelte";
 	import { FormGroup, Input, Row } from "sveltestrap";
 	import Select from "svelte-select";
 	import { toasts } from "svelte-toasts";
 	import { PengelolaApi } from "./pengelola.d.ts";
 	import SelectLoading from "$lib/component/loader/SelectLoading.svelte";
 
-	import { mapKey, preloader, ws, ws_visible, wsp_visible, ordo_visible, wsFilter, pengelola, filter_asset } from "../../../store/map.js";
+	import { preloader, ws, ws_visible, wsp_visible, ordo_visible, wsFilter, pengelola, filter_asset } from "../../../store/map.js";
 	import { wsp_features, featureExistWSP } from "../../../store/features.js";
 
 	const itemId = "id";
 	const label = "name";
-
-	const mapContext = getContext(mapKey);
-	const map = mapContext;
 
 	const _api = new PengelolaApi();
 
@@ -51,7 +47,6 @@
 		$wsFilter = $ws;
 		$wsp_visible = false;
 		$ws_visible = false;
-		// $dasFilter = [];
 		// $das_visible = false;
 		// $provinceByWs = [];
 	};

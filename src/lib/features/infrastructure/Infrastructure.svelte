@@ -3,16 +3,19 @@
 	import { slide } from "svelte/transition";
 	import { infrastructure } from "../../control/NavigationStore.js";
 	import InfrastructureButton from "./InfrastructureButton.svelte";
-	import PosDugaAir from "./filters/PosDugaAir.svelte";
+	import PosDugaAir from "./filters/pda/PosDugaAir.svelte";
 	import BoxContent from "./filters/BoxContent.svelte";
+	import PosCurahHujan from "./filters/pch/PosCurahHujan.svelte";
+	import PosKlimatologi from "./filters/pklim/PosKlimatologi.svelte";
 
 	let open = false;
 	let filterLayerId = undefined;
 	let filterLayerLabel = undefined;
 
-	const toggle = (event) => {
+	const toggleFilter = (event) => {
+		let layerId = event.detail.layerId;
 		open = event.detail.value;
-		filterLayerId = event.detail.layerId;
+		filterLayerId = layerId;
 		filterLayerLabel = event.detail.layerLabel;
 	};
 
@@ -25,7 +28,7 @@
 
   <div class="d-flex flex-column bd-highlight">
     {#each $infrastructure as { id, name, checked }}
-      <InfrastructureButton {id} {name} {checked} on:open={toggle} />
+      <InfrastructureButton {id} {name} bind:checked={checked} on:open={toggleFilter} />
     {/each}
   </div>
 </div>
@@ -37,7 +40,9 @@
   <ModalBody>
 
     {#if filterLayerId === 14}
-      <BoxContent />
+      <BoxContent>
+        <PosCurahHujan />
+      </BoxContent>
     {/if}
 
     {#if filterLayerId === 15}
@@ -47,12 +52,14 @@
     {/if}
 
     {#if filterLayerId === 16}
-      <BoxContent />
+      <BoxContent>
+        <PosKlimatologi />
+      </BoxContent>
     {/if}
 
 
   </ModalBody>
   <ModalFooter>
-    <Button color="danger" on:click={toggle}>Close</Button>
+    <Button color="danger" on:click={toggleFilter}>Close</Button>
   </ModalFooter>
 </Modal>
