@@ -3,7 +3,7 @@
 	import Select from "svelte-select";
 	import SelectLoading from "$lib/component/loader/SelectLoading.svelte";
 
-	import { filter_asset, ws, ws_visible, ordo_visible, wsFilter, onDasReq } from "../../../store/map.js";
+	import { filter_asset, ws, ws_visible, ordo_visible, wsFilter, das_visible, provinceByWs, onDasReq } from "../../../store/map.js";
 	import { featureExist } from "../../../store/features.js";
 
 	import { WilayahSungaiApi } from "./wilayahsungai.d.ts";
@@ -34,6 +34,13 @@
 				$onDasReq = false;
 			});
 		}
+
+		if (e.detail.province !== null) {
+			// console.log(JSON.parse(e.detail.province).map(val => val));
+			$provinceByWs = JSON.parse(e.detail.province).map(val => val);
+		}
+
+
 	};
 
 	let toggleWilayahSungai = () => {
@@ -46,20 +53,34 @@
 	let fieldClear = () => {
 		$filter_asset.wsId = undefined;
 		$filter_asset.dasId = undefined;
+		$das_visible = false;
+
+		if (!$filter_asset.pengelolaId) {
+			$provinceByWs = [];
+		} else {
+			$provinceByWs = [];
+			$wsFilter.map(val => {
+				JSON.parse(val.province).map(provinces => {
+					if (!$provinceByWs.find(p => p.id === provinces.id)) {
+						$provinceByWs.push(provinces);
+					}
+				});
+			});
+		}
 	};
 
 </script>
 
 <Row>
   {#if ($ws.length !== 0)}
-    <Select placeholder="Pilih Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws }" {itemId} {label} on:select={wsSelect} on:clear={fieldClear} clearable="true">
+    <Select placeholder="Select Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws }" {itemId} {label} on:select={wsSelect} on:clear={fieldClear} clearable="true">
       <div slot="clear-icon">❌</div>
     </Select>
   {:else}
     {#await _api_ws.getList()}
       <SelectLoading />
     {:then wsItems}
-      <Select placeholder="Pilih Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws }" {itemId} {label} on:select={wsSelect} on:clear={fieldClear} clearable="true">
+      <Select placeholder="Select Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws }" {itemId} {label} on:select={wsSelect} on:clear={fieldClear} clearable="true">
         <div slot="clear-icon">❌</div>
       </Select>
     {/await}

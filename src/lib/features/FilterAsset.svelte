@@ -9,11 +9,15 @@
 		paramKw = value;
 	});
 
-	let pengelola;
-	let ws;
+	let pengelola, ws, das, province, city, district, urban;
 	filter_asset.subscribe(value => {
 		pengelola = value.pengelolaId;
 		ws = value.wsId;
+		das = value.dasId;
+		province = value.provinsi;
+		city = value.kabupaten;
+		district = value.kecamatan;
+		urban = value.kelurahan;
 	});
 
 	export function filteredAsset(feature) {
@@ -23,6 +27,11 @@
 		let kw = feature.get("kewenangan");
 		let pengId = feature.get("pengelola_id");
 		let wsId = feature.get("ws_id");
+		let dasId = feature.get("das_id");
+		let provinceText = feature.get("provinsi");
+		// let kabupatenText = feature.get("kabupaten");
+		// let kecamatanText = feature.get("kecamatan");
+		// let kelurahanText = feature.get("kelurahan");
 		let inf_id = feature.get("type_id");
 
 
@@ -38,25 +47,34 @@
 					return false;
 				} else {
 
-					if ([14, 15, 16].includes(inf_id)) {
-
-						if (inf_id === 14) {
-							return filteredPCH(feature);
-						}
-
-						if (inf_id === 15) {
-							return filteredPDA(feature);
-						}
-
-						if (inf_id === 16) {
-							return filteredKlim(feature);
-						}
-
-						return true;
-
+					if (das && das !== dasId) {
+						return false;
 					} else {
 
-						return true;
+						if (province && province !== provinceText) {
+							return false;
+						} else {
+
+							if ([14, 15, 16].includes(inf_id)) {
+
+								if (inf_id === 14) {
+									return filteredPCH(feature);
+								}
+
+								if (inf_id === 15) {
+									return filteredPDA(feature);
+								}
+
+								if (inf_id === 16) {
+									return filteredKlim(feature);
+								}
+
+								return true;
+
+							} else {
+								return true;
+							}
+						}
 					}
 
 				}

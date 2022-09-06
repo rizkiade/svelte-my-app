@@ -5,7 +5,7 @@
 	import { PengelolaApi } from "./pengelola.d.ts";
 	import SelectLoading from "$lib/component/loader/SelectLoading.svelte";
 
-	import { preloader, ws, ws_visible, wsp_visible, ordo_visible, wsFilter, pengelola, filter_asset } from "../../../store/map.js";
+	import { preloader, ws, ws_visible, wsp_visible, das_visible, ordo_visible, wsFilter, pengelola, filter_asset, provinceByWs } from "../../../store/map.js";
 	import { wsp_features, featureExistWSP } from "../../../store/features.js";
 
 	const itemId = "id";
@@ -26,18 +26,19 @@
 
 		ordo_visible.set({ 1: false, 2: false, 3: false, 4: false });
 
-
 		$wsFilter = JSON.parse(e.detail.ws_area);
 		showAreaPengelola();
-		// $provinceByWs = [];
+		$provinceByWs = [];
 
-		// $wsFilter.map(val => {
-		// 	JSON.parse(val.province).map(provinces => {
-		// 		if (!$provinceByWs.find(p => p.id === provinces.id)) {
-		// 			$provinceByWs.push(provinces);
-		// 		}
-		// 	});
-		// });
+		console.log($wsFilter);
+
+		$wsFilter.map(val => {
+			JSON.parse(val.province).map(provinces => {
+				if (!$provinceByWs.find(p => p.id === provinces.id)) {
+					$provinceByWs.push(provinces);
+				}
+			});
+		});
 	};
 
 	let fieldClear = () => {
@@ -47,8 +48,8 @@
 		$wsFilter = $ws;
 		$wsp_visible = false;
 		$ws_visible = false;
-		// $das_visible = false;
-		// $provinceByWs = [];
+		$das_visible = false;
+		$provinceByWs = [];
 	};
 
 	let togglePengelola = (e) => {
@@ -84,20 +85,18 @@
 
 		}
 	};
-
-
 </script>
 
 <Row>
   {#if ($pengelola.length !== 0)}
-    <Select placeholder="Pilih Pengelola" } items="{$pengelola}" {itemId} {label} on:select={pengelolaSelect} on:clear={fieldClear}>
+    <Select placeholder="Select Pengelola" } items="{$pengelola}" {itemId} {label} on:select={pengelolaSelect} on:clear={fieldClear}>
       <div slot="clear-icon">❌</div>
     </Select>
   {:else}
     {#await _api.getList()}
       <SelectLoading />
     {:then pengelolaItems}
-      <Select placeholder="Pilih Pengelola" } items="{pengelolaItems}" {itemId} {label} on:select={pengelolaSelect} on:clear={fieldClear}>
+      <Select placeholder="Select Pengelola" } items="{pengelolaItems}" {itemId} {label} on:select={pengelolaSelect} on:clear={fieldClear}>
         <div slot="clear-icon">❌</div>
       </Select>
     {/await}

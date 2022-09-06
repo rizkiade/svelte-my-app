@@ -5,6 +5,9 @@
 	import { filter_asset, paramsKewenangan } from "../../store/map.js";
 	import Sungai from "../features/sungai/Sungai.svelte";
 	import DaerahAliranSungai from "../features/daerahaliransungai/DaerahAliranSungai.svelte";
+	// import ProvinceFeatures from "../features/province/ProvinceFeatures.svelte";
+	import Province from "../features/province/Province.svelte";
+	// import { featureExist } from "../../store/features.js";
 
 	let isOpen = false;
 
@@ -20,11 +23,9 @@
 		// console.log($filter_asset_sub);
 		// console.log($featureExist);
 		console.log($filter_asset);
+		// console.log($featureExist[$filter_asset.wsId]);
 	};
 
-	// let addNew = () => {
-	// 	$featureExist[$filter_asset.wsId] = { 24: "DAS" };
-	// };
 
 	export { isOpen };
 </script>
@@ -54,6 +55,12 @@
     <WilayahSungai />
     <Sungai />
     <DaerahAliranSungai />
+
+  </Card>
+
+  <Card body style="background: rgba(104, 129, 169, 0.35); padding-bottom: 10px; margin-top: 5px">
+    <Label class="text-center">Wilayah Administratif</Label>
+    <Province />
 
   </Card>
 

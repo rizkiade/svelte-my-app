@@ -11,11 +11,14 @@
 
 	let das = [];
 	let list_das = () => {
-		// eslint-disable-next-line no-prototype-builtins
-		if ($filter_asset.wsId !== undefined && $featureExist[$filter_asset.wsId].hasOwnProperty(24)) {
-			das = $featureExist[$filter_asset.wsId][24].features.map(item => {
-				return { id: item.properties.id, name: item.properties.name !== "" ? `${item.properties.kode_das} - ${item.properties.name}` : "-" };
-			});
+		das = [];
+		if ($filter_asset.wsId !== undefined) {
+			// eslint-disable-next-line no-prototype-builtins
+			if ($featureExist[$filter_asset.wsId].hasOwnProperty(24)) {
+				das = $featureExist[$filter_asset.wsId][24].features.map(item => {
+					return { id: item.properties.id, name: item.properties.name !== "" ? `${item.properties.kode_das} - ${item.properties.name}` : "-" };
+				});
+			}
 		}
 	};
 	$: list_das($featureExist[$filter_asset.wsId]);
@@ -45,7 +48,7 @@
   {#if $onDasReq}
     <SelectLoading />
   {:else }
-    <Select placeholder="Pilih Daerah Aliran Sungai" } items="{das }" {itemId} {label} on:select={dasSelect} on:clear={fieldClear} clearable="true">
+    <Select placeholder="Select Daerah Aliran Sungai" } items="{das}" {itemId} {label} on:select={dasSelect} on:clear={fieldClear} clearable="true">
       <div slot="clear-icon">❌</div>
     </Select>
   {/if}
