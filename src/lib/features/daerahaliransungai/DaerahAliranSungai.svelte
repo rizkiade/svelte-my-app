@@ -53,6 +53,6 @@
     </Select>
   {/if}
   <FormGroup>
-    <Input type="switch" label="Show Area" on:change={toggleDAS} checked={$das_visible} />
+    <Input id="daerah_aliran_sungai" type="switch" label="Show Area" on:change={toggleDAS} checked={$das_visible} />
   </FormGroup>
 </Row>

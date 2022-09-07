@@ -105,10 +105,7 @@
 		}
 
 		VSourceWS.clear();
-		VSourceWS.addFeatures(new GeoJSON().readFeatures(feature, {
-			dataProjection: "EPSG:4326",
-			featureProjection: "EPSG:4326"
-		}));
+		VSourceWS.addFeatures(new GeoJSON().readFeatures(feature));
 		VLayerWS.setZIndex(2);
 		VLayerWS.setStyle(styleArea);
 		VLayerWS.setVisible($ws_visible);

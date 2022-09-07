@@ -26,6 +26,13 @@ const province = writable([]);
 const provinceByWs = writable([]);
 const prov_visible = writable(false);
 
+let paramsAdm = writable({
+	provId: undefined,
+	kabId: undefined,
+	kecId: undefined,
+	desaId: undefined
+});
+
 let assets_features = writable({
 	"type": "FeatureCollection",
 	"features": []
@@ -96,4 +103,4 @@ let assetDetail = writable({
 let onAssetDetailReq = writable(false);
 
 
-export { mapKey, preloader, ws_visible, wsp_visible, ordo_visible, paramsKewenangan, pengelola, ws, wsFilter, onDasReq, das_visible, province, provinceByWs, prov_visible, assets_features, count_asset, filter_asset, filter_asset_sub, selected_asset, categoryProject, projectLayer, assetDetail, onAssetDetailReq };
+export { mapKey, preloader, ws_visible, wsp_visible, ordo_visible, paramsKewenangan, pengelola, ws, wsFilter, onDasReq, das_visible, province, provinceByWs, prov_visible, paramsAdm, assets_features, count_asset, filter_asset, filter_asset_sub, selected_asset, categoryProject, projectLayer, assetDetail, onAssetDetailReq };

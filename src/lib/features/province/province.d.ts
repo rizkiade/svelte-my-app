@@ -13,7 +13,8 @@ export class ProvinceApi {
 		const result = await response.json();
 
 		if (response.ok) {
-			province.set(result);
+			const result_clean = result.map(({ id, name }) => ({ value: id, label: name }));
+			province.set(result_clean);
 		} else {
 			throw new Error(result);
 		}

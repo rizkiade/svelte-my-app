@@ -2,12 +2,11 @@
 	import { Button, Card, Col, Input, Label, Offcanvas, Row } from "sveltestrap";
 	import Pengelola from "../features/pengelola/Pengelola.svelte";
 	import WilayahSungai from "../features/wilayahsungai/WilayahSungai.svelte";
-	import { filter_asset, paramsKewenangan } from "../../store/map.js";
+	import { filter_asset, paramsAdm, paramsKewenangan } from "../../store/map.js";
 	import Sungai from "../features/sungai/Sungai.svelte";
 	import DaerahAliranSungai from "../features/daerahaliransungai/DaerahAliranSungai.svelte";
-	// import ProvinceFeatures from "../features/province/ProvinceFeatures.svelte";
 	import Province from "../features/province/Province.svelte";
-	// import { featureExist } from "../../store/features.js";
+	import { featureExistAdm } from "../../store/features.js";
 
 	let isOpen = false;
 
@@ -20,10 +19,7 @@
 	};
 
 	let print = () => {
-		// console.log($filter_asset_sub);
-		// console.log($featureExist);
-		console.log($filter_asset);
-		// console.log($featureExist[$filter_asset.wsId]);
+		console.log($paramsAdm);
 	};
 
 
@@ -64,7 +60,6 @@
 
   </Card>
 
-  <Button on:click={print}> CETAK</Button>
-  <!--  <Button on:click={addNew}> Add</Button>-->
+  <Button class="mt-2" on:click={print}> CETAK</Button>
 
 </Offcanvas>
