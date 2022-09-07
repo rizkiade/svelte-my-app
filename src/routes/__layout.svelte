@@ -2,6 +2,8 @@
 	import Header from "$lib/header/Header.svelte";
 	import "../app.css";
 	import { FlatToast, ToastContainer, toasts } from "svelte-toasts";
+	import DetailCard from "../lib/features/project/DetailCard.svelte";
+	import { panel } from "../../src/lib/control/NavigationStore.js";
 </script>
 
 <Header />
@@ -14,6 +16,11 @@
 <main>
   <slot />
 </main>
+
+{#if $panel.right === 'project'}
+  <DetailCard />
+{/if}
+
 
 <!--<footer>-->
 <!--    <p><a href="https://sda.pu.go.id">sda.pu.go.id</a></p>-->

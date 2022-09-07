@@ -7,6 +7,7 @@
 	import { projectLayerSource } from "../../../store/features.js";
 	import ListLoading from "../../component/loader/ListLoading.svelte";
 	import { toasts } from "svelte-toasts";
+	import DetailCard from "./DetailCard.svelte";
 
 	const category = [];
 
@@ -151,48 +152,48 @@
 
   {/if}
 
-  <Modal isOpen={open} {fullscreen}>
-    <ModalHeader>Project Detail</ModalHeader>
-    <ModalBody>
-      <Table>
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>Asset Name</th>
-          <th class="text-center">Progress</th>
-          <th class="text-center">Status</th>
-          <th class="text-center">Budget</th>
-          <th class="text-end">Waktu Pelaksanaan(H)</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        {#each $projectLayerSource as item }
-
-          <tr>
-            <th scope="row">{item.no}</th>
-            <td>
-              {item.name.toUpperCase()}
-              {#if item.name.toUpperCase().includes('KASKADE') }
-                <Badge pill color="success">KASKADE</Badge>
-              {/if}
-            </td>
-            <td>
-              <Progress value={Math.floor(Math.random() * 100)}>25%</Progress>
-            </td>
-            <td class="text-center">{item.status !== null ? item.status.toUpperCase() : '-'}</td>
-            <td class="text-end">{new Intl.NumberFormat(`id-ID`, { currency: `IDR`, style: 'currency' }).format(item.cost)}</td>
-            <td class="text-end">{`${item.date_begin}  s.d  ${item.date_end}` }</td>
-          </tr>
-
-        {/each}
-
-        </tbody>
-      </Table>
-    </ModalBody>
-    <ModalFooter>
-      <Button color="danger" on:click={() => open = false}>Close</Button>
-    </ModalFooter>
-  </Modal>
-
 </div>
+
+<Modal isOpen={open} {fullscreen}>
+  <ModalHeader>Project Detail</ModalHeader>
+  <ModalBody>
+    <Table>
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Asset Name</th>
+        <th class="text-center">Progress</th>
+        <th class="text-center">Status</th>
+        <th class="text-center">Budget</th>
+        <th class="text-end">Waktu Pelaksanaan(H)</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      {#each $projectLayerSource as item }
+
+        <tr>
+          <th scope="row">{item.no}</th>
+          <td>
+            {item.name.toUpperCase()}
+            {#if item.name.toUpperCase().includes('KASKADE') }
+              <Badge pill color="success">KASKADE</Badge>
+            {/if}
+          </td>
+          <td>
+            <Progress value={Math.floor(Math.random() * 100)}>25%</Progress>
+          </td>
+          <td class="text-center">{item.status !== null ? item.status.toUpperCase() : '-'}</td>
+          <td class="text-end">{new Intl.NumberFormat(`id-ID`, { currency: `IDR`, style: 'currency' }).format(item.cost)}</td>
+          <td class="text-end">{`${item.date_begin}  s.d  ${item.date_end}` }</td>
+        </tr>
+
+      {/each}
+
+      </tbody>
+    </Table>
+  </ModalBody>
+  <ModalFooter>
+    <Button color="danger" on:click={() => open = false}>Close</Button>
+  </ModalFooter>
+</Modal>

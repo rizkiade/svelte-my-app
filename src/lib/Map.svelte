@@ -63,6 +63,7 @@
 					props.kode_ws = feature.get("kode_ws") ?? "";
 					props.kode_das = feature.get("kode_das") ?? "";
 					props.luas = feature.get("luas") ?? "";
+					props.status = feature.get("status");
 					overlay.setPosition(e.coordinate);
 				} else {
 					overlay.setPosition(undefined);
@@ -117,7 +118,8 @@
 		status_lintas: undefined,
 		kode_ws: undefined,
 		kode_das: undefined,
-		luas: undefined
+		luas: undefined,
+		status: undefined
 	};
 
 </script>

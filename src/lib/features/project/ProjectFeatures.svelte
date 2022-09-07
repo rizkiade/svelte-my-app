@@ -58,7 +58,8 @@
 
 				const feature = new Feature({
 					geometry: new Point([coordinate[0], coordinate[1]]),
-					name: i.name
+					name: i.name,
+					status: i.status
 				});
 
 				features.push(feature);
