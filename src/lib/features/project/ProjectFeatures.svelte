@@ -5,7 +5,7 @@
 	import VectorLayer from "ol/layer/Vector.js";
 	import { Icon, Style } from "ol/style.js";
 	import { getContext } from "svelte";
-	import { filter_asset, mapKey, paramsKewenangan } from "../../../store/map.js";
+	import { countProject, filter_asset, mapKey, paramsKewenangan } from "../../../store/map.js";
 	import { projectLayerSource } from "../../../store/features.js";
 	import { Point } from "ol/geom.js";
 	import { panel } from "../../control/NavigationStore.js";
@@ -52,7 +52,28 @@
 			features = [];
 		}
 
+		// reset counter
+		countProject.set({
+			persiapan: 0,
+			pelaksanaan: 0,
+			selesai: 0
+		});
+
 		$projectLayerSource.map(i => {
+			let status = i.status;
+			if (status !== null) {
+				if (status.toLowerCase() === "persiapan") {
+					$countProject.persiapan += 1;
+				} else if (status.toLowerCase() === "pelaksanaan") {
+					$countProject.pelaksanaan += 1;
+				} else if (status.toLowerCase() === "selesai") {
+					$countProject.selesai += 1;
+				}
+			}
+
+
+			// console.log(i.status.toLowerCase());
+
 			let coordinate = i.coordinate.replaceAll(" ", "").split(",");
 			if (coordinate[0].length !== 0 && coordinate[1].length !== 0) {
 

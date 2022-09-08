@@ -103,4 +103,10 @@ let assetDetail = writable({
 let onAssetDetailReq = writable(false);
 
 
-export { mapKey, preloader, ws_visible, wsp_visible, ordo_visible, paramsKewenangan, pengelola, ws, wsFilter, onDasReq, das_visible, province, provinceByWs, prov_visible, paramsAdm, assets_features, count_asset, filter_asset, filter_asset_sub, selected_asset, categoryProject, projectLayer, assetDetail, onAssetDetailReq };
+const countProject = writable({
+	persiapan: 0,
+	pelaksanaan: 0,
+	selesai: 0
+});
+
+export { mapKey, preloader, ws_visible, wsp_visible, ordo_visible, paramsKewenangan, pengelola, ws, wsFilter, onDasReq, das_visible, province, provinceByWs, prov_visible, paramsAdm, assets_features, count_asset, filter_asset, filter_asset_sub, selected_asset, categoryProject, projectLayer, assetDetail, onAssetDetailReq, countProject };

@@ -1,32 +1,48 @@
 <script>
-	import { Progress } from "sveltestrap";
+	import { Progress, Row } from "sveltestrap";
+	import { slide } from "svelte/transition";
+	import { countProject } from "../../../store/map.js";
+
 </script>
 
-<div class="card-detail-project">
+<div class="card-detail-project" transition:slide>
 
-  <div style="width: 100%">
-    <ul class="mt-3">
-      <li>
-        <h5>Rencana : 0</h5>
-      </li>
-      <li>
-        <h5>On Going : 0</h5>
-      </li>
-      <li>
-        <h5>Selesai : 0</h5>
-      </li>
-    </ul>
-    <h4>Total
+  <Row>
+
+    <div class="d-flex justify-content-evenly">
+      <div class="card-mini">
+        <i class="fa-solid fa-paper-plane text-primary" style="font-size: 25px"></i>
+        <h5>Rencana : {$countProject.persiapan}</h5>
+      </div>
+      <div class="card-mini">
+        <i class="fa-solid fa-bars-progress text-primary" style="font-size: 25px"></i>
+        <h5>On Going : {$countProject.pelaksanaan}</h5>
+      </div>
+      <div class="card-mini">
+        <i class="fa-solid fa-circle-check text-primary" style="font-size: 25px"></i>
+        <h5>Selesai : {$countProject.selesai}</h5>
+      </div>
+    </div>
+  </Row>
+
+  <Row class="mt-3">
+    <h5>Total Progress :
       <span class="float-end">75%</span>
       <Progress value={75} class="mt-1" />
-    </h4>
-  </div>
+    </h5>
+  </Row>
+
+  <Row class="mt-1">
+    <h5>Progress Tahun <span style="color: deeppink">{new Date().getFullYear()}</span> :
+      <span class="float-end">60%</span>
+      <Progress value={60} class="mt-1" />
+    </h5>
+  </Row>
 </div>
 
 
 <style>
     .card-detail-project {
-        display: flex;
         position: absolute;
         width: 80vh;
         height: 200px;
@@ -39,4 +55,15 @@
         justify-content: space-between;
         padding: 10px;
     }
+
+    .card-mini {
+        display: inline-block;
+        position: relative;
+        width: 120px;
+        padding: 5px;
+        background: lightslategray;
+        border-radius: 10px;
+        text-align: center;
+    }
+
 </style>

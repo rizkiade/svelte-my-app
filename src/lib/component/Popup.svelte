@@ -40,7 +40,7 @@
   {/if}
 
   {#if status}
-    <em>({status} - 0% ) </em>
+    <em>( {status} - 0% ) </em>
   {/if}
 </Card>
 

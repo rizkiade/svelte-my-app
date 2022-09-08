@@ -8,13 +8,11 @@
 	import { selected_asset } from "../../store/map.js";
 	import DetailAsset from "../features/detail/DetailAsset.svelte";
 
-	let current = undefined;
 
 	function handleAction(event) {
-		current = event.detail.text;
-		$panel.right = current;
+		$panel.right = event.detail.text;
 
-		switch (current) {
+		switch (event.detail.text) {
 			case "search":
 			case "infrastructure":
 				rightWidth.set(400);
@@ -84,16 +82,16 @@
 
     <Row class="justify-content-evenly">
       <Col>
-        <NavButton src="/nav-icon/search.svg" alt="search" name="{current === 'search' ? 'searches': 'search'}" title="Search" on:action={handleAction}
-                   active="{current === 'search'}" />
+        <NavButton src="/nav-icon/search.svg" alt="search" name="{$panel.right === 'search' ? 'searches': 'search'}" title="Search" on:action={handleAction}
+                   active="{$panel.right === 'search'}" />
         <NavButton src="/nav-icon/layer-shadow.svg" alt="layer" name="{$panel.left === 'layer' ? 'layers':'layer'}"
                    title="Layer" on:action active={ $panel.left === 'layer'} />
-        <NavButton src="/nav-icon/maps-shadow.svg" alt="infrastructure" name="{current === 'infrastructure' ? 'infrastructures': 'infrastructure'}" title="Infrastructure"
+        <NavButton src="/nav-icon/maps-shadow.svg" alt="infrastructure" name="{$panel.right === 'infrastructure' ? 'infrastructures': 'infrastructure'}" title="Infrastructure"
                    on:action={handleAction}
-                   active="{current === 'infrastructure' }" />
-        <NavButton src="/nav-icon/list-shadow.svg" alt="project" name="{current === 'project' ? 'projects': 'project'}" title="Project"
+                   active="{$panel.right === 'infrastructure' }" />
+        <NavButton src="/nav-icon/list-shadow.svg" alt="project" name="{$panel.right === 'project' ? 'projects': 'project'}" title="Project"
                    on:action={handleAction}
-                   active="{current === 'project' }" />
+                   active="{$panel.right === 'project' }" />
       </Col>
     </Row>
 
