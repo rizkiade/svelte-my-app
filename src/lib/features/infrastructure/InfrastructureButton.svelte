@@ -45,7 +45,7 @@
 
 <Row>
   <div class="btn-group mt-2" role="group" aria-label="Basic example">
-    <button class="btn bg-warning" style="border-radius: 15px 0 0 0; border: none; width: 25%" disabled>
+    <button class="btn" style="border-radius: 15px 0 0 0; border: 2px solid #183153; width: 25%; background: #ffcf23">
       {#if onRequested}
         <Spinner size="sm" />
       {:else }
@@ -56,8 +56,11 @@
     </button>
     <div class="d-inline-block" style="width: 75%">
       <input type="checkbox" class="btn-check" bind:checked="{checked}" id="{id}" autocomplete="off" on:change={handleChanged}>
-      <label class="btn btn-primary text-start d-block" for="{id}" style="border-radius: 0 0 15px 0">{name}
-        <i class="fa-regular fa-circle-check float-end text-warning"></i>
+      <label class="btn btn-primary text-start d-block" for="{id}" style="border-radius: 0 0 15px 0;border: 2px solid #183153;">{name}
+
+        {#if checked}
+          <i class="fa-regular fa-circle-check float-end text-warning"></i>
+        {/if}
       </label>
     </div>
 
