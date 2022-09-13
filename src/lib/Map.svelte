@@ -11,10 +11,8 @@
 
 	import "ol/ol.css";
 	import { mapKey, preloader, selected_asset } from "../store/map.js";
-	import { panel } from "./control/NavigationStore.js";
 	import Preloader from "./component/loader/Preloader.svelte";
 	import Popup from "./component/Popup.svelte";
-	import DetailCard from "./features/project/DetailCard.svelte";
 
 	setContext(mapKey, {
 		getMap: () => map
@@ -146,10 +144,3 @@
 {#if $preloader}
   <Preloader />
 {/if}
-
-{#if $panel.right === 'project'}
-  <DetailCard />
-{/if}
-
-
-

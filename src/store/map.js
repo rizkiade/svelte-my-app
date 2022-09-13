@@ -43,7 +43,9 @@ let count_asset = writable({});
 let filter_asset = writable({
 	pengelolaId: undefined,
 	wsId: undefined,
+	wsLabel: undefined,
 	dasId: undefined,
+	dasLabel: undefined,
 	provinsi: undefined,
 	kabupaten: undefined,
 	kecamatan: undefined,

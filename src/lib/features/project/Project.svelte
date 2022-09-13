@@ -7,7 +7,6 @@
 	import { projectLayerSource } from "../../../store/features.js";
 	import ListLoading from "../../component/loader/ListLoading.svelte";
 	import { toasts } from "svelte-toasts";
-	import DetailCard from "./DetailCard.svelte";
 
 	const category = [];
 
@@ -100,7 +99,6 @@
 
 	$:countProjectSub($projectLayerSource);
 
-
 </script>
 
 
@@ -128,10 +126,10 @@
 
           <Row>
             <div class="btn-group mt-1" role="group" aria-label="Button Project Group">
-              <button class="btn bg-warning" style="border-radius: 15px 0 0 0; border: none; width: 25%" disabled><b>{countProject[id] ?? 0}</b></button>
+              <button class="btn" style="border-radius: 15px 0 0 0; border: 2px solid #183153; width: 25%; background: #ffcf23"><b>{countProject[id] ?? 0}</b></button>
               <div class="d-inline-block" style="width: 75%">
                 <input type="checkbox" class="btn-check" id="{id}" autocomplete="off" on:change={handleClick}>
-                <label class="btn btn-primary text-start d-block" for="{id}" style="border-radius: 0 0 15px 0">{name}
+                <label class="btn btn-primary text-start d-block" for="{id}" style="border-radius: 0 0 15px 0; border: 2px solid #183153">{name}
                   <i class="fa-regular fa-circle-check float-end text-warning"></i>
                 </label>
               </div>
@@ -140,14 +138,17 @@
 
         {/each}
 
-        <button class="btn mt-2 btn-outline-primary" on:click="{()=> openDetail(id)}" disabled="{$projectLayer !== id ? 'disabled': ''}"> Detail <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+        {#if $projectLayer === id}
+          <button class="btn mt-2 btn-outline-primary" on:click="{()=> openDetail(id)}"> Detail <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+        {/if}
 
       {/each}
 
       <Input class="mt-4 text-center" type="switch" label="KEGIATAN SUMBER DAYA AIR" value="0" on:change={layerSwitch} checked={$projectLayer === 0} />
       <hr class="mt-0">
-      <button class="btn mt-2 btn-outline-primary" on:click="{()=> openDetail('0')}" disabled="{$projectLayer !== '0' ? 'disabled': ''}"> Detail <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
-
+      {#if $projectLayer === '0'}
+        <button class="btn mt-2 btn-outline-primary" on:click="{()=> openDetail('0')}"> Detail <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+      {/if}
     </div>
 
   {/if}

@@ -7,15 +7,25 @@
 
 	import { preloader, ws, ws_visible, wsp_visible, das_visible, ordo_visible, wsFilter, pengelola, filter_asset, provinceByWs } from "../../../store/map.js";
 	import { wsp_features, featureExistWSP } from "../../../store/features.js";
-
-	const itemId = "id";
-	const label = "name";
+	import { onMount } from "svelte";
+	import { log2 } from "ol/math";
 
 	const _api = new PengelolaApi();
 
+	let onReq = false;
+	onMount(() => {
+		if ($pengelola.length === 0) {
+			onReq = true;
+			_api.getList().then(result => {
+				$pengelola = result.map(({ id, name, ws_area }) => ({ value: id, label: name, ws: ws_area }));
+				onReq = false;
+			});
+		}
+	});
+
 	let pengelolaSelect = (e) => {
 		filter_asset.set({
-			pengelolaId: parseInt(e.detail.id),
+			pengelolaId: parseInt(e.detail.value),
 			wsId: undefined,
 			dasId: undefined,
 			provinsi: undefined,
@@ -26,25 +36,15 @@
 
 		ordo_visible.set({ 1: false, 2: false, 3: false, 4: false });
 
-		$wsFilter = JSON.parse(e.detail.ws_area);
 		showAreaPengelola();
-		$provinceByWs = [];
-
-		console.log($wsFilter);
-
-		$wsFilter.map(val => {
-			JSON.parse(val.province).map(provinces => {
-				if (!$provinceByWs.find(p => p.id === provinces.id)) {
-					$provinceByWs.push(provinces);
-				}
-			});
-		});
 	};
 
 	let fieldClear = () => {
 		$filter_asset.pengelolaId = undefined;
 		$filter_asset.wsId = undefined;
+		$filter_asset.wsLabel = undefined;
 		$filter_asset.dasId = undefined;
+		$filter_asset.dasLabel = undefined;
 		$wsFilter = $ws;
 		$wsp_visible = false;
 		$ws_visible = false;
@@ -88,18 +88,12 @@
 </script>
 
 <Row>
-  {#if ($pengelola.length !== 0)}
-    <Select placeholder="Select Pengelola" } items="{$pengelola}" {itemId} {label} on:select={pengelolaSelect} on:clear={fieldClear}>
+  {#if onReq}
+    <SelectLoading />
+  {:else }
+    <Select placeholder="Select Pengelola" } items="{$pengelola}" on:select={pengelolaSelect} on:clear={fieldClear}>
       <div slot="clear-icon">❌</div>
     </Select>
-  {:else}
-    {#await _api.getList()}
-      <SelectLoading />
-    {:then pengelolaItems}
-      <Select placeholder="Select Pengelola" } items="{pengelolaItems}" {itemId} {label} on:select={pengelolaSelect} on:clear={fieldClear}>
-        <div slot="clear-icon">❌</div>
-      </Select>
-    {/await}
   {/if}
 
   <FormGroup>

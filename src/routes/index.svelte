@@ -15,6 +15,7 @@
 	import SungaiFeatures from "../lib/features/sungai/SungaiFeatures.svelte";
 	import DaerahAliranSungaiFeatures from "../lib/features/daerahaliransungai/DaerahAliranSungaiFeatures.svelte";
 	import ProvinceFeatures from "../lib/features/province/ProvinceFeatures.svelte";
+	import DetailCard from "../lib/features/project/DetailCard.svelte";
 
 	let isOpen = undefined;
 
@@ -46,6 +47,9 @@
   <FilterLayer isOpen={isOpen} />
   <Sidebar on:action={handleAction} />
 
+  {#if $panel.right === 'project'}
+    <DetailCard />
+  {/if}
 </Map>
 
 

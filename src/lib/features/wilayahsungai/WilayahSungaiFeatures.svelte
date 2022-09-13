@@ -1,5 +1,5 @@
 <script>
-	import { mapKey, ws_visible, paramsKewenangan, wsFilter, filter_asset, pengelola, wsp_visible } from "../../../store/map.js";
+	import { mapKey, ws_visible, paramsKewenangan, wsFilter, filter_asset, pengelola, wsp_visible, provinceByWs, ws } from "../../../store/map.js";
 	import { getContext, onMount, onDestroy } from "svelte";
 	import VectorSource from "ol/source/Vector.js";
 	import { GeoJSON } from "ol/format.js";
@@ -118,18 +118,18 @@
 	let filterWS = () => {
 
 		let paramsKw = $paramsKewenangan ? $paramsKewenangan.toUpperCase() : undefined;
-
 		$wsFilter = []; // Clear filter
 		if ($filter_asset.pengelolaId) {
 
-			let obj_value = $pengelola.find(o => o.id === $filter_asset.pengelolaId.toString());
-			$wsFilter = JSON.parse(obj_value.ws_area).filter(item => {
+			let obj_value = $pengelola.find(o => o.value === $filter_asset.pengelolaId.toString());
+
+			JSON.parse(obj_value.ws).map(value => {
 				if ($paramsKewenangan) {
-					if (item.kewenangan === paramsKw) {
-						return { id: item.id, name: item.name };
+					if (value.kewenangan === paramsKw) {
+						$wsFilter.push({ value: value.id, label: value.name, wsp_id: value.wsp_id, luas_ws: value.luas_ws, kode_ws: value.kode_ws, province: value.province, kewenangan: value.kewenangan });
 					}
 				} else {
-					return { id: item.id, name: item.name };
+					$wsFilter.push({ value: value.id, label: value.name, wsp_id: value.wsp_id, luas_ws: value.luas_ws, kode_ws: value.kode_ws, province: value.province, kewenangan: value.kewenangan });
 				}
 			});
 
@@ -140,14 +140,27 @@
 				let prop = val.properties;
 				if ($paramsKewenangan) {
 					if (prop.kewenangan === paramsKw) {
-						temp.push({ id: prop.id, name: prop.name });
-						return true;
+						let ws_prov = $ws.find(o => o.value === prop.id);
+						return temp.push({ value: prop.id, label: prop.name, province: ws_prov.province });
 					}
 				}
 				return true;
 			});
 			$wsFilter = [...temp];
 		}
+
+		// clear province
+		$provinceByWs = [];
+
+		$wsFilter.map(val => {
+			JSON.parse(val.province).map(provinces => {
+				// assign new object
+				provinces = { value: provinces.id, label: provinces.name };
+				if (!$provinceByWs.find(p => p.value === provinces.value)) {
+					$provinceByWs.push(provinces);
+				}
+			});
+		});
 
 		reloadMap();
 	};

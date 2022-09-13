@@ -56,10 +56,10 @@
     </button>
     <div class="d-inline-block" style="width: 75%">
       <input type="checkbox" class="btn-check" bind:checked="{checked}" id="{id}" autocomplete="off" on:change={handleChanged}>
-      <label class="btn btn-primary text-start d-block" for="{id}" style="border-radius: 0 0 15px 0;border: 2px solid #183153;">{name}
+      <label class="btn btn-primary text-start d-block" for="{id}" style="border-radius: 0 0 15px 0; border: 2px solid #183153;">{name}
 
         {#if checked}
-          <i class="fa-regular fa-circle-check float-end text-warning"></i>
+          <i class="fa-regular fa-circle-check float-end text-warning mt-1"></i>
         {/if}
       </label>
     </div>

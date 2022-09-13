@@ -23,7 +23,9 @@
 	};
 	$: list_das($featureExist[$filter_asset.wsId]);
 
+	let justValue;
 	let dasSelect = (e) => {
+		justValue = undefined;
 		$filter_asset.dasId = e.detail.id;
 	};
 

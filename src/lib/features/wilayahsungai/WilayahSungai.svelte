@@ -8,15 +8,31 @@
 
 	import { WilayahSungaiApi } from "./wilayahsungai.d.ts";
 	import { DaerahAliranSungaiApi } from "../daerahaliransungai/daerahaliransungai.d.ts";
+	import { onMount } from "svelte";
 
-	const itemId = "id";
-	const label = "name";
+	// const itemId = "id";
+	// const label = "name";
 
 	const _api_ws = new WilayahSungaiApi();
 	const _api_das = new DaerahAliranSungaiApi();
 
+	let onReq = false;
+	onMount(() => {
+		if ($ws.length === 0) {
+			onReq = true;
+			_api_ws.getList().then(result => {
+				// console.log(result);
+				$ws = result.map(({ id, name, province }) => ({ value: id, label: name, province: province }));
+				onReq = false;
+			});
+		}
+	});
+
+	let justValue;
 	let wsSelect = (e) => {
-		$filter_asset.wsId = e.detail.id;
+		let current_wsId = e.detail.value;
+		$filter_asset.wsId = justValue;
+		$filter_asset.wsLabel = e.detail.label;
 		$filter_asset.dasId = undefined;
 
 		// set sungai checked variable
@@ -29,14 +45,13 @@
 		// eslint-disable-next-line no-prototype-builtins
 		if (!$featureExist[$filter_asset.wsId].hasOwnProperty(24)) {
 			$onDasReq = true;
-			_api_das.getArea(e.detail.id).then(response => {
-				$featureExist[$filter_asset.wsId][24] = { ...response };
+			_api_das.getArea(current_wsId).then(response => {
+				$featureExist[current_wsId][24] = { ...response };
 				$onDasReq = false;
 			});
 		}
 
 		if (e.detail.province !== null) {
-			// console.log(JSON.parse(e.detail.province).map(val => val));
 			$provinceByWs = JSON.parse(e.detail.province).map(val => val);
 		}
 
@@ -45,14 +60,14 @@
 
 	let toggleWilayahSungai = () => {
 		$ws_visible = !$ws_visible;
-		// toasts.error("Pilih Wilayah Sungai terlebih dahulu.");
-		// console.log($filter_asset);
-		// console.log(map.getMap().updateSize());
 	};
 
 	let fieldClear = () => {
+		justValue = null;
 		$filter_asset.wsId = undefined;
+		$filter_asset.wsLabel = undefined;
 		$filter_asset.dasId = undefined;
+		$filter_asset.dasLabel = undefined;
 		$das_visible = false;
 
 		if (!$filter_asset.pengelolaId) {
@@ -72,19 +87,32 @@
 </script>
 
 <Row>
-  {#if ($ws.length !== 0)}
-    <Select placeholder="Select Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws }" {itemId} {label} on:select={wsSelect} on:clear={fieldClear} clearable="true">
+
+  {#if onReq}
+    <SelectLoading />
+  {:else }
+    <Select placeholder="Select Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws}"
+            on:select={wsSelect}
+            on:clear={fieldClear}
+            bind:justValue
+            value="{$filter_asset.wsLabel}">
       <div slot="clear-icon">❌</div>
     </Select>
-  {:else}
-    {#await _api_ws.getList()}
-      <SelectLoading />
-    {:then wsItems}
-      <Select placeholder="Select Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws }" {itemId} {label} on:select={wsSelect} on:clear={fieldClear} clearable="true">
-        <div slot="clear-icon">❌</div>
-      </Select>
-    {/await}
   {/if}
+
+  <!--{#if ($ws.length !== 0)}-->
+  <!--  <Select placeholder="Select Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws }" {itemId} {label} on:select={wsSelect} on:clear={fieldClear} clearable="true">-->
+  <!--    <div slot="clear-icon">❌</div>-->
+  <!--  </Select>-->
+  <!--{:else}-->
+  <!--  {#await _api_ws.getList()}-->
+  <!--    <SelectLoading />-->
+  <!--  {:then wsItems}-->
+  <!--    <Select placeholder="Select Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws }" {itemId} {label} on:select={wsSelect} on:clear={fieldClear} clearable="true">-->
+  <!--      <div slot="clear-icon">❌</div>-->
+  <!--    </Select>-->
+  <!--  {/await}-->
+  <!--{/if}-->
 
   <FormGroup>
     <Input id="wilayah_sungai" type="switch" label="Show Area" on:change={toggleWilayahSungai} checked={$ws_visible} />

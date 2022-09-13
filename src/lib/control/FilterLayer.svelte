@@ -2,11 +2,10 @@
 	import { Button, Card, Col, Input, Label, Offcanvas, Row } from "sveltestrap";
 	import Pengelola from "../features/pengelola/Pengelola.svelte";
 	import WilayahSungai from "../features/wilayahsungai/WilayahSungai.svelte";
-	import { filter_asset, paramsAdm, paramsKewenangan } from "../../store/map.js";
+	import { paramsKewenangan } from "../../store/map.js";
 	import Sungai from "../features/sungai/Sungai.svelte";
 	import DaerahAliranSungai from "../features/daerahaliransungai/DaerahAliranSungai.svelte";
 	import Province from "../features/province/Province.svelte";
-	import { featureExistAdm } from "../../store/features.js";
 
 	let isOpen = false;
 
@@ -19,7 +18,8 @@
 	};
 
 	let print = () => {
-		console.log($paramsAdm);
+		// console.log($ws);
+		// console.log($wsFilter);
 	};
 
 

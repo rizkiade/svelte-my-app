@@ -44,12 +44,12 @@
 <style>
     .card-detail-project {
         position: absolute;
-        width: 80vh;
+        width: 70vh;
         height: 200px;
         background: rgba(255, 255, 255, 0.42);
         border-radius: 15px;
         bottom: 20px;
-        left: 20%;
+        left: 25%;
         z-index: 100;
         border: 2px solid darkgray;
         justify-content: space-between;
