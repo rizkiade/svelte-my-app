@@ -8,7 +8,6 @@
 	import { preloader, ws, ws_visible, wsp_visible, das_visible, ordo_visible, wsFilter, pengelola, filter_asset, provinceByWs } from "../../../store/map.js";
 	import { wsp_features, featureExistWSP } from "../../../store/features.js";
 	import { onMount } from "svelte";
-	import { log2 } from "ol/math";
 
 	const _api = new PengelolaApi();
 
