@@ -7,6 +7,7 @@
 	import { projectLayerSource } from "../../../store/features.js";
 	import ListLoading from "../../component/loader/ListLoading.svelte";
 	import { toasts } from "svelte-toasts";
+	import DetailCard from "./DetailCard.svelte";
 
 	const category = [];
 
@@ -32,7 +33,6 @@
 
 			// selected_asset_id.push(_id);
 
-
 			// disabled = true;
 			// let result = await getAsset(_id);
 			// disabled = false;
@@ -52,19 +52,21 @@
 
 	};
 
-	let layerSwitch = async (e) => {
+	let layerSwitch = (e) => {
 		let val = e.target.value;
 
 		let qs = "format=json";
 		if (e.target.checked) {
 			projectLayer.set(val);
-			toasts.info("Requested");
+			toasts.info("Loaded Data");
 
 			if (val !== "0") {
 				qs = `ctgPId=${val}&${qs}`;
 			}
-
-			await _api.getProject(qs);
+			_api.getProject(qs).then(result => {
+				projectLayerSource.set(result);
+				listProjects = [...result];
+			});
 
 		} else {
 			projectLayer.set(undefined);
@@ -79,14 +81,24 @@
 		if (id !== $projectLayer) {
 			toasts.error("Tidak dapat menampilkan data, Layer non aktif");
 		} else {
+			listProjects = [...$projectLayerSource];
 			open = true;
 		}
 	};
 
 	let countProject = [];
+	let countProjectYear = 0;
 	let countProjectSub = () => {
 		countProject = [];
+		countProjectYear = 0;
 		$projectLayerSource.map(i => {
+
+			if (i.date_end) {
+				let year_end = new Date(i.date_end).getFullYear();
+				if (new Date().getFullYear() === year_end) {
+					countProjectYear += 1;
+				}
+			}
 
 			if (i.category_sub_id in countProject) {
 				countProject[i.category_sub_id] += 1;
@@ -94,17 +106,35 @@
 				countProject[i.category_sub_id] = 1;
 			}
 		});
-
 	};
 
 	$:countProjectSub($projectLayerSource);
+
+	let listProjects = [];
+
+	function handleAction(event) {
+		if ($projectLayer === undefined) {
+			toasts.error("Tidak dapat menampilkan data, Layer non aktif");
+		} else {
+			if (typeof event.detail.value === "number") {
+				listProjects = $projectLayerSource.filter(project => {
+					if (project.date_end) {
+						return new Date(project.date_end).getFullYear() === new Date().getFullYear();
+					}
+				});
+			} else {
+				listProjects = $projectLayerSource.filter(project => project.status === event.detail.value.toUpperCase());
+			}
+			open = event.detail.value;
+		}
+	}
 
 </script>
 
 
 <div transition:slide>
   <div class="card" style="background-color: rgba(104,129,169,0.35)">
-    <div class="card-header text-center" style="background-color: rgba(87,107,131,0.5)">Project Information</div>
+    <div class="card-header text-center bg-card-title">Project Information</div>
   </div>
 
 
@@ -155,8 +185,10 @@
 
 </div>
 
+<DetailCard on:detail={handleAction} {countProjectYear} />
+
 <Modal isOpen={open} {fullscreen}>
-  <ModalHeader>Project Detail</ModalHeader>
+  <ModalHeader>List Project <span style="font-size: 10pt; font-style: italic">(total: {listProjects.length})</span></ModalHeader>
   <ModalBody>
     <Table>
       <thead>
@@ -171,11 +203,14 @@
       </thead>
       <tbody>
 
-      {#each $projectLayerSource as item }
+      {#each listProjects as item }
 
         <tr>
           <th scope="row">{item.no}</th>
           <td>
+            {#if item.coordinate.length > 2}
+              <i class="fa-solid fa-location-dot"></i>
+            {/if}
             {item.name.toUpperCase()}
             {#if item.name.toUpperCase().includes('KASKADE') }
               <Badge pill color="success">KASKADE</Badge>

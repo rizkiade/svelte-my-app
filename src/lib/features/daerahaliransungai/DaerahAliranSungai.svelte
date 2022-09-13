@@ -6,9 +6,6 @@
 	import { das_visible, filter_asset, onDasReq } from "../../../store/map.js";
 	import { toasts } from "svelte-toasts";
 
-	const itemId = "id";
-	const label = "name";
-
 	let das = [];
 	let list_das = () => {
 		das = [];
@@ -16,7 +13,7 @@
 			// eslint-disable-next-line no-prototype-builtins
 			if ($featureExist[$filter_asset.wsId].hasOwnProperty(24)) {
 				das = $featureExist[$filter_asset.wsId][24].features.map(item => {
-					return { id: item.properties.id, name: item.properties.name !== "" ? `${item.properties.kode_das} - ${item.properties.name}` : "-" };
+					return { value: item.properties.id, label: item.properties.name !== "" ? item.properties.name : "-", kode_das: item.properties.kode_das };
 				});
 			}
 		}
@@ -25,11 +22,12 @@
 
 	let justValue;
 	let dasSelect = (e) => {
-		justValue = undefined;
-		$filter_asset.dasId = e.detail.id;
+		$filter_asset.dasId = e.detail.value;
+		$filter_asset.dasLabel = e.detail.label;
 	};
 
 	let fieldClear = () => {
+		justValue = null;
 		$filter_asset.dasId = undefined;
 	};
 
@@ -50,8 +48,11 @@
   {#if $onDasReq}
     <SelectLoading />
   {:else }
-    <Select placeholder="Select Daerah Aliran Sungai" } items="{das}" {itemId} {label} on:select={dasSelect} on:clear={fieldClear} clearable="true">
+    <Select placeholder="Select Daerah Aliran Sungai" } items="{das}" on:select={dasSelect} on:clear={fieldClear} clearable="true">
       <div slot="clear-icon">❌</div>
+      <div slot="item" let:item>
+        {item.kode_das}: {item.label}
+      </div>
     </Select>
   {/if}
   <FormGroup>

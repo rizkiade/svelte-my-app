@@ -1,5 +1,6 @@
 <script context="module">
 	import { filter_asset, paramsKewenangan } from "../../store/map.js";
+	import { filteredBendungan } from "./infrastructure/filters/bendungan/FilterBendungan.svelte";
 	import { filteredPDA } from "./infrastructure/filters/pda/FilterPDA.svelte";
 	import { filteredPCH } from "./infrastructure/filters/pch/FilterPCH.svelte";
 	import { filteredKlim } from "./infrastructure/filters/pklim/FilterPKlim.svelte";
@@ -55,6 +56,10 @@
 							return false;
 						} else {
 
+							if (inf_id === 3) {
+								return filteredBendungan(feature);
+							}
+
 							if ([14, 15, 16].includes(inf_id)) {
 
 								if (inf_id === 14) {
@@ -71,9 +76,12 @@
 
 								return true;
 
-							} else {
-								return true;
 							}
+							// else {
+							// 	return true;
+							// }
+
+							return true;
 						}
 					}
 

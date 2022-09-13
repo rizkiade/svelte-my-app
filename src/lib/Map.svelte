@@ -13,6 +13,7 @@
 	import { mapKey, preloader, selected_asset } from "../store/map.js";
 	import Preloader from "./component/loader/Preloader.svelte";
 	import Popup from "./component/Popup.svelte";
+	import { Icon, Style } from "ol/style.js";
 
 	setContext(mapKey, {
 		getMap: () => map
@@ -27,6 +28,23 @@
 	const attributions =
 		"<a href=\"https://openlayers.org/\" target=\"_blank\">&copy; OpenLayers</a> " +
 		"<a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>";
+
+	let selectedStyleIcon = (feature) => {
+		let image = "map-marker-selected-128.png";
+		let type = feature.getGeometry().getType();
+
+		if (type === "Point") {
+			return new Style({
+				image: new Icon({
+					anchor: [0.5, 200],
+					anchorXUnits: "fraction",
+					anchorYUnits: "pixels",
+					scale: [0.20, 0.20],
+					src: `/marker/${image}`
+				})
+			});
+		}
+	};
 
 	onMount(() => {
 		if (browser) {
@@ -70,7 +88,21 @@
 				}
 			});
 
+			let selected = null;
 			map.on("click", function(e) {
+
+				// selected feature
+				if (selected !== null) {
+					selected.setStyle(undefined);
+					selected = null;
+				}
+
+				map.forEachFeatureAtPixel(e.pixel, function(f) {
+					selected = f;
+					f.setStyle(selectedStyleIcon);
+					return true;
+				});
+				// end selected feature
 
 				let feature = map.forEachFeatureAtPixel(e.pixel, function(feature) {
 					return feature;

@@ -53,6 +53,15 @@ let filter_asset = writable({
 });
 
 let filter_asset_sub = writable({
+	3: {
+		status_infrastructure: [
+			{ value: "Tahap Rencana", name: "Tahap Rencana", checked: true },
+			{ value: "Sedang Dibangun", name: "Sedang Dibangun", checked: true },
+			{ value: "Sudah Terbangun", name: "Sudah Terbangun", checked: true },
+			{ value: "", name: "Tanpa Ket", checked: true }
+		],
+		manfaat_irigasi: null
+	},
 	14: {
 		type_pos: [
 			{ id: "pos_manual", name: "Pos Manual", checked: true },

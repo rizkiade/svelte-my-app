@@ -142,6 +142,11 @@ button:focus:not(:focus-visible) {
     font-size: 1.0rem;
 }
 
+.bg-card-title {
+    background: rgba(87, 107, 131, 0.6);
+    background: linear-gradient(0deg, rgba(87, 107, 131, 0.6) 0%, rgba(201, 199, 199, 1) 100%);
+}
+
 @media (min-width: 720px) {
     h1 {
         font-size: 2.4rem;

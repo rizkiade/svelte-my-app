@@ -1,15 +1,9 @@
 import { categoryProject } from "../../../store/map.js";
-import { projectLayerSource } from "../../../store/features.js";
 
 export type Project = {
 	id: number,
 	name: string,
 }
-
-// export type Features = {
-// 	type: "FeatureCollection",
-// 	features: []
-// }
 
 export type Json = [];
 
@@ -31,7 +25,6 @@ export class ProjectApi {
 		const result = await response.json();
 
 		if (response.ok) {
-			projectLayerSource.set(result);
 			return result;
 		} else {
 			throw new Error(result);

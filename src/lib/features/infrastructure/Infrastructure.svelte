@@ -7,6 +7,7 @@
 	import BoxContent from "./filters/BoxContent.svelte";
 	import PosCurahHujan from "./filters/pch/PosCurahHujan.svelte";
 	import PosKlimatologi from "./filters/pklim/PosKlimatologi.svelte";
+	import Bendungan from "./filters/bendungan/Bendungan.svelte";
 
 	let open = false;
 	let filterLayerId = undefined;
@@ -23,7 +24,7 @@
 
 <div transition:slide>
   <div class="card" style="background-color: rgba(104,129,169,0.35)">
-    <div class="card-header text-center" style="background-color: rgba(87,107,131,0.5)">List Infrastructure</div>
+    <div class="card-header text-center bg-card-title">List Infrastructure</div>
   </div>
 
   <div class="d-flex flex-column bd-highlight">
@@ -38,6 +39,12 @@
     <em>{filterLayerLabel}</em>
   </ModalHeader>
   <ModalBody>
+
+    {#if filterLayerId === 3}
+      <BoxContent>
+        <Bendungan />
+      </BoxContent>
+    {/if}
 
     {#if filterLayerId === 14}
       <BoxContent>

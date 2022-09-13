@@ -9,27 +9,36 @@
 	import { projectLayerSource } from "../../../store/features.js";
 	import { Point } from "ol/geom.js";
 	import { panel } from "../../control/NavigationStore.js";
-	import { filteredAsset } from "../FilterAsset.svelte";
-
 
 	let styleIcon = (feature) => {
 		// let typeId = feature.get("type_id");
-		let image = "map-marker-red-128.png";
+		let image;
 		let type = feature.getGeometry().getType();
+		let status = feature.get("status");
 
-		if (filteredAsset(feature)) {
+		switch (status) {
+			case "SELESAI":
+				image = "map-marker-green-128.png";
+				break;
+			case "PELAKSANAAN":
+				image = "map-marker-blue-128.png";
+				break;
+			default:
+				image = "map-marker-red-128.png";
+				break;
+		}
 
-			if (type === "Point") {
-				return new Style({
-					image: new Icon({
-						anchor: [0.5, 46],
-						anchorXUnits: "fraction",
-						anchorYUnits: "pixels",
-						scale: [0.20, 0.20],
-						src: `/marker/${image}`
-					})
-				});
-			}
+		if (type === "Point") {
+			return new Style({
+				image: new Icon({
+					anchor: [0.5, 100],
+					anchorXUnits: "fraction",
+					anchorYUnits: "pixels",
+					scale: [0.20, 0.20],
+					src: `/marker/${image}`
+					// src: 'https://openlayers.org/en/latest/examples/data/icon.png'
+				})
+			});
 		}
 	};
 
@@ -71,16 +80,15 @@
 				}
 			}
 
-
-			// console.log(i.status.toLowerCase());
-
 			let coordinate = i.coordinate.replaceAll(" ", "").split(",");
 			if (coordinate[0].length !== 0 && coordinate[1].length !== 0) {
-
 				const feature = new Feature({
 					geometry: new Point([coordinate[0], coordinate[1]]),
 					name: i.name,
-					status: i.status
+					id: i.id,
+					status: i.status,
+					infrastructure_id: i.infrastructure_id,
+					type_name: i.type_name
 				});
 
 				features.push(feature);

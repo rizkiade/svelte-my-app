@@ -7,6 +7,7 @@
 	import Project from "../features/project/Project.svelte";
 	import { selected_asset } from "../../store/map.js";
 	import DetailAsset from "../features/detail/DetailAsset.svelte";
+	import DetailProject from "../features/project/DetailProject.svelte";
 
 
 	function handleAction(event) {
@@ -63,7 +64,11 @@
           {/if}
 
           {#if $panel.right === 'project'}
-            <Project />
+            {#if $selected_asset.id !== undefined}
+              <DetailProject />
+            {:else }
+              <Project />
+            {/if}
           {/if}
         </Col>
 

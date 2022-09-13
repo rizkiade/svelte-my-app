@@ -1,7 +1,7 @@
 <script>
-	// import { activeNav } from "../store/control.js";
 	import { Tooltip } from "sveltestrap";
 	import { createEventDispatcher } from "svelte";
+	import { selected_asset } from "../../store/map.js";
 
 	const dispatch = createEventDispatcher();
 
@@ -9,6 +9,7 @@
 		dispatch("action", {
 			text: param
 		});
+		$selected_asset.id = undefined;
 	}
 
 	let src;
@@ -25,7 +26,6 @@
 <div>
   <button class="btn-landing" id={`btn-${name}`} class:active="{active}" on:click="{()=>activeLayer(name)}">
     <img class="img-icon" src="{src}" alt="{alt}">
-    <!--{$activeNav.left} {$activeNav.right}-->
   </button>
   <Tooltip target={`btn-${name}`} placement="left">{title}</Tooltip>
 </div>

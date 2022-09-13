@@ -11,6 +11,22 @@
 	export let luas;
 	export let status;
 
+	let progress = (param) => {
+		let percentage;
+		switch (param) {
+			case "PELAKSANAAN":
+				percentage = 0;
+				break;
+			case "SELESAI":
+				percentage = 100;
+				break;
+			default:
+				percentage = 0;
+				break;
+		}
+		return percentage;
+	};
+
 </script>
 
 
@@ -40,7 +56,7 @@
   {/if}
 
   {#if status}
-    <em>( {status} - 0% ) </em>
+    <em>( {status} - {progress(status)}% ) </em>
   {/if}
 </Card>
 
