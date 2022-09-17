@@ -8,7 +8,7 @@
 </script>
 
 <div class="card" style="background-color: rgba(104,129,169,0.35)">
-  <div class="card-header text-center bg-card-title">Detail Information</div>
+  <div class="card-header text-center bg-card-title text-light">Detail Information</div>
 </div>
 <Button class="btn-sm btn-danger mt-2" on:click={closeDetail}>Hide</Button>
 

@@ -56,6 +56,15 @@
 				})
 			});
 		}
+
+		if (type === "MultiLineString" || type === "LineString") {
+			return new Style({
+				stroke: new Stroke({
+					color: "#ff7600",
+					width: 1.5
+				})
+			});
+		}
 	};
 
 
