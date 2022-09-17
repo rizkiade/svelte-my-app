@@ -1,5 +1,5 @@
 <script>
-	import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "sveltestrap";
+	import { Button, FormGroup, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "sveltestrap";
 	import { slide } from "svelte/transition";
 	import { infrastructure } from "../../control/NavigationStore.js";
 	import InfrastructureButton from "./InfrastructureButton.svelte";
@@ -8,6 +8,7 @@
 	import PosCurahHujan from "./filters/pch/PosCurahHujan.svelte";
 	import PosKlimatologi from "./filters/pklim/PosKlimatologi.svelte";
 	import Bendungan from "./filters/bendungan/Bendungan.svelte";
+	import { refIdOnly } from "../../../store/map.js";
 
 	let open = false;
 	let filterLayerId = undefined;
@@ -20,12 +21,19 @@
 		filterLayerLabel = event.detail.layerLabel;
 	};
 
+	let show_integration = () => {
+		$refIdOnly = !$refIdOnly;
+	};
 </script>
 
 <div transition:slide>
   <div class="card" style="background-color: rgba(104,129,169,0.35)">
-    <div class="card-header text-center bg-card-title">List Infrastructure</div>
+    <div class="card-header text-center bg-card-title text-light">List Infrastructure</div>
   </div>
+
+  <FormGroup class="mt-2">
+    <Input type="switch" label="Show Integration" on:change={show_integration} checked={$refIdOnly} />
+  </FormGroup>
 
   <div class="d-flex flex-column bd-highlight">
     {#each $infrastructure as { id, name, checked }}

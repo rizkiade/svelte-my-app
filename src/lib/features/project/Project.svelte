@@ -134,7 +134,7 @@
 
 <div transition:slide>
   <div class="card" style="background-color: rgba(104,129,169,0.35)">
-    <div class="card-header text-center bg-card-title">Project Information</div>
+    <div class="card-header text-center bg-card-title text-light">Project Information</div>
   </div>
 
 

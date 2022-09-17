@@ -16,8 +16,8 @@ const iconList = {
 	13: "_posko_banjir.png",
 	14: "_pos_curah_hujan.png",
 	15: "_pos_duga_air.png",
-	16: "_pos_klimatologi.png",
-	17: "map-marker-red.png"
+	17: "map-marker-red.png",
+	16: "_pos_klimatologi.png"
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

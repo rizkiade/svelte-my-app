@@ -3,9 +3,9 @@
 	import Select from "svelte-select";
 	import { slide } from "svelte/transition";
 
-  const optionIdentifier = "id";
-  const getOptionLabel = (option) => option.name;
-  const getSelectionLabel = (option) => option.name;
+	const optionIdentifier = "id";
+	const getOptionLabel = (option) => option.name;
+	const getSelectionLabel = (option) => option.name;
 
 </script>
 
@@ -18,7 +18,7 @@
   </Card>
 
   <Card body style="background: rgba(104,129,169,0.35);" class="mb-2 text-center">
-    <Alert color="warning">Masukkan nilai coordinate untuk mendpatkan informasi Geo location.
+    <Alert color="warning">Masukkan nilai coordinate untuk mendapatkan informasi Geo location.
     </Alert>
     <Row>
       <div class="input-group mb-1">

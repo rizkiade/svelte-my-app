@@ -2,10 +2,11 @@
 	import { Button, Card, Col, Input, Label, Offcanvas, Row } from "sveltestrap";
 	import Pengelola from "../features/pengelola/Pengelola.svelte";
 	import WilayahSungai from "../features/wilayahsungai/WilayahSungai.svelte";
-	import { filter_asset_sub, paramsKewenangan } from "../../store/map.js";
+	import { refIdOnly, paramsKewenangan, filter_asset } from "../../store/map.js";
 	import Sungai from "../features/sungai/Sungai.svelte";
 	import DaerahAliranSungai from "../features/daerahaliransungai/DaerahAliranSungai.svelte";
 	import Province from "../features/province/Province.svelte";
+	import City from "../features/city/City.svelte";
 	// import { featureExist, projectLayerSource } from "../../store/features.js";
 
 	let isOpen = false;
@@ -19,15 +20,22 @@
 	};
 
 	let print = () => {
-		console.log($filter_asset_sub[3].manfaat_irigasi);
+		// console.log($filter_asset_sub[3].manfaat_irigasi);
+		console.log($refIdOnly);
+		console.log($filter_asset);
 	};
 
 
 	export { isOpen };
 </script>
 
-<Offcanvas isOpen={ isOpen === 'layer'} header="Asset Filter" placement="start" backdrop={false} style="width: 310px; background: rgba(255, 255, 255, 0.5);">
-  <Card body style="background: rgba(104, 129, 169, 0.35); padding-bottom: 10px;">
+<Offcanvas isOpen={ isOpen === 'layer'} placement="start" backdrop={false} style="width: 310px; background: rgba(255, 255, 255, 0.5);">
+
+  <div class="card" style="background-color: rgba(104,129,169,0.35)">
+    <div class="card-header text-center bg-card-title text-light">Asset Filter</div>
+  </div>
+
+  <Card body style="background: rgba(104, 129, 169, 0.35); padding-bottom: 10px; margin-top: 10px">
     <Label class="text-center">Kewenangan</Label>
 
     <Row style="background-color:rgba(104,129,169,0.54); border-radius: 10px">
@@ -44,19 +52,18 @@
 
   </Card>
 
-  <Card body style="background: rgba(104, 129, 169, 0.35); padding-bottom: 10px; margin-top: 5px">
+  <Card body style="background: rgba(104, 129, 169, 0.35); margin-top: 5px">
     <Label class="text-center">Wilayah Kerja</Label>
-
     <Pengelola />
     <WilayahSungai />
     <Sungai />
     <DaerahAliranSungai />
-
   </Card>
 
   <Card body style="background: rgba(104, 129, 169, 0.35); padding-bottom: 10px; margin-top: 5px">
     <Label class="text-center">Wilayah Administratif</Label>
     <Province />
+    <City />
 
   </Card>
 

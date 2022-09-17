@@ -10,8 +10,6 @@
 	import { DaerahAliranSungaiApi } from "../daerahaliransungai/daerahaliransungai.d.ts";
 	import { onMount } from "svelte";
 
-	// const itemId = "id";
-	// const label = "name";
 
 	const _api_ws = new WilayahSungaiApi();
 	const _api_das = new DaerahAliranSungaiApi();
@@ -21,7 +19,6 @@
 		if ($ws.length === 0) {
 			onReq = true;
 			_api_ws.getList().then(result => {
-				// console.log(result);
 				$ws = result.map(({ id, name, province }) => ({ value: id, label: name, province: province }));
 				onReq = false;
 			});
@@ -99,20 +96,6 @@
       <div slot="clear-icon">❌</div>
     </Select>
   {/if}
-
-  <!--{#if ($ws.length !== 0)}-->
-  <!--  <Select placeholder="Select Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws }" {itemId} {label} on:select={wsSelect} on:clear={fieldClear} clearable="true">-->
-  <!--    <div slot="clear-icon">❌</div>-->
-  <!--  </Select>-->
-  <!--{:else}-->
-  <!--  {#await _api_ws.getList()}-->
-  <!--    <SelectLoading />-->
-  <!--  {:then wsItems}-->
-  <!--    <Select placeholder="Select Wilayah Sungai" } items="{$wsFilter.length !== 0 ? $wsFilter : $ws }" {itemId} {label} on:select={wsSelect} on:clear={fieldClear} clearable="true">-->
-  <!--      <div slot="clear-icon">❌</div>-->
-  <!--    </Select>-->
-  <!--  {/await}-->
-  <!--{/if}-->
 
   <FormGroup>
     <Input id="wilayah_sungai" type="switch" label="Show Area" on:change={toggleWilayahSungai} checked={$ws_visible} />

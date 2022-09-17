@@ -4,7 +4,7 @@
 	import { GeoJSON } from "ol/format.js";
 	import VectorLayer from "ol/layer/Vector.js";
 	import { styleIcon } from "../../helper/style.js";
-	import { assets_features, count_asset, filter_asset, filter_asset_sub, mapKey, paramsKewenangan } from "../../../store/map.js";
+	import { assets_features, count_asset, filter_asset, filter_asset_sub, mapKey, paramsKewenangan, refIdOnly } from "../../../store/map.js";
 	import { getContext } from "svelte";
 	import { panel } from "../../control/NavigationStore.js";
 	import { filteredAsset } from "../FilterAsset.svelte";
@@ -42,7 +42,7 @@
 
 	};
 
-	$:reloadMap($assets_features, $panel.right, $paramsKewenangan, $filter_asset, $filter_asset_sub);
+	$:reloadMap($assets_features, $panel.right, $paramsKewenangan, $filter_asset, $filter_asset_sub, $refIdOnly);
 
 	let countAsset = () => {
 		// reset counter
@@ -58,8 +58,7 @@
 				}
 			}
 		});
-		// console.log($count_asset);
 	};
-	$:countAsset($assets_features, $paramsKewenangan, $filter_asset, $filter_asset_sub);
+	$:countAsset($assets_features, $paramsKewenangan, $filter_asset, $filter_asset_sub, $refIdOnly);
 
 </script>

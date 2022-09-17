@@ -143,8 +143,10 @@ button:focus:not(:focus-visible) {
 }
 
 .bg-card-title {
-    background: rgba(87, 107, 131, 0.6);
-    background: linear-gradient(0deg, rgba(87, 107, 131, 0.6) 0%, rgba(201, 199, 199, 1) 100%);
+    /*background: rgba(87, 107, 131, 0.6);*/
+    /*background: linear-gradient(0deg, rgba(87, 107, 131, 0.6) 0%, rgba(201, 199, 199, 1) 100%);*/
+    background: rgba(11,20,58);
+    background: linear-gradient(0deg, rgba(11,20,58,0.92) 25%, rgba(89,117,185,1) 100%);
 }
 
 @media (min-width: 720px) {

@@ -1,10 +1,7 @@
-import { province } from "../../../store/map.js";
-
 export type Province = {
 	id: string,
 	name: string,
 }
-
 
 export class ProvinceApi {
 
@@ -13,8 +10,7 @@ export class ProvinceApi {
 		const result = await response.json();
 
 		if (response.ok) {
-			const result_clean = result.map(({ id, name }) => ({ value: id, label: name }));
-			province.set(result_clean);
+			return result;
 		} else {
 			throw new Error(result);
 		}

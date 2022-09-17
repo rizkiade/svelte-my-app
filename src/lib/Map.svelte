@@ -13,7 +13,7 @@
 	import { mapKey, preloader, selected_asset } from "../store/map.js";
 	import Preloader from "./component/loader/Preloader.svelte";
 	import Popup from "./component/Popup.svelte";
-	import { Icon, Style } from "ol/style.js";
+	import { Fill, Stroke, Icon, Style } from "ol/style.js";
 
 	setContext(mapKey, {
 		getMap: () => map
@@ -44,7 +44,20 @@
 				})
 			});
 		}
+
+		if (type === "MultiPolygon" || type === "Polygon") {
+			return new Style({
+				stroke: new Stroke({
+					color: "#502909",
+					width: 1
+				}),
+				fill: new Fill({
+					color: "rgba(245,112,9,0.7)"
+				})
+			});
+		}
 	};
+
 
 	onMount(() => {
 		if (browser) {
