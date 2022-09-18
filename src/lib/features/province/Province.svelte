@@ -54,7 +54,6 @@
 	};
 
 	let showAreaProv = () => {
-		console.log(justValue);
 		if ($prov_visible && $paramsAdm.provId) {
 
 			// eslint-disable-next-line no-prototype-builtins
@@ -65,16 +64,19 @@
 					feature: undefined,
 					kabupaten: []
 				};
-
-				onProvReq = true;
-				// Request new Feature
-				_api_province.getArea($paramsAdm.provId).then(result => {
-					$featureExistAdm[$paramsAdm.provId].feature = { ...result };
-					toasts.success(`${result.features.length} feature has been added.`);
-					onProvReq = false;
-				});
 			}
+			request_feature();
 		}
+	};
+
+	let request_feature = () => {
+		onProvReq = true;
+		// Request new Feature
+		return _api_province.getArea($paramsAdm.provId).then(result => {
+			$featureExistAdm[$paramsAdm.provId].feature = { ...result };
+			toasts.success(`${result.features.length} feature has been added.`);
+			onProvReq = false;
+		});
 	};
 
 	let fieldClear = () => {
