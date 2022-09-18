@@ -15,6 +15,7 @@
 	import SungaiFeatures from "../lib/features/sungai/SungaiFeatures.svelte";
 	import DaerahAliranSungaiFeatures from "../lib/features/daerahaliransungai/DaerahAliranSungaiFeatures.svelte";
 	import ProvinceFeatures from "../lib/features/province/ProvinceFeatures.svelte";
+	import CityFeatures from "../lib/features/city/CityFeatures.svelte";
 
 	let isOpen = undefined;
 
@@ -38,6 +39,7 @@
   <SungaiFeatures />
   <DaerahAliranSungaiFeatures />
   <ProvinceFeatures />
+  <CityFeatures />
 
   <InfrastructureFeatures />
   <ProjectFeatures />

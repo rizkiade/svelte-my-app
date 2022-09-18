@@ -68,28 +68,32 @@
 									return false;
 								} else {
 
-									if (inf_id === 3) {
-										return filteredBendungan(feature);
-									}
-
-									if ([14, 15, 16].includes(inf_id)) {
-
-										if (inf_id === 14) {
-											return filteredPCH(feature);
+									if (district && district !== kecamatanText) {
+										return false;
+									} else {
+										if (inf_id === 3) {
+											return filteredBendungan(feature);
 										}
 
-										if (inf_id === 15) {
-											return filteredPDA(feature);
-										}
+										if ([14, 15, 16].includes(inf_id)) {
 
-										if (inf_id === 16) {
-											return filteredKlim(feature);
+											if (inf_id === 14) {
+												return filteredPCH(feature);
+											}
+
+											if (inf_id === 15) {
+												return filteredPDA(feature);
+											}
+
+											if (inf_id === 16) {
+												return filteredKlim(feature);
+											}
+
+											return true;
 										}
 
 										return true;
 									}
-
-									return true;
 								}
 							}
 						}

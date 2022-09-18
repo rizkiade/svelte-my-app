@@ -5,7 +5,7 @@
 	import { ProvinceApi } from "./province.d.ts";
 	import SelectLoading from "../../component/loader/SelectLoading.svelte";
 	import { toasts } from "svelte-toasts";
-	import { featureExistAdm, prov_features } from "../../../store/features.js";
+	import { featureExistAdm } from "../../../store/features.js";
 	import { onMount } from "svelte";
 
 	let _api_province = new ProvinceApi();
@@ -36,15 +36,6 @@
 				desaId: undefined
 			});
 
-			// Create new object ON feature Administratif.
-			// eslint-disable-next-line no-prototype-builtins
-			if (!$featureExistAdm.hasOwnProperty($paramsAdm.provId)) {
-				$featureExistAdm[$paramsAdm.provId] = {
-					feature: undefined,
-					kabupaten: []
-				};
-			}
-
 			$kabupatenByProv = $kabupaten.filter(kab => kab.prov_id === justValue);
 			showAreaProv();
 		}
@@ -62,19 +53,26 @@
 		}
 	};
 
-	let showAreaProv = async () => {
+	let showAreaProv = () => {
+		console.log(justValue);
 		if ($prov_visible && $paramsAdm.provId) {
-			if (!$featureExistAdm[$paramsAdm.provId].feature) {
+
+			// eslint-disable-next-line no-prototype-builtins
+			if (!$featureExistAdm.hasOwnProperty($paramsAdm.provId)) {
+
+				// Create new object ON feature Administratif.
+				$featureExistAdm[$paramsAdm.provId] = {
+					feature: undefined,
+					kabupaten: []
+				};
+
 				onProvReq = true;
 				// Request new Feature
-				let result = await _api_province.getArea($paramsAdm.provId);
-				$featureExistAdm[$paramsAdm.provId].feature = { ...result };
-				$prov_features = { ...result };
-				toasts.success(`${result.features.length} feature has been added.`);
-				onProvReq = false;
-			} else {
-				// existing Feature
-				$prov_features = { ...$featureExistAdm[$paramsAdm.provId].feature };
+				_api_province.getArea($paramsAdm.provId).then(result => {
+					$featureExistAdm[$paramsAdm.provId].feature = { ...result };
+					toasts.success(`${result.features.length} feature has been added.`);
+					onProvReq = false;
+				});
 			}
 		}
 	};
@@ -96,7 +94,7 @@
   {#if onProvReq}
     <SelectLoading />
   {:else }
-    <Select placeholder="Select Province" items="{$provinceByWs.length !== 0 ? $provinceByWs : $province}"
+    <Select placeholder="Select Provinsi" items="{$provinceByWs.length !== 0 ? $provinceByWs : $province}"
             on:select={provSelect}
             on:clear={fieldClear}
             bind:justValue

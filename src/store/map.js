@@ -28,6 +28,10 @@ const prov_visible = writable(false);
 
 const kabupaten = writable([]);
 const kabupatenByProv = writable([]);
+const kabupaten_visible = writable(false);
+
+const kecamatanByKab = writable([]);
+const kecamatan_visible = writable(false);
 
 let paramsAdm = writable({
 	provId: undefined,
@@ -124,4 +128,4 @@ const countProject = writable({
 
 const refIdOnly = writable(false);
 
-export { mapKey, preloader, ws_visible, wsp_visible, ordo_visible, paramsKewenangan, pengelola, ws, wsFilter, onDasReq, das_visible, province, provinceByWs, prov_visible, kabupaten, kabupatenByProv, paramsAdm, assets_features, count_asset, filter_asset, filter_asset_sub, selected_asset, categoryProject, projectLayer, assetDetail, onAssetDetailReq, countProject, refIdOnly };
+export { mapKey, preloader, ws_visible, wsp_visible, ordo_visible, paramsKewenangan, pengelola, ws, wsFilter, onDasReq, das_visible, province, provinceByWs, prov_visible, kabupaten, kabupatenByProv, kabupaten_visible, kecamatanByKab, kecamatan_visible, paramsAdm, assets_features, count_asset, filter_asset, filter_asset_sub, selected_asset, categoryProject, projectLayer, assetDetail, onAssetDetailReq, countProject, refIdOnly };
