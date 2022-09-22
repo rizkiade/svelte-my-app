@@ -16,7 +16,6 @@ export class InfrastructureApi {
 		const result = await response.json();
 
 		if (response.ok) {
-			// assets_features.set(result);
 			return result;
 		} else {
 			throw new Error(result);

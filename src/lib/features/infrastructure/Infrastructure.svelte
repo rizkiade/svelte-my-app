@@ -1,7 +1,7 @@
 <script>
 	import { Button, FormGroup, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "sveltestrap";
 	import { slide } from "svelte/transition";
-	import { infrastructure } from "../../control/NavigationStore.js";
+	import { infrastructure, infrastructure_sub } from "../../control/NavigationStore.js";
 	import InfrastructureButton from "./InfrastructureButton.svelte";
 	import PosDugaAir from "./filters/pda/PosDugaAir.svelte";
 	import BoxContent from "./filters/BoxContent.svelte";
@@ -40,6 +40,14 @@
       <InfrastructureButton {id} {name} bind:checked={checked} on:open={toggleFilter} />
     {/each}
   </div>
+
+  <div class="card mt-4" style="background-color: rgba(104,129,169,0.35)">
+    <div class="card-header text-center bg-card-title text-light">List Infrastructure Sub</div>
+  </div>
+  {#each $infrastructure_sub as { id, name, checked }}
+    <InfrastructureButton {id} {name} bind:checked={checked} on:open={toggleFilter} />
+  {/each}
+
 </div>
 
 <Modal isOpen={open} size="sm">

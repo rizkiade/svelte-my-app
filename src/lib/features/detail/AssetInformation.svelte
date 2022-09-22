@@ -1,16 +1,27 @@
 <script>
-	import { Button, Table } from "sveltestrap";
-	import { selected_asset } from "../../../store/map.js";
+	import { Button, Card, CardBody, CardFooter, CardSubtitle, CardText, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row, TabContent, Table, TabPane } from "sveltestrap";
+	import { assetDetail, selected_asset } from "../../../store/map.js";
+
+	let openDetail = () => {
+		open = !open;
+	};
 
 	let closeDetail = () => {
 		$selected_asset.id = undefined;
 	};
+
+	let open = false;
+	const toggle = () => {
+		open = !open;
+	};
+
+
 </script>
 
 <div class="card" style="background-color: rgba(104,129,169,0.35)">
   <div class="card-header text-center bg-card-title text-light">Detail Information</div>
 </div>
-<Button class="btn-sm btn-danger mt-2" on:click={closeDetail}>Hide</Button>
+<Button class="btn-sm mt-2" color="danger" on:click={closeDetail}>Hide</Button>
 
 <Table borderless size="sm" class="mt-4">
   <tbody>
@@ -66,3 +77,42 @@
   </tr>
   </tbody>
 </Table>
+
+<Button class="btn-sm" color="primary" on:click={openDetail}>Detail</Button>
+
+<div>
+  <Modal isOpen={open} size="lg">
+    <ModalHeader>{$selected_asset.name}</ModalHeader>
+    <ModalBody>
+      <TabContent pills>
+        <TabPane tabId="teknis" tab="Teknis">
+          <h5 class="text-center mt-5 mb-5">Whoops!! Fitur belum tersedia</h5>
+        </TabPane>
+        <TabPane tabId="sub_asset" tab="Sub Asset" active>
+          <Row>
+
+            {#each $assetDetail.sub_asset as row}
+              <Col xs="6" sm="4">
+                <Card class="mt-3">
+                  <CardBody>
+                    <CardSubtitle>#{row.kodefikasi}</CardSubtitle>
+                    <CardText>
+                      {row.category.replace(/_/g, ' ')}
+                      <em>{row.coordinate}</em>
+                    </CardText>
+                  </CardBody>
+                  <CardFooter>{row.name}</CardFooter>
+                </Card>
+              </Col>
+            {/each}
+
+          </Row>
+
+        </TabPane>
+      </TabContent>
+    </ModalBody>
+    <ModalFooter>
+      <Button color="secondary" on:click={toggle}>Close</Button>
+    </ModalFooter>
+  </Modal>
+</div>

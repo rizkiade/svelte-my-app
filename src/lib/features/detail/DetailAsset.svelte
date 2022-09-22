@@ -33,12 +33,9 @@
 
   <AssetInformation />
 
-  <Card style="background: rgba(104,129,169,0.35)">
+  <Card style="background: rgba(104,129,169,0.35)" class="mt-3">
 
     <TabContent>
-      <TabPane tabId="teknis" tab="Teknis">
-        <h5 class="text-center mt-5 mb-5">Whoops!! Fitur belum tersedia</h5>
-      </TabPane>
       <TabPane tabId="kegiatan" tab="Kegiatan">
         {#if $onAssetDetailReq}
           <h5 class="text-center mt-5 mb-5">

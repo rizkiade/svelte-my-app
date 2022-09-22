@@ -11,8 +11,7 @@ const infrastructure = writable([
 	{ id: 3, name: "Bendungan", checked: false },
 	{ id: 4, name: "Bendung", checked: false },
 	{ id: 5, name: "Embung", checked: false },
-	{ id: 6, name: "Air Tanah", checked: false },
-	{ id: 7, name: "Air Baku", checked: false },
+
 	{ id: 8, name: "Pengendali Sedimen", checked: false },
 	{ id: 12, name: "Pengaman Pantai", checked: false },
 	{ id: 13, name: "Posko Banjir", checked: false },
@@ -21,5 +20,10 @@ const infrastructure = writable([
 	{ id: 16, name: "Pos Klimatologi", checked: false }
 ]);
 
+const infrastructure_sub = writable([
+	{ id: 6, name: "Air Tanah", checked: false },
+	{ id: 7, name: "Air Baku", checked: false }
+]);
 
-export { panel, rightWidth, infrastructure };
+
+export { panel, rightWidth, infrastructure, infrastructure_sub };
