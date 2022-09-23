@@ -11,7 +11,6 @@ const infrastructure = writable([
 	{ id: 3, name: "Bendungan", checked: false },
 	{ id: 4, name: "Bendung", checked: false },
 	{ id: 5, name: "Embung", checked: false },
-
 	{ id: 8, name: "Pengendali Sedimen", checked: false },
 	{ id: 12, name: "Pengaman Pantai", checked: false },
 	{ id: 13, name: "Posko Banjir", checked: false },

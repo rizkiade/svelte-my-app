@@ -65,16 +65,23 @@ let filter_asset_sub = writable({
 			{ value: "Tahap Rencana", name: "Tahap Rencana", checked: true },
 			{ value: "Sedang Dibangun", name: "Sedang Dibangun", checked: true },
 			{ value: "Sudah Terbangun", name: "Sudah Terbangun", checked: true },
-			{ value: "", name: "Tanpa Ket", checked: true }
+			{ value: "", name: "Lainnya", checked: true }
 		],
 		manfaat_irigasi: null
+	},
+	7: {
+		type_air_baku: [
+			{ value: "INTAKE_SUNGAI", name: "INTAKE SUNGAI", checked: true },
+			{ value: "PAH_ABSAH", name: "PAH/ABSAH", checked: true },
+			{ value: "TAMPUNGAN", name: "TAMPUNGAN", checked: true }
+		]
 	},
 	14: {
 		type_pos: [
 			{ id: "pos_manual", name: "Pos Manual", checked: true },
 			{ id: "pos_otomatik", name: "Pos Automatic", checked: true },
 			{ id: "pos_telemetri", name: "Pos Telemetry", checked: true },
-			{ id: "pos_undefined", name: "Tanpa Ket", checked: true }
+			{ id: "pos_undefined", name: "Lainnya", checked: true }
 		]
 	},
 	15: {
@@ -82,7 +89,7 @@ let filter_asset_sub = writable({
 			{ id: "pos_manual", name: "Pos Manual", checked: true },
 			{ id: "pos_otomatik", name: "Pos Automatic", checked: true },
 			{ id: "pos_telemetri", name: "Pos Telemetry", checked: true },
-			{ id: "pos_undefined", name: "Tanpa Ket", checked: true }
+			{ id: "pos_undefined", name: "Lainnya", checked: true }
 		]
 	},
 	16: {
@@ -90,7 +97,7 @@ let filter_asset_sub = writable({
 			{ id: "pos_manual", name: "Pos Manual", checked: true },
 			{ id: "pos_otomatik", name: "Pos Automatic", checked: true },
 			{ id: "pos_telemetri", name: "Pos Telemetry", checked: true },
-			{ id: "pos_undefined", name: "Tanpa Ket", checked: true }
+			{ id: "pos_undefined", name: "Lainnya", checked: true }
 		]
 	}
 });
