@@ -91,20 +91,22 @@
         <TabPane tabId="sub_asset" tab="Sub Asset" active>
           <Row>
 
-            {#each $assetDetail.sub_asset as row}
-              <Col xs="6" sm="4">
-                <Card class="mt-3">
-                  <CardBody>
-                    <CardSubtitle>#{row.kodefikasi}</CardSubtitle>
-                    <CardText>
-                      {row.category.replace(/_/g, ' ')}
-                      <em>{row.coordinate}</em>
-                    </CardText>
-                  </CardBody>
-                  <CardFooter>{row.name}</CardFooter>
-                </Card>
-              </Col>
-            {/each}
+            {#if $assetDetail.hasOwnProperty('sub_asset')}
+              {#each $assetDetail.sub_asset as row}
+                <Col xs="6" sm="4">
+                  <Card class="mt-3">
+                    <CardBody>
+                      <CardSubtitle>#{row.kodefikasi}</CardSubtitle>
+                      <CardText>
+                        {row.category.replace(/_/g, ' ')}
+                        <em>{row.coordinate}</em>
+                      </CardText>
+                    </CardBody>
+                    <CardFooter>{row.name}</CardFooter>
+                  </Card>
+                </Col>
+              {/each}
+            {/if}
 
           </Row>
 

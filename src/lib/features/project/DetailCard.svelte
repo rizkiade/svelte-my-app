@@ -30,7 +30,7 @@
         <h5><a class="btn" on:click={()=>openDetail('pelaksanaan')}>On Going : {$countProject.pelaksanaan}</a></h5>
       </div>
       <div class="card-mini">
-        <i class="fa-solid fa-location-dot mt-1" style="font-size: 25px; color: #91ec0a"></i>
+        <i class="fa-solid fa-location-dot mt-1" style="font-size: 25px; color: #9cef29"></i>
         <h5><a class="btn" on:click={()=>openDetail('selesai')}>Selesai : {$countProject.selesai}</a></h5>
       </div>
     </div>
