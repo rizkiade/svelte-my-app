@@ -51,7 +51,7 @@
 
 </div>
 
-<Modal isOpen={open} size="sm">
+<Modal isOpen={open} size="md">
   <ModalHeader>Params
     <em>{filterLayerLabel}</em>
   </ModalHeader>

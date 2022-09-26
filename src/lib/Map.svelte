@@ -8,7 +8,6 @@
 	import { ScaleLine } from "ol/control.js";
 	import Overlay from "ol/Overlay.js";
 
-
 	import "ol/ol.css";
 	import { mapKey, preloader, selected_asset } from "../store/map.js";
 	import Preloader from "./component/loader/Preloader.svelte";

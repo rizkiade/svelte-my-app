@@ -72,31 +72,30 @@ let filter_asset_sub = writable({
 	7: {
 		type_air_baku: [
 			{ value: "INTAKE_SUNGAI", name: "INTAKE SUNGAI", checked: true },
-			{ value: "PAH_ABSAH", name: "PAH/ABSAH", checked: true },
 			{ value: "TAMPUNGAN", name: "TAMPUNGAN", checked: true }
 		]
 	},
 	14: {
 		type_pos: [
-			{ id: "pos_manual", name: "Pos Manual", checked: true },
-			{ id: "pos_otomatik", name: "Pos Automatic", checked: true },
-			{ id: "pos_telemetri", name: "Pos Telemetry", checked: true },
+			{ id: "pos_manual", name: "Manual", checked: true },
+			{ id: "pos_otomatik", name: "Automatic", checked: true },
+			{ id: "pos_telemetri", name: "Telemetry", checked: true },
 			{ id: "pos_undefined", name: "Lainnya", checked: true }
 		]
 	},
 	15: {
 		type_pos: [
-			{ id: "pos_manual", name: "Pos Manual", checked: true },
-			{ id: "pos_otomatik", name: "Pos Automatic", checked: true },
-			{ id: "pos_telemetri", name: "Pos Telemetry", checked: true },
+			{ id: "pos_manual", name: "Manual", checked: true },
+			{ id: "pos_otomatik", name: "Automatic", checked: true },
+			{ id: "pos_telemetri", name: "Telemetry", checked: true },
 			{ id: "pos_undefined", name: "Lainnya", checked: true }
 		]
 	},
 	16: {
 		type_pos: [
-			{ id: "pos_manual", name: "Pos Manual", checked: true },
-			{ id: "pos_otomatik", name: "Pos Automatic", checked: true },
-			{ id: "pos_telemetri", name: "Pos Telemetry", checked: true },
+			{ id: "pos_manual", name: "Manual", checked: true },
+			{ id: "pos_otomatik", name: "Automatic", checked: true },
+			{ id: "pos_telemetri", name: "Telemetry", checked: true },
 			{ id: "pos_undefined", name: "Lainnya", checked: true }
 		]
 	}

@@ -16,7 +16,9 @@ const infrastructure = writable([
 	{ id: 13, name: "Posko Banjir", checked: false },
 	{ id: 14, name: "Pos Curah Hujan", checked: false },
 	{ id: 15, name: "Pos Duga Air", checked: false },
-	{ id: 16, name: "Pos Klimatologi", checked: false }
+	{ id: 16, name: "Pos Klimatologi", checked: false },
+	{ id: 25, name: "PAH / ABSAH", checked: false },
+	{ id: 26, name: "Sumur", checked: false }
 ]);
 
 const infrastructure_sub = writable([

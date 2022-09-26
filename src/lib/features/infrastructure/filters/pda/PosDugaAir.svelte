@@ -1,12 +1,31 @@
 <script>
-	import { FormGroup, Input } from "sveltestrap";
 	import { filter_asset_sub } from "../../../../../store/map.js";
+
+	const icon = {
+		"pos_manual": "fa-m",
+		"pos_otomatik": "fa-a",
+		"pos_telemetri": "fa-t",
+		"pos_undefined": "fa-circle-exclamation"
+	};
 </script>
 
 
-Type Alat :
-<FormGroup class="mt-2">
-  {#each $filter_asset_sub[15].type_pos as row}
-    <Input id="{row.id}" value="{row.id}" type="checkbox" label="{row.name}" bind:checked="{row.checked}" />
-  {/each}
-</FormGroup>
+<div class="text-center">
+  <ul>
+    {#each $filter_asset_sub[15].type_pos as row}
+      <li>
+        <label>
+          <input type="checkbox" name="{row.id}" bind:checked={row.checked}>
+          <div class="icon-box">
+            <i class="fa {icon[row.id]}" aria-hidden="true"></i>
+          </div>
+          {row.name}
+        </label>
+      </li>
+    {/each}
+  </ul>
+</div>
+
+<style lang="scss">
+  @import "src/neumorphism.scss";
+</style>
