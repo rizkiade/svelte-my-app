@@ -1,5 +1,5 @@
 <script>
-	import { Button, Card, CardBody, CardFooter, CardSubtitle, CardText, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row, TabContent, Table, TabPane } from "sveltestrap";
+	import { Button, Card, CardBody, CardFooter, CardSubtitle, CardText, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row, TabContent, Table, TabPane, Image, Icon } from "sveltestrap";
 	import { assetDetail, selected_asset } from "../../../store/map.js";
 
 	let openDetail = () => {
@@ -84,33 +84,46 @@
   <Modal isOpen={open} size="lg">
     <ModalHeader>{$selected_asset.name}</ModalHeader>
     <ModalBody>
-      <TabContent pills>
+      <TabContent vertical pills>
         <TabPane tabId="teknis" tab="Teknis">
           <h5 class="text-center mt-5 mb-5">Whoops!! Fitur belum tersedia</h5>
         </TabPane>
-        <TabPane tabId="sub_asset" tab="Sub Asset" active>
-          <Row>
-
-            {#if $assetDetail.hasOwnProperty('sub_asset')}
-              {#each $assetDetail.sub_asset as row}
-                <Col xs="6" sm="4">
-                  <Card class="mt-3">
-                    <CardBody>
-                      <CardSubtitle>#{row.kodefikasi}</CardSubtitle>
-                      <CardText>
-                        {row.category.replace(/_/g, ' ')}
-                        <em>{row.coordinate}</em>
-                      </CardText>
-                    </CardBody>
-                    <CardFooter>{row.name}</CardFooter>
-                  </Card>
-                </Col>
-              {/each}
-            {/if}
-
-          </Row>
-
+        <TabPane tabId="sub_asset" tab="Sub Asset">
+          {#if $assetDetail.hasOwnProperty('sub_asset')}
+            {#each $assetDetail.sub_asset as row}
+              <Col xs="6" sm="4">
+                <Card class="mt-3">
+                  <CardBody>
+                    <CardSubtitle>#{row.ref_id}</CardSubtitle>
+                    <CardText>
+                      {row.category.replace(/_/g, ' ')}
+                      <em>{row.coordinate}</em>
+                    </CardText>
+                  </CardBody>
+                  <CardFooter>{row.name}</CardFooter>
+                </Card>
+              </Col>
+            {/each}
+          {/if}
         </TabPane>
+
+        <TabPane tabId="media" tab="Media" class="p-2" active>
+          {#if $assetDetail.images.foto !== null}
+            {#each $assetDetail.images.foto as img, i}
+              <Image thumbnail alt="Image {++i}" src="{img}" style="width: 200px; height: 200px;" class="m-1" />
+            {/each}
+          {:else}
+            <span>No Media</span>
+          {/if}
+          <!--          <Image thumbnail alt="Dunes" src="https://picsum.photos/200/200?random=1" />-->
+          <!--          <Image thumbnail alt="Bicycle" src="https://picsum.photos/200/200?random=2" />-->
+          <!--          <Image-->
+          <!--            thumbnail-->
+          <!--            alt="Television"-->
+          <!--            src="https://picsum.photos/200/200?random=3"-->
+          <!--          />-->
+        </TabPane>
+
       </TabContent>
     </ModalBody>
     <ModalFooter>

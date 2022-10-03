@@ -116,6 +116,21 @@ let selected_asset = writable({
 	desa: undefined
 });
 
+// single feature only using search asset.
+const search_features = writable({
+	id: undefined,
+	name: undefined,
+	type: undefined,
+	pengelola: undefined,
+	coordinate: undefined,
+	ws: undefined,
+	das: undefined,
+	provinsi: undefined,
+	kabupaten: undefined,
+	kecamatan: undefined,
+	desa: undefined
+});
+
 const categoryProject = writable([]);
 let projectLayer = writable(undefined);
 
@@ -134,4 +149,37 @@ const countProject = writable({
 
 const refIdOnly = writable(false);
 
-export { mapKey, preloader, ws_visible, wsp_visible, ordo_visible, paramsKewenangan, pengelola, ws, wsFilter, onDasReq, das_visible, province, provinceByWs, prov_visible, kabupaten, kabupatenByProv, kabupaten_visible, kecamatanByKab, kecamatan_visible, paramsAdm, assets_features, count_asset, filter_asset, filter_asset_sub, selected_asset, categoryProject, projectLayer, assetDetail, onAssetDetailReq, countProject, refIdOnly };
+export {
+	mapKey,
+	preloader,
+	ws_visible,
+	wsp_visible,
+	ordo_visible,
+	paramsKewenangan,
+	pengelola,
+	ws,
+	wsFilter,
+	onDasReq,
+	das_visible,
+	province,
+	provinceByWs,
+	prov_visible,
+	kabupaten,
+	kabupatenByProv,
+	kabupaten_visible,
+	kecamatanByKab,
+	kecamatan_visible,
+	paramsAdm,
+	assets_features,
+	count_asset,
+	filter_asset,
+	filter_asset_sub,
+	selected_asset,
+	search_features,
+	categoryProject,
+	projectLayer,
+	assetDetail,
+	onAssetDetailReq,
+	countProject,
+	refIdOnly
+};

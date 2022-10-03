@@ -16,6 +16,7 @@
 	import DaerahAliranSungaiFeatures from "../lib/features/daerahaliransungai/DaerahAliranSungaiFeatures.svelte";
 	import ProvinceFeatures from "../lib/features/province/ProvinceFeatures.svelte";
 	import CityFeatures from "../lib/features/city/CityFeatures.svelte";
+	import SearchFeatures from "../lib/features/search/SearchFeatures.svelte";
 
 	let isOpen = undefined;
 
@@ -41,6 +42,7 @@
   <ProvinceFeatures />
   <CityFeatures />
 
+  <SearchFeatures />
   <InfrastructureFeatures />
   <ProjectFeatures />
 

@@ -2,12 +2,12 @@
 	import { Col, Container, Offcanvas, Row } from "sveltestrap";
 	import NavButton from "../component/NavButton.svelte";
 	import { panel, rightWidth } from "../control/NavigationStore.js";
-	import SearchPanel from "../control/SearchPanel.svelte";
 	import Infrastructure from "../features/infrastructure/Infrastructure.svelte";
 	import Project from "../features/project/Project.svelte";
 	import { selected_asset } from "../../store/map.js";
 	import DetailAsset from "../features/detail/DetailAsset.svelte";
 	import DetailProject from "../features/project/DetailProject.svelte";
+	import Search from "../features/search/Search.svelte";
 
 
 	function handleAction(event) {
@@ -52,7 +52,7 @@
         <Col class="mt-2 me-lg-5 p-0">
 
           {#if $panel.right === 'search'}
-            <SearchPanel />
+            <Search />
           {/if}
 
           {#if $panel.right === 'infrastructure'}

@@ -152,7 +152,7 @@
 				}
 			});
 
-		}
+		} 
 
 		let el = document.querySelector(".ol-zoom");
 		el["style"].top = "5em";

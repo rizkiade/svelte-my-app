@@ -1,19 +1,72 @@
 <script>
 	import { Alert, Card, Row } from "sveltestrap";
-	import Select from "svelte-select";
 	import { slide } from "svelte/transition";
+	import Select from "svelte-select";
 
-	const optionIdentifier = "id";
-	const getOptionLabel = (option) => option.name;
-	const getSelectionLabel = (option) => option.name;
+	import loadOptions from "./search.d.ts";
+	import SearchItem from "./SearchItem.svelte";
+	import { search_features } from "../../../store/map.js";
+	import { onDestroy } from "svelte";
+
+	const itemId = "id";
+
+	const handleSelect = (e) => {
+		search_features.set({
+			id: e.detail.id,
+			name: e.detail.name,
+			type: e.detail.type_name,
+			pengelola: e.detail.pengelola_name,
+			coordinate: e.detail.coordinate,
+			ws: e.detail.ws_name,
+			das: e.detail.das_name,
+			provinsi: e.detail.provinsi,
+			kabupaten: e.detail.kabupaten,
+			kecamatan: e.detail.kecamatan,
+			desa: e.detail.kelurahan
+		});
+	};
+
+	const handleClear = () => {
+		reset_search_data();
+	};
+
+	onDestroy(() => {
+		reset_search_data();
+	});
+
+	let reset_search_data = () => {
+		search_features.set({
+			id: undefined,
+			name: undefined,
+			type: undefined,
+			pengelola: undefined,
+			coordinate: undefined,
+			ws: undefined,
+			das: undefined,
+			provinsi: undefined,
+			kabupaten: undefined,
+			kecamatan: undefined,
+			desa: undefined
+		});
+	};
+
 
 </script>
 
 <div transition:slide>
 
-  <Card body style="background: rgba(104,129,169,0.35);" class="mb-2">
+  <Card body style="background: rgba(104,129,169,0.35); z-index: 999" class="mb-2">
     <Row>
-      <Select placeholder="Search by name" />
+      <Select placeholder="Search by name" {itemId} {loadOptions} on:select={handleSelect} on:clear={handleClear}>
+        <div class="search" slot="item" let:item let:index>
+          <SearchItem {item} />
+        </div>
+
+        <div class="search" slot="selection" let:selection>
+          <SearchItem item={selection} />
+        </div>
+      </Select>
+
     </Row>
   </Card>
 
