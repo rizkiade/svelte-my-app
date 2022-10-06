@@ -131,6 +131,16 @@ const search_features = writable({
 	desa: undefined
 });
 
+const geo_features = writable({
+	coordinate: undefined,
+	ws: undefined,
+	das: undefined,
+	provinsi: undefined,
+	kabupaten: undefined,
+	kecamatan: undefined,
+	desa: undefined
+});
+
 const categoryProject = writable([]);
 let projectLayer = writable(undefined);
 
@@ -176,6 +186,7 @@ export {
 	filter_asset_sub,
 	selected_asset,
 	search_features,
+	geo_features,
 	categoryProject,
 	projectLayer,
 	assetDetail,

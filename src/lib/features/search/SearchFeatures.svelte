@@ -32,16 +32,18 @@
 		if ($search_features.coordinate) {
 			coordinate = $search_features.coordinate.split(" ");
 
-			iconFeature.setProperties({ id: $search_features.id });
-			iconFeature.setProperties({ name: $search_features.name });
-			iconFeature.setProperties({ type_name: $search_features.type });
-			iconFeature.setProperties({ pengelola_name: $search_features.pengelola });
-			iconFeature.setProperties({ ws_name: $search_features.ws });
-			iconFeature.setProperties({ das_name: $search_features.das });
-			iconFeature.setProperties({ provinsi: $search_features.provinsi });
-			iconFeature.setProperties({ kabupaten: $search_features.kabupaten });
-			iconFeature.setProperties({ kecamatan: $search_features.kecamatan });
-			iconFeature.setProperties({ kelurahan: $search_features.desa });
+			iconFeature.setProperties({
+				id: $search_features.id,
+				name: $search_features.name,
+				type_name: $search_features.type,
+				pengelola_name: $search_features.pengelola,
+				ws_name: $search_features.ws,
+				das_name: $search_features.das,
+				provinsi: $search_features.provinsi,
+				kabupaten: $search_features.kabupaten,
+				kecamatan: $search_features.kecamatan,
+				kelurahan: $search_features.desa
+			});
 		}
 		iconFeature.setGeometry(new Point([coordinate[0], coordinate[1]]));
 
@@ -50,7 +52,5 @@
 		}
 	};
 
-	search_features.subscribe(() => {
-		reloadMap();
-	});
+	search_features.subscribe(() => reloadMap());
 </script>

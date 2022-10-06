@@ -17,6 +17,7 @@
 	import ProvinceFeatures from "../lib/features/province/ProvinceFeatures.svelte";
 	import CityFeatures from "../lib/features/city/CityFeatures.svelte";
 	import SearchFeatures from "../lib/features/search/SearchFeatures.svelte";
+	import GeoFeatures from "../lib/features/search/GeoFeatures.svelte";
 
 	let isOpen = undefined;
 
@@ -43,6 +44,7 @@
   <CityFeatures />
 
   <SearchFeatures />
+  <GeoFeatures />
   <InfrastructureFeatures />
   <ProjectFeatures />
 

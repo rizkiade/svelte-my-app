@@ -14,3 +14,23 @@ export default async function getAssetByName(filterText) {
 		return [];
 	}
 }
+
+export class SearchApi {
+	getGeoLocation = async (params): Promise<[]> => {
+		const bodyRaw = {
+			"coordinate": params.coordinate_input,
+			"radius": params.radius
+		};
+		const response = await fetch(`${import.meta.env.VITE_GIS_API}/infrastructure/geo`, {
+			method: "POST",
+			body: JSON.stringify(bodyRaw)
+		});
+		const result = await response.json();
+
+		if (response.ok) {
+			return result;
+		} else {
+			throw new Error(result);
+		}
+	};
+}

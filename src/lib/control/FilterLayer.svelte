@@ -2,13 +2,12 @@
 	import { Button, Card, Col, Input, Label, Offcanvas, Row } from "sveltestrap";
 	import Pengelola from "../features/pengelola/Pengelola.svelte";
 	import WilayahSungai from "../features/wilayahsungai/WilayahSungai.svelte";
-	import { paramsKewenangan, filter_asset } from "../../store/map.js";
+  import { paramsKewenangan } from "../../store/map.js";
 	import Sungai from "../features/sungai/Sungai.svelte";
 	import DaerahAliranSungai from "../features/daerahaliransungai/DaerahAliranSungai.svelte";
 	import Province from "../features/province/Province.svelte";
 	import City from "../features/city/City.svelte";
 	import District from "../features/district/District.svelte";
-	import { featureExistAdm } from "../../store/features.js";
 	// import { featureExist, projectLayerSource } from "../../store/features.js";
 
 	let isOpen = false;
@@ -23,9 +22,9 @@
 
 	let print = () => {
 		// console.log($filter_asset_sub[3].manfaat_irigasi);
-		console.log($featureExistAdm);
-		console.log($filter_asset);
-		console.log($featureExistAdm[32].kabupaten[206]);
+		// console.log($featureExistAdm);
+		// console.log($filter_asset);
+		// console.log($featureExistAdm[32].kabupaten[206]);
 	};
 
 
