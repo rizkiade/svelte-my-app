@@ -43,7 +43,7 @@
   </div>
 
   <div class="card mt-4" style="background-color: rgba(104,129,169,0.35)">
-    <div class="card-header text-center bg-card-title text-light">List Infrastructure Sub</div>
+    <div class="card-header text-center bg-card-title text-light">List Infrastructure Sub System</div>
   </div>
   {#each $infrastructure_sub as { id, name, checked }}
     <InfrastructureButton {id} {name} bind:checked={checked} on:open={toggleFilter} />
