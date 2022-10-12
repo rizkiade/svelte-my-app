@@ -157,7 +157,7 @@ const countProject = writable({
 	selesai: 0
 });
 
-const refIdOnly = writable(false);
+const refIdOnly = writable(true);
 
 export {
 	mapKey,
