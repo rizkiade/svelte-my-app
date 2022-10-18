@@ -23,7 +23,6 @@
   <div class="card-header text-center bg-card-title text-light">Detail Information</div>
 </div>
 <Button class="btn-sm mt-2" color="danger" on:click={closeDetail}>Hide</Button>
-<a href="" class="btn-sm mt-2" color="danger" on:click={closeDetail}>Hide</a>
 
 <Table borderless size="sm" class="mt-4">
   <tbody>
