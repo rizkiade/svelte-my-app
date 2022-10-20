@@ -19,7 +19,7 @@ const infrastructure = writable([
 	{ id: 16, name: "Pos Klimatologi", checked: false },
 	{ id: 25, name: "PAH / ABSAH", checked: false },
 	{ id: 26, name: "Sumur", checked: false },
-	{ id: 27, name: "Mata Air", checked: false }
+	{ id: 27, name: "Intake", checked: false }
 ]);
 
 const infrastructure_sub = writable([
