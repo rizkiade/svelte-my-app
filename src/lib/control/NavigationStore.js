@@ -24,7 +24,7 @@ const infrastructure = writable([
 
 const infrastructure_sub = writable([
 	{ id: 6, name: "Air Tanah", checked: false },
-	{ id: 7, name: "Air Baku", checked: false },
+	// { id: 7, name: "Air Baku", checked: false },
 	{ id: 99, name: "Perizinan", checked: false }
 ]);
 

@@ -59,7 +59,7 @@ let filter_asset = writable({
 	kelurahan: undefined
 });
 
-let filter_asset_sub = writable({
+let advanced_filter_asset = writable({
 	3: {
 		status_infrastructure: [
 			{ value: "Tahap Rencana", name: "Tahap Rencana", checked: true },
@@ -68,12 +68,6 @@ let filter_asset_sub = writable({
 			{ value: "", name: "Lainnya", checked: true }
 		],
 		manfaat_irigasi: null
-	},
-	7: {
-		type_air_baku: [
-			{ value: "INTAKE_SUNGAI", name: "INTAKE SUNGAI", checked: true },
-			{ value: "TAMPUNGAN", name: "TAMPUNGAN", checked: true }
-		]
 	},
 	14: {
 		type_pos: [
@@ -98,6 +92,12 @@ let filter_asset_sub = writable({
 			{ id: "pos_telemetri", name: "Telemetry", checked: true },
 			{ id: "pos_undefined", name: "Lainnya", checked: true }
 		]
+	},
+	27: {
+		type_air_baku: [
+			{ value: "INTAKE_SUNGAI", name: "INTAKE SUNGAI", checked: true },
+			{ value: "TAMPUNGAN", name: "TAMPUNGAN", checked: true }
+		]
 	}
 });
 
@@ -113,7 +113,8 @@ let selected_asset = writable({
 	provinsi: undefined,
 	kabupaten: undefined,
 	kecamatan: undefined,
-	desa: undefined
+	desa: undefined,
+	ref_id: undefined
 });
 
 // single feature only using search asset.
@@ -183,7 +184,7 @@ export {
 	assets_features,
 	count_asset,
 	filter_asset,
-	filter_asset_sub,
+	advanced_filter_asset,
 	selected_asset,
 	search_features,
 	geo_features,

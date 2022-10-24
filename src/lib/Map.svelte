@@ -146,13 +146,14 @@
 							kabupaten: feature.get("kabupaten"),
 							kecamatan: feature.get("kecamatan"),
 							desa: feature.get("kelurahan"),
-							infrastructure_id: feature.get("type_id")
+							infrastructure_id: feature.get("type_id"),
+							ref_id: feature.get("ref_id")
 						});
 					}
 				}
 			});
 
-		} 
+		}
 
 		let el = document.querySelector(".ol-zoom");
 		el["style"].top = "5em";

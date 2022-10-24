@@ -9,7 +9,7 @@
 	import PosKlimatologi from "./filters/pklim/PosKlimatologi.svelte";
 	import Bendungan from "./filters/bendungan/Bendungan.svelte";
 	import { refIdOnly } from "../../../store/map.js";
-	import AirBaku from "./filters/airbaku/AirBaku.svelte";
+	import AirBaku from "./filters/intake/AirBaku.svelte";
 
 	let open = false;
 	let filterLayerId = undefined;
@@ -81,7 +81,7 @@
       </BoxContent>
     {/if}
 
-    {#if filterLayerId === 7}
+    {#if filterLayerId === 27}
       <BoxContent>
         <AirBaku />
       </BoxContent>

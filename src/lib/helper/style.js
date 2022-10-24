@@ -19,7 +19,8 @@ const iconList = {
 	17: "map-marker-red.png",
 	16: "_pos_klimatologi.png",
 	25: "_air_baku.png",
-	26: "_sumur.png"
+	26: "_sumur.png",
+	27: "_air_baku.png"
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
