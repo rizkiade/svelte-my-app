@@ -22,10 +22,14 @@
 <div class="card" style="background-color: rgba(104,129,169,0.35)">
   <div class="card-header text-center bg-card-title text-light">Detail Information</div>
 </div>
-<Button class="btn-sm mt-2" color="danger" on:click={closeDetail}>Hide</Button>
 
 <Table borderless size="sm" class="mt-4">
   <tbody>
+  <tr>
+    <td>Integrasi ID</td>
+    <td>:</td>
+    <td class="text-primary">#{$selected_asset.ref_id ?? '-'}</td>
+  </tr>
   <tr>
     <td>Asset</td>
     <td>:</td>
@@ -79,7 +83,9 @@
   </tbody>
 </Table>
 
+<Button class="btn-sm" color="danger" on:click={closeDetail}>Hide</Button>
 <Button class="btn-sm" color="primary" on:click={openDetail}>Detail</Button>
+
 
 <div>
   <Modal isOpen={open} size="lg">
