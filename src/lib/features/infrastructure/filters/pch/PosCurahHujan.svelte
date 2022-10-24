@@ -1,5 +1,5 @@
 <script>
-	import { filter_asset_sub } from "../../../../../store/map.js";
+	import { advanced_filter_asset } from "../../../../../store/map.js";
 
 	const icon = {
 		"pos_manual": "fa-m",
@@ -12,7 +12,7 @@
 
 <div class="text-center">
   <ul>
-    {#each $filter_asset_sub[14].type_pos as row}
+    {#each $advanced_filter_asset[14].type_pos as row}
       <li>
         <label>
           <input type="checkbox" name="{row.id}" bind:checked={row.checked}>

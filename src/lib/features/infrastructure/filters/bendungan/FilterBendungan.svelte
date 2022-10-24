@@ -1,6 +1,6 @@
 <script context="module">
 
-	import { filter_asset_sub } from "../../../../../store/map.js";
+	import { advanced_filter_asset } from "../../../../../store/map.js";
 
 
 	let persiapan = true;
@@ -8,7 +8,7 @@
 	let selesai = true;
 	let tanpa_ket = true;
 	let manfaat_irigasi = null;
-	filter_asset_sub.subscribe(value => {
+	advanced_filter_asset.subscribe(value => {
 		let val = value[3].status_infrastructure;
 		persiapan = val[0].checked;
 		pelaksanaan = val[1].checked;

@@ -1,13 +1,13 @@
 <script context="module">
 
-	import { filter_asset_sub } from "../../../../../store/map.js";
+	import { advanced_filter_asset } from "../../../../../store/map.js";
 
 
 	let pos_manual = true;
 	let pos_otomatik = true;
 	let pos_telemetri = true;
 	let pos_undefined = true;
-	filter_asset_sub.subscribe(value => {
+	advanced_filter_asset.subscribe(value => {
 		let val = value[14].type_pos;
 		pos_manual = val[0].checked;
 		pos_otomatik = val[1].checked;

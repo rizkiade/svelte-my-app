@@ -21,7 +21,7 @@
 	};
 
 	let print = () => {
-		// console.log($filter_asset_sub[3].manfaat_irigasi);
+		// console.log($advanced_filter_asset[3].manfaat_irigasi);
 		// console.log($featureExistAdm);
 		// console.log($filter_asset);
 		// console.log($featureExistAdm[32].kabupaten[206]);

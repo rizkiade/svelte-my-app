@@ -4,7 +4,7 @@
 	import { filteredPDA } from "./infrastructure/filters/pda/FilterPDA.svelte";
 	import { filteredPCH } from "./infrastructure/filters/pch/FilterPCH.svelte";
 	import { filteredKlim } from "./infrastructure/filters/pklim/FilterPKlim.svelte";
-	import { filteredAirBaku } from "./infrastructure/filters/airbaku/FilterAirBaku.svelte";
+	import { filteredAirBaku } from "./infrastructure/filters/intake/FilterAirBaku.svelte";
 
 	let ref_id;
 	refIdOnly.subscribe(value => {
@@ -75,7 +75,7 @@
 										if (inf_id === 3)
 											return filteredBendungan(feature);
 
-										if (inf_id === 7)
+										if (inf_id === 27)
 											return filteredAirBaku(feature);
 
 										if ([14, 15, 16].includes(inf_id)) {
