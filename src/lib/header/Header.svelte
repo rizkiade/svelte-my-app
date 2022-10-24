@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from "$app/stores";
 	import logo_pu from "./pu_logo.png";
+	import { panel } from "../control/NavigationStore.js";
 </script>
 
 <header>
@@ -18,12 +19,24 @@
       <li class:active={$page.url.pathname === '/'}>
         <a sveltekit:prefetch href="/">Map</a>
       </li>
+      <li class:active={$page.url.pathname === '/'}>
+        <a sveltekit:prefetch href="/" on:click={() => {
+			    if($page.url.pathname !== '/'){
+			      $panel.right = 'project'
+			    }else if($panel.right === 'project' ){
+					  $panel.right = undefined
+			    }else{
+					  $panel.right = 'project'
+			    }
+		      }} disabled>Priority Project</a>
+      </li>
       <li class:active={$page.url.pathname === '/statistic'}>
         <a sveltekit:prefetch href="/statistic">Statistic</a>
       </li>
-      <li class:active={$page.url.pathname === '/danaupriority'}>
-        <a sveltekit:prefetch href="/danaupriority">Danau Prioritas</a>
-      </li>
+
+      <!--      <li class:active={$page.url.pathname === '/danaupriority'}>-->
+      <!--        <a sveltekit:prefetch href="/danaupriority">Priority Project</a>-->
+      <!--      </li>-->
     </ul>
     <svg viewBox="0 0 2 3" aria-hidden="true">
       <path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />

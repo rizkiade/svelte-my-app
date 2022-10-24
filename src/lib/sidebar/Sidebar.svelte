@@ -81,6 +81,7 @@
 </Offcanvas>
 
 
+<!--Navigasi button-->
 <Offcanvas isOpen="{true}" backdrop={false} placement="end"
            style="width: 55px; height: 40%; align-items: center; background: {$panel.right ? 'transparent': 'rgba(255,255,255,0.42)'} ; transition: width 0.25s; border-radius: 15px 0px 0px 15px; {$panel.right ? 'border: none': ''}">
   <Container>
