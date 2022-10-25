@@ -25,7 +25,7 @@ export class WilayahSungaiApi {
 	};
 
 	getArea = async (): Promise<[]> => {
-		const response = await fetch(`${import.meta.env.VITE_GIS_API}/area/ws`);
+		const response = await fetch(`${import.meta.env.VITE_GIS_API}/area/all_ws`);
 		const result = await response.json();
 
 		if (response.ok) {
