@@ -62,6 +62,7 @@ let filter_asset = writable({
 let advanced_filter_asset = writable({
 	3: {
 		status_infrastructure: [
+			{ value: "Potensi", name: "Potensi", checked: true },
 			{ value: "Tahap Rencana", name: "Tahap Rencana", checked: true },
 			{ value: "Sedang Dibangun", name: "Sedang Dibangun", checked: true },
 			{ value: "Sudah Terbangun", name: "Sudah Terbangun", checked: true },
