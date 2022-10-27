@@ -60,6 +60,13 @@ let filter_asset = writable({
 });
 
 let advanced_filter_asset = writable({
+	2: {
+		jenis: [
+			{ value: "Danau", name: "Danau", checked: true },
+			{ value: "Situ", name: "Situ", checked: true },
+			{ value: null, name: "Lainnya", checked: true }
+		]
+	},
 	3: {
 		status_infrastructure: [
 			{ value: "Potensi", name: "Potensi", checked: true },

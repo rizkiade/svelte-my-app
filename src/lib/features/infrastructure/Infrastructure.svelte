@@ -10,6 +10,7 @@
 	import Bendungan from "./filters/bendungan/Bendungan.svelte";
 	import { refIdOnly } from "../../../store/map.js";
 	import AirBaku from "./filters/intake/AirBaku.svelte";
+	import Danau from "./filters/danau/Danau.svelte";
 
 	let open = false;
 	let filterLayerId = undefined;
@@ -56,6 +57,12 @@
     <em>{filterLayerLabel}</em>
   </ModalHeader>
   <ModalBody>
+
+    {#if filterLayerId === 2}
+      <BoxContent>
+        <Danau />
+      </BoxContent>
+    {/if}
 
     {#if filterLayerId === 3}
       <BoxContent>

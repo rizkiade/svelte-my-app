@@ -1,5 +1,6 @@
 <script context="module">
 	import { filter_asset, paramsKewenangan, refIdOnly } from "../../store/map.js";
+	import { filteredDanau } from "./infrastructure/filters/danau/FilterDanau.svelte";
 	import { filteredBendungan } from "./infrastructure/filters/bendungan/FilterBendungan.svelte";
 	import { filteredPDA } from "./infrastructure/filters/pda/FilterPDA.svelte";
 	import { filteredPCH } from "./infrastructure/filters/pch/FilterPCH.svelte";
@@ -72,6 +73,10 @@
 									if (district && district !== kecamatanText) {
 										return false;
 									} else {
+
+										if (inf_id === 2)
+											return filteredDanau(feature);
+
 										if (inf_id === 3)
 											return filteredBendungan(feature);
 
