@@ -16,8 +16,8 @@
 	});
 
 	export function filteredKlim(feature) {
-		let type_pos = feature.get("jenis_pos");
-		if ((type_pos.includes("pos_manual") && pos_manual) || (type_pos.includes("pos_otomatik") && pos_otomatik) || (type_pos.includes("pos_telemetri") && pos_telemetri) || (type_pos.includes("") && pos_undefined)) {
+		let type_pos = feature.get("sensor_type");
+		if ((type_pos.includes("MANUAL") && pos_manual) || (type_pos.includes("OTOMATIK") && pos_otomatik) || (type_pos.includes("TELEMETRI") && pos_telemetri) || (type_pos.includes("") && pos_undefined)) {
 			return true;
 		}
 

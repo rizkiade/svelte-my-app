@@ -12,7 +12,7 @@ export type Features = {
 
 export class InfrastructureApi {
 	getAsset = async (id): Promise<Features[]> => {
-		const response = await fetch(`${import.meta.env.VITE_GIS_API}/infrastructure/asset?id=${id}`);
+		const response = await fetch(`${import.meta.env.VITE_GIS_API}/infrastructure/asset?id=${id}&format=GeoJSON`);
 		const result = await response.json();
 
 		if (response.ok) {
