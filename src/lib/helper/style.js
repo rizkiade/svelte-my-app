@@ -1,5 +1,7 @@
 import { Fill, Icon, Stroke, Style } from "ol/style.js";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { filteredAsset } from "../features/FilterAsset.svelte";
 
 const iconList = {
@@ -24,9 +26,11 @@ const iconList = {
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-let styleIcon = (feature) => {
+let styleIcon = (/** @type {{ get: (arg0: string) => any; getGeometry: () => { (): any; new (): any; getType: { (): any; new (): any; }; }; }} */ feature) => {
 
 	let typeId = feature.get("type_id");
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	let image = iconList[typeId] ?? "map-marker-red-128.png";
 	let type = feature.getGeometry().getType();
 
@@ -49,7 +53,7 @@ let styleIcon = (feature) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-let styleArea = (feature) => {
+let styleArea = (/** @type {{ get: (arg0: string) => any; }} */ feature) => {
 	let color = feature.get("color");
 
 	return new Style({
